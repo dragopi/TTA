@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { CardItem } from './TTAUI';
 
 function App() {
   return (
@@ -19,6 +20,16 @@ function App() {
           Learn React
         </a>
       </header>
+      <CardItem code="LEA01" />
+      <CardItem code="LEA02" />
+      <CardItem code="LEA03" />
+      <CardItem code="LEA04" />
+      <CardItem code="LEA05" />
+      <CardItem code="LEA06" />
+      <CardItem code="LEA07" />
+      <CardItem code="LEA08" />
+      <CardItem code="LEA09" />
+      <CardItem code="LEA10" />
     </div>
   );
 }
