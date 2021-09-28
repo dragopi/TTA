@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { CardItem, FilterLeaders } from './TTAUI';
+import { CardItem, FilterCategory, FilterLeaders } from './TTAUI';
 import { Form } from "./Forms";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         render={() => (
           <React.Fragment>
 
-<FilterLeaders />
+        <FilterLeaders />
 
         <div className="card">
             <div className="card-header">
@@ -27,6 +27,13 @@ function App() {
             </div>
         </div>
 
+          <FilterCategory descr="Cavallery" render={() => (
+            <div className="d-flex">
+              <CardItem code="MCA01" />
+              <CardItem code="MCA02" />
+              <CardItem code="MCA03" />
+            </div>
+          )} />
 
           </React.Fragment>
         )}

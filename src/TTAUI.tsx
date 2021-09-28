@@ -124,6 +124,40 @@ export class FilterLeaders extends React.Component<FLeadersProps, FLeadersState>
     }
 }
 
+
+
+type FilterCategoryProps =  {
+    descr: string;
+
+    render: () => React.ReactNode;
+}
+
+type FilterCategoryState = {
+    //card: TTACard;
+    //onBoard: boolean;
+    //needToken: boolean;
+    //tokens: number;
+}
+
+
+export class FilterCategory extends React.Component<FilterCategoryProps, FilterCategoryState> {
+    state: FLeadersState = {};
+
+    render() {
+
+        return (
+            <div className="card">
+                <div className="card-header">
+                    {this.props.descr}
+                </div>
+                <div className="card-body d-flex">
+                    {this.props.render()}
+                </div>
+            </div>           
+        );
+    }
+}
+
 /*
             <div className="toast">
                 <div className="toast-header">
