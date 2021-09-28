@@ -17,6 +17,18 @@ export type TTACard = {
     text: string;
 };
 
+export type TTATacticCard = {
+    code: string,
+    name: string,
+    age: number,
+    strength: number,
+    strengthObs: number,
+    ninf: number,
+    ncav: number,
+    nart: number,
+    nair: number
+}
+
 let CARD_PFA01: TTACard = {
     code: "PFA01",
     type: "Production",
@@ -1803,10 +1815,215 @@ let CARD_SCN03: TTACard = {
     text: "Level I buildings cost 1 less resource; level II 2 less, and level III 3 less; can build up to 4 stages of wonder in 1 civil action"
 };
 
+let CARD_TAC01: TTATacticCard = {
+    code: "TAC01",
+    name: "Fighting Band",
+    age: 1,
+    strength: 1,
+    strengthObs: 0,
+    ninf: 2,
+    ncav: 0,
+    nart: 0,
+    nair: 0
+}
+
+let CARD_TAC02: TTATacticCard = {
+    code: "TAC02",
+    name: "Legion",
+    age: 1,
+    strength: 2,
+    strengthObs: 0,
+    ninf: 3,
+    ncav: 0,
+    nart: 0,
+    nair: 0
+}
+
+let CARD_TAC03: TTATacticCard = {
+    code: "TAC03",
+    name: "Phalanx",
+    age: 1,
+    strength: 3,
+    strengthObs: 0,
+    ninf: 2,
+    ncav: 1,
+    nart: 0,
+    nair: 0
+}
+
+let CARD_TAC04: TTATacticCard = {
+    code: "TAC04",
+    name: "Heavy Cavalry",
+    age: 1,
+    strength: 4,
+    strengthObs: 0,
+    ninf: 0,
+    ncav: 3,
+    nart: 0,
+    nair: 0
+}
+
+let CARD_TAC05: TTATacticCard = {
+    code: "TAC05",
+    name: "Medieval Army",
+    age: 1,
+    strength: 2,
+    strengthObs: 0,
+    ninf: 1,
+    ncav: 1,
+    nart: 0,
+    nair: 0
+}
+
+let CARD_TAC06: TTATacticCard = {
+    code: "TAC06",
+    name: "Napoleonic Army",
+    age: 2,
+    strength: 7,
+    strengthObs: 4,
+    ninf: 1,
+    ncav: 1,
+    nart: 1,
+    nair: 0
+}
+
+let CARD_TAC07: TTATacticCard = {
+    code: "TAC07",
+    name: "Defensive Army",
+    age: 2,
+    strength: 6,
+    strengthObs: 3,
+    ninf: 2,
+    ncav: 0,
+    nart: 1,
+    nair: 0
+}
+
+let CARD_TAC08: TTATacticCard = {
+    code: "TAC08",
+    name: "Conquistadores",
+    age: 2,
+    strength: 5,
+    strengthObs: 3,
+    ninf: 1,
+    ncav: 2,
+    nart: 0,
+    nair: 0
+}
+
+let CARD_TAC09: TTATacticCard = {
+    code: "TAC09",
+    name: "Fortifications",
+    age: 2,
+    strength: 5,
+    strengthObs: 3,
+    ninf: 0,
+    ncav: 0,
+    nart: 2,
+    nair: 0
+}
+
+let CARD_TAC10: TTATacticCard = {
+    code: "TAC10",
+    name: "Classic Army",
+    age: 2,
+    strength: 8,
+    strengthObs: 4,
+    ninf: 2,
+    ncav: 2,
+    nart: 0,
+    nair: 0
+}
+
+let CARD_TAC11: TTATacticCard = {
+    code: "TAC11",
+    name: "Mobile Artillery",
+    age: 2,
+    strength: 5,
+    strengthObs: 3,
+    ninf: 0,
+    ncav: 1,
+    nart: 1,
+    nair: 0
+}
+
+let CARD_TAC12: TTATacticCard = {
+    code: "TAC12",
+    name: "Hussars",
+    age: 2,
+    strength: 2,
+    strengthObs: 0,
+    ninf: 0,
+    ncav: 2,
+    nart: 0,
+    nair: 0
+}
+
+let CARD_TAC13: TTATacticCard = {
+    code: "TAC13",
+    name: "Entrenchments",
+    age: 3,
+    strength: 9,
+    strengthObs: 5,
+    ninf: 1,
+    ncav: 0,
+    nart: 2,
+    nair: 0
+}
+
+let CARD_TAC14: TTATacticCard = {
+    code: "TAC14",
+    name: "Modern Army",
+    age: 3,
+    strength: 13,
+    strengthObs: 7,
+    ninf: 2,
+    ncav: 1,
+    nart: 1,
+    nair: 0
+}
+
+let CARD_TAC15: TTATacticCard = {
+    code: "TAC15",
+    name: "Mechanized Army",
+    age: 3,
+    strength: 10,
+    strengthObs: 5,
+    ninf: 0,
+    ncav: 1,
+    nart: 2,
+    nair: 0
+}
+
+let CARD_TAC16: TTATacticCard = {
+    code: "TAC16",
+    name: "Shock Troops",
+    age: 3,
+    strength: 11,
+    strengthObs: 6,
+    ninf: 1,
+    ncav: 3,
+    nart: 0,
+    nair: 0
+}
+
+let CARD_TAC17: TTATacticCard = {
+    code: "TAC17",
+    name: "Positional Army",
+    age: 3,
+    strength: 12,
+    strengthObs: 6,
+    ninf: 2,
+    ncav: 0,
+    nart: 2,
+    nair: 0
+}
+
 export class TTARepoCards {
 
     private static _instance: TTARepoCards;
-    private internalRepo: Map<string, TTACard>;    
+    private internalRepo: Map<string, TTACard>;
+    private internalTacticRepo: Map<string, TTATacticCard>;    
     private FillRepo() {
         this.internalRepo = new Map<string, TTACard>([
             ["PFA01", CARD_PFA01],
@@ -1906,8 +2123,31 @@ export class TTARepoCards {
         ]);
     }
 
+    private FillTactics() {
+        this.internalTacticRepo = new Map<string, TTATacticCard>([
+            ["TAC01", CARD_TAC01],
+            ["TAC02", CARD_TAC02],
+            ["TAC03", CARD_TAC03],
+            ["TAC04", CARD_TAC04],
+            ["TAC05", CARD_TAC05],
+            ["TAC06", CARD_TAC06],
+            ["TAC07", CARD_TAC07],
+            ["TAC08", CARD_TAC08],
+            ["TAC09", CARD_TAC09],
+            ["TAC10", CARD_TAC10],
+            ["TAC11", CARD_TAC11],
+            ["TAC12", CARD_TAC12],
+            ["TAC13", CARD_TAC13],
+            ["TAC14", CARD_TAC14],
+            ["TAC15", CARD_TAC15],
+            ["TAC16", CARD_TAC16],
+            ["TAC17", CARD_TAC17]
+        ]);
+    }
+
     private constructor() {
         this.FillRepo();
+        this.FillTactics();
     }
 
     public static get Instance(): TTARepoCards {
@@ -1916,6 +2156,10 @@ export class TTARepoCards {
 
     public Get(cardName: string) {
         return this.internalRepo.get(cardName);
+    }
+
+    public GetTactic(cardName: string) {
+        return this.internalTacticRepo.get(cardName);
     }
 
     public GetLeaders() {
@@ -1945,5 +2189,27 @@ export class TTARepoCards {
         leaders.push(this.internalRepo.get("LEA23"));
         leaders.push(this.internalRepo.get("LEA24"));
         return leaders;
+    }
+
+    public GetTactics() {
+        let tactics = Array<TTATacticCard>();
+        tactics.push(this.internalTacticRepo.get("TAC01"));
+        tactics.push(this.internalTacticRepo.get("TAC02"));
+        tactics.push(this.internalTacticRepo.get("TAC03"));
+        tactics.push(this.internalTacticRepo.get("TAC04"));
+        tactics.push(this.internalTacticRepo.get("TAC05"));
+        tactics.push(this.internalTacticRepo.get("TAC06"));
+        tactics.push(this.internalTacticRepo.get("TAC07"));
+        tactics.push(this.internalTacticRepo.get("TAC08"));
+        tactics.push(this.internalTacticRepo.get("TAC09"));
+        tactics.push(this.internalTacticRepo.get("TAC10"));
+        tactics.push(this.internalTacticRepo.get("TAC11"));
+        tactics.push(this.internalTacticRepo.get("TAC12"));
+        tactics.push(this.internalTacticRepo.get("TAC13"));
+        tactics.push(this.internalTacticRepo.get("TAC14"));
+        tactics.push(this.internalTacticRepo.get("TAC15"));
+        tactics.push(this.internalTacticRepo.get("TAC16"));
+        tactics.push(this.internalTacticRepo.get("TAC17"));
+        return tactics;
     }
 }

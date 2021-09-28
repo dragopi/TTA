@@ -125,6 +125,45 @@ export class FilterLeaders extends React.Component<FLeadersProps, FLeadersState>
 }
 
 
+export class FilterTactics extends React.Component<FLeadersProps, FLeadersState> {
+    state: FLeadersState = {};
+
+    render() {
+
+        var tactics = TTARepoCards.Instance.GetTactics();
+        var indents = [];
+        for (var i = 0; i < tactics.length; i++) {
+            var tactic = tactics[i];
+            //indents.push(<CardItem code={leader.code} />);
+            indents.push(<option value={tactic.code}>{tactic.name}</option>);
+        }
+
+        return (
+            <div className="card">
+                <div className="card-header">
+                    Tactic
+                </div>
+                <div className="card-body">
+                    <FormContext.Consumer>
+                    {(context: IFormContext) => (
+                        <select name="tactic"                        
+                            onChange={
+                            (e: React.FormEvent<HTMLSelectElement>) =>
+                            context.setValues({ ["tactic"]: e.currentTarget.value })
+                            }
+                        >
+                            <option value="">No one </option>
+                        {indents}
+                        </select>
+                    )}
+                    </FormContext.Consumer>
+                </div>
+            </div>           
+        );
+    }
+}
+
+
 
 type FilterCategoryProps =  {
     descr: string;
