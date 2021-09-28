@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { CardItem, FilterCategory, FilterLeaders } from './TTAUI';
+import { CardItem, FilterCategory, FilterLeaders, FilterTactics } from './TTAUI';
 import { Form } from "./Forms";
 
 function App() {
@@ -14,6 +14,8 @@ function App() {
           <React.Fragment>
 
         <FilterLeaders />
+
+        <FilterTactics />
 
         <div className="card">
             <div className="card-header">
@@ -32,6 +34,19 @@ function App() {
               <CardItem code="MCA01" />
               <CardItem code="MCA02" />
               <CardItem code="MCA03" />
+            </div>
+          )} />
+
+          <FilterCategory descr="Artillery" render={() => (
+            <div className="d-flex">
+              <CardItem code="MAR01" />
+              <CardItem code="MAR02" />
+            </div>
+          )} />
+
+          <FilterCategory descr="Air Force" render={() => (
+            <div className="d-flex">
+              <CardItem code="MAF01" />
             </div>
           )} />
 
