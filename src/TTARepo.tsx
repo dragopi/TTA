@@ -1917,4 +1917,33 @@ export class TTARepoCards {
     public Get(cardName: string) {
         return this.internalRepo.get(cardName);
     }
+
+    public GetLeaders() {
+        let leaders = Array<TTACard>();
+        leaders.push(this.internalRepo.get("LEA01"));
+        leaders.push(this.internalRepo.get("LEA02"));
+        leaders.push(this.internalRepo.get("LEA03"));
+        leaders.push(this.internalRepo.get("LEA04"));
+        leaders.push(this.internalRepo.get("LEA05"));
+        leaders.push(this.internalRepo.get("LEA06"));
+        leaders.push(this.internalRepo.get("LEA07"));
+        leaders.push(this.internalRepo.get("LEA08"));
+        leaders.push(this.internalRepo.get("LEA09"));
+        leaders.push(this.internalRepo.get("LEA10"));
+        leaders.push(this.internalRepo.get("LEA11"));
+        leaders.push(this.internalRepo.get("LEA12"));
+        leaders.push(this.internalRepo.get("LEA13"));
+        leaders.push(this.internalRepo.get("LEA14"));
+        leaders.push(this.internalRepo.get("LEA15"));
+        leaders.push(this.internalRepo.get("LEA16"));
+        leaders.push(this.internalRepo.get("LEA17"));
+        leaders.push(this.internalRepo.get("LEA18"));
+        leaders.push(this.internalRepo.get("LEA19"));
+        leaders.push(this.internalRepo.get("LEA20"));
+        leaders.push(this.internalRepo.get("LEA21"));
+        leaders.push(this.internalRepo.get("LEA22"));
+        leaders.push(this.internalRepo.get("LEA23"));
+        leaders.push(this.internalRepo.get("LEA24"));
+        return leaders;
+    }
 }
