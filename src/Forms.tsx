@@ -1,4 +1,6 @@
 import * as React from "react";
+import { BoardCard, Scene, StrenghtCalculation } from "./TTACalc";
+import { TTACard, TTARepoCards } from "./TTARepo";
 
 export interface IFormContext
   extends IFormState {
@@ -37,6 +39,71 @@ export interface IFormState {
 
   /* Whether the form has been successfully submitted */
   submitSuccess?: boolean;
+}
+
+
+function MakeBoardCard(card: TTACard, values: IValues)
+{
+  return {
+    code: card.code,
+    card: card,
+    yellowToken: Number((values[card.code+"_tk"])?values[card.code+"_tk"]:0)
+  }
+}
+
+function CalculateScene(values: IValues)
+{
+  console.log("CalculateScene: START");
+
+  let s: Scene = {
+    Age: 1,
+    Leader: null,
+    Infantry: [],
+    Cavallery: [],
+    Artillery: [],
+    AirForce: null,
+    Wonders: [],
+    Urbans: [],
+    Tactic: null
+  };
+
+  if (values["leader"])
+    s.Leader = {
+      code: values["leader"],
+      yellowToken: 0
+    };
+  
+  if (values["tactic"])
+    s.Tactic = TTARepoCards.Instance.GetTactic(values["tactic"]);
+
+  for (let key in values) {
+    let value = values[key];
+    //console.log(key + " => " + value);
+    if (!key.includes("_"))
+    {
+      let card = TTARepoCards.Instance.Get(key);
+      if (card!=null)
+      {
+        if (card.code.startsWith("MIN"))
+          s.Infantry.push(MakeBoardCard(card, values));
+        else if (card.code.startsWith("MCA"))
+          s.Cavallery.push(MakeBoardCard(card, values));
+        else if (card.code.startsWith("MAR"))
+          s.Artillery.push(MakeBoardCard(card, values));
+        else if (card.code.startsWith("MAF"))
+          s.AirForce=(MakeBoardCard(card, values));
+        else if (card.code.startsWith("WON"))
+          s.Wonders.push(MakeBoardCard(card, values));
+        else if (card.code.startsWith("P"))
+          s.Productions.push(MakeBoardCard(card, values));
+        else if (card.code.startsWith("U"))
+          s.Urbans.push(MakeBoardCard(card, values));
+      }
+    }
+  }
+  console.log(s);
+  console.log("CalculateScene: END");
+  StrenghtCalculation(s);
 }
 
 export class Form extends React.Component<IFormProps, IFormState> {
@@ -78,7 +145,8 @@ export class Form extends React.Component<IFormProps, IFormState> {
   ): Promise<void> => {
     e.preventDefault();
 
-    console.log(this.state.values);
+    //console.log(this.state.values);
+    CalculateScene(this.state.values);
 
     if (this.validateForm()) {
       const submitSuccess: boolean = await this.submitForm();
