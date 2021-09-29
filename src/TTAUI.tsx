@@ -69,6 +69,67 @@ export class CardItem extends React.Component<CardItemProps, CardItemState> {
     }
 }
 
+export class CardWithToken extends React.Component<CardItemProps, CardItemState> {
+    state: CardItemState = {
+        // optional second annotation for better type inference
+        card: TTARepoCards.Instance.Get(this.props.code),
+        onBoard: false,
+        tokens: 0,
+        needToken: false,
+    };
+
+    render() {
+
+        return (
+            <FormContext.Consumer>
+            {(context: IFormContext) => (
+
+            <div className="crdtkn">
+                <div className="crdtkn-header">
+                    
+                    <div className="form-check form-switch">
+                        <input className="form-check-input" type="checkbox" name={this.state.card.code + "_ob"} onChange={
+                (e: React.FormEvent<HTMLInputElement>) =>
+                  context.setValues({ [this.state.card.code + "_ob"]: e.currentTarget.value })
+              } />
+                    </div>
+
+                    <strong className="me-auto">{this.state.card.name}</strong>
+                    <small>{this.state.card.type}</small>
+                </div>
+                <div className="crdtkn-body">
+
+
+                    <div className="qty mt-5">
+                        <span className="minus bg-dark" onClick={
+                            () => {
+                                let value = this.state.tokens - 1;
+                                if (value<0)
+                                    value = 0;
+                                this.setState({tokens: value});
+                                context.setValues({ [this.state.card.code + "_tk"]: value });
+                            }
+                        }>-</span>
+                        <input type="number" className="count" name="qty" value={this.state.tokens} disabled onChange={
+                (e: React.FormEvent<HTMLInputElement>) =>
+                  context.setValues({ [this.state.card.code + "_tk"]: e.currentTarget.value })
+              } />
+                        <span className="plus bg-dark" onClick={
+                            () => {
+                                let value = this.state.tokens;
+                                value = value+1
+                                this.setState({tokens: value});
+                                context.setValues({ [this.state.card.code + "_tk"]: value });
+                            }
+                        }>+</span>
+                    </div>
+                </div>
+            </div>
+            )}
+            </FormContext.Consumer>
+        );
+    }
+}
 
 type FLeadersProps =  {
     //code: string;
