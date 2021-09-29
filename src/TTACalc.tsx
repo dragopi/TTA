@@ -121,6 +121,7 @@ export function StrenghtCalculation(s: Scene)
                 obsolete: false
             });
         }
+        console.log(s.AirForce);
         strengthFromMilitary += (s.AirForce.yellowToken * s.AirForce.card.strength);
     }
 
@@ -291,7 +292,7 @@ let infAgeA: BoardCard = {
 }
 
 let aircraft: BoardCard = {
-    code: "MAF01",
+    code: "MAI01",
     yellowToken: 2
 }
 

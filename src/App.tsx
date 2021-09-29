@@ -46,7 +46,7 @@ function App() {
 
           <FilterCategory descr="Air Force" render={() => (
             <div className="d-flex">
-              <CardItem code="MAF01" />
+              <CardItem code="MAI01" />
             </div>
           )} />
 
@@ -60,17 +60,17 @@ function App() {
           )} />
           <FilterCategory descr="Mine" render={() => (
             <div className="d-flex">
-              <CardItem code="PMN01" />
-              <CardItem code="PMN02" />
-              <CardItem code="PMN03" />
-              <CardItem code="PMN04" />
+              <CardItem code="PMI01" />
+              <CardItem code="PMI02" />
+              <CardItem code="PMI03" />
+              <CardItem code="PMI04" />
             </div>
           )} />
           <FilterCategory descr="Lab" render={() => (
             <div className="d-flex">
-              <CardItem code="ULB01" />
-              <CardItem code="ULB02" />
-              <CardItem code="ULB03" />
+              <CardItem code="ULA01" />
+              <CardItem code="ULA02" />
+              <CardItem code="ULA03" />
             </div>
           )} />
           <FilterCategory descr="Theology" render={() => (

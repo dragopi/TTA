@@ -90,7 +90,7 @@ function CalculateScene(values: IValues)
           s.Cavallery.push(MakeBoardCard(card, values));
         else if (card.code.startsWith("MAR"))
           s.Artillery.push(MakeBoardCard(card, values));
-        else if (card.code.startsWith("MAF"))
+        else if (card.code.startsWith("MAI"))
           s.AirForce=(MakeBoardCard(card, values));
         else if (card.code.startsWith("WON"))
           s.Wonders.push(MakeBoardCard(card, values));
