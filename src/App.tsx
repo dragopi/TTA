@@ -50,6 +50,37 @@ function App() {
             </div>
           )} />
 
+          <FilterCategory descr="Farm" render={() => (
+            <div className="d-flex">
+              <CardItem code="PFA01" />
+              <CardItem code="PFA02" />
+              <CardItem code="PFA03" />
+              <CardItem code="PFA04" />
+            </div>
+          )} />
+          <FilterCategory descr="Mine" render={() => (
+            <div className="d-flex">
+              <CardItem code="PMN01" />
+              <CardItem code="PMN02" />
+              <CardItem code="PMN03" />
+              <CardItem code="PMN04" />
+            </div>
+          )} />
+          <FilterCategory descr="Lab" render={() => (
+            <div className="d-flex">
+              <CardItem code="ULB01" />
+              <CardItem code="ULB02" />
+              <CardItem code="ULB03" />
+            </div>
+          )} />
+          <FilterCategory descr="Theology" render={() => (
+            <div className="d-flex">
+              <CardItem code="UTH01" />
+              <CardItem code="UTH02" />
+              <CardItem code="UTH03" />
+            </div>
+          )} />
+
           </React.Fragment>
         )}
       

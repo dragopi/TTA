@@ -47,9 +47,9 @@ export class CardItem extends React.Component<CardItemProps, CardItemState> {
                 <div className="crdtkn-header">
                     
                     <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" name={this.state.card.code + "_ob"} onChange={
+                        <input className="form-check-input" type="checkbox" name={this.state.card.code} onChange={
                 (e: React.FormEvent<HTMLInputElement>) =>
-                  context.setValues({ [this.state.card.code + "_ob"]: e.currentTarget.value })
+                  context.setValues({ [this.state.card.code]: e.currentTarget.value })
               } />
                     </div>
 
