@@ -53,8 +53,14 @@ function FillArray(a: Array<BoardCard>)
         });
 }
 
+interface LogItem {
+    msg: string;
+    cardName: string;
+}
+
 export function StrenghtCalculation(s: Scene)
 {
+    let logs: LogItem[] = [];
     FillCard(s.Leader);
     FillCard(s.Governament);
     FillCard(s.AirForce);
@@ -79,6 +85,11 @@ export function StrenghtCalculation(s: Scene)
     let cavArray: Array<Token> = [];
     let artArray: Array<Token> = [];
     let airArray: Array<Token> = [];
+    let infCount: number = 0;
+    let cavCount: number = 0;
+    let artCount: number = 0;
+    let airCount: number = 0;
+
 
     s.Infantry.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
@@ -90,6 +101,7 @@ export function StrenghtCalculation(s: Scene)
 
         strengthFromMilitary += (c.yellowToken * c.card.strength);
     });
+    infCount = infArray.length;
 
     s.Cavallery.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
@@ -98,9 +110,9 @@ export function StrenghtCalculation(s: Scene)
                 obsolete : (Math.abs(c.card.age-s.Age)>1)
             });
         }
-
         strengthFromMilitary += (c.yellowToken * c.card.strength);
     });
+    cavCount = cavArray.length;
 
     s.Artillery.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
@@ -112,6 +124,7 @@ export function StrenghtCalculation(s: Scene)
 
         strengthFromMilitary += (c.yellowToken * c.card.strength);
     });
+    artCount = artArray.length;
 
     if (s.AirForce != null)
     {
@@ -121,9 +134,24 @@ export function StrenghtCalculation(s: Scene)
                 obsolete: false
             });
         }
-        console.log(s.AirForce);
         strengthFromMilitary += (s.AirForce.yellowToken * s.AirForce.card.strength);
     }
+    airCount = airArray.length;
+
+
+
+    if ((s.Leader != null)&&(s.Leader.code=="LEA33"))
+    {
+        s.Productions.forEach(c => {
+            if (c.card.subtype=="Farm")
+                for (let index = 0; index < c.yellowToken; index++) {
+                    infArray.push({
+                        assignedCard: c,
+                        obsolete : (Math.abs(c.card.age-s.Age)>1)
+                    });
+                }
+        });
+    }
 
     if (s.Tactic!=null)
     {
@@ -230,13 +258,13 @@ export function StrenghtCalculation(s: Scene)
         }
         else if (s.Leader.card.code == "LEA15") // Napoleon
         {
-            if (infArray.length>0)
+            if (infCount>0)
                 strengthFromLeader += 2;
-            if (cavArray.length>0)
+            if (cavCount>0)
                 strengthFromLeader += 2;
-            if (artArray.length>0)
+            if (artCount>0)
                 strengthFromLeader += 2;
-            if (airArray.length>0)
+            if (airCount>0)
                 strengthFromLeader += 2;
         }
         else if (s.Leader.card.code == "LEA06") // Alexander
@@ -267,6 +295,9 @@ export function StrenghtCalculation(s: Scene)
     console.log("Strength", strengthFromTactic);
     console.log("--[  Air Mod ]--");
     console.log("Strength", strengthFromAirMod);
+    console.log("----------------");
+    console.log("--[ Leader ]--");
+    console.log("Strength", strengthFromLeader);
     console.log("----------------");
     console.log("TOTAL", strengthTotal);
     console.log("----------------");
