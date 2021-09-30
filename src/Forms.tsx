@@ -70,6 +70,9 @@ function CalculateScene(values: IValues)
     Tactic: null
   };
 
+  if (values["age"])
+    s.Age = values["age"];
+
   if (values["leader"])
     s.Leader = {
       code: values["leader"],

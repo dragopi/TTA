@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { CardItem, CardWithToken, FilterCategory, FilterLeaders, FilterTactics, FilterWonder } from './TTAUI';
+import { CardItem, CardWithToken, FilterAge, FilterCategory, FilterLeaders, FilterTactics, FilterWonder } from './TTAUI';
 import { Form } from "./Forms";
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
         <div className="row">
             <div className="col">
               <h6>Age</h6>
+              <FilterAge />
             </div>
             <div className="col">
               <FilterLeaders />
