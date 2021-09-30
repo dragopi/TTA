@@ -340,6 +340,60 @@ export class FilterWonder extends React.Component<FLeadersProps, FLeadersState> 
     }
 }
 
+export class FilterAge extends React.Component<FLeadersProps, FLeadersState> {
+    state: FLeadersState = {};
+
+    render() {
+
+        return (
+            
+                <FormContext.Consumer>
+                    {(context: IFormContext) => (
+                        <div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="age" onClick={
+                                        (e: React.FormEvent<HTMLInputElement>) =>
+                                            context.setValues({ ["age"]: 0 })
+                                        } />
+                                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                                    Age A
+                                </label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="age" onClick={
+                                        (e: React.FormEvent<HTMLInputElement>) =>
+                                            context.setValues({ ["age"]: 1 })
+                                        } />
+                                <label className="form-check-label" htmlFor="flexRadioDefault2">
+                                    Age I
+                                </label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="age" onClick={
+                                        (e: React.FormEvent<HTMLInputElement>) =>
+                                            context.setValues({ ["age"]: 2 })
+                                        } />
+                                <label className="form-check-label" htmlFor="flexRadioDefault2">
+                                    Age II
+                                </label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="age" onClick={
+                                        (e: React.FormEvent<HTMLInputElement>) =>
+                                            context.setValues({ ["age"]: 3 })
+                                        } />
+                                <label className="form-check-label" htmlFor="flexRadioDefault2">
+                                    Age III
+                                </label>
+                            </div>
+                        </div>
+                )}
+                </FormContext.Consumer>
+                     
+        );
+    }
+}
+
 
 type FilterCategoryProps =  {
     descr: string;
