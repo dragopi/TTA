@@ -54,14 +54,29 @@ export class CardItem extends React.Component<CardItemProps, CardItemState> {
                     </div>
 
                     <strong className="me-auto">{this.state.card.name}</strong>
-                    <small>{this.state.card.type}</small>
+                    <small>
+
+                        <select name={this.state.card.code + "_tk"}
+                            onChange={
+                            (e: React.FormEvent<HTMLSelectElement>) =>
+                            context.setValues({ [this.state.card.code + "_tk"]: e.currentTarget.value })
+                            }
+                        >
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+
+                    </small>
                 </div>
-                <div className="crdtkn-body">
-                    <input className="form-control form-control-sm" type="text" name={this.state.card.code + "_tk"} onChange={
-                (e: React.FormEvent<HTMLInputElement>) =>
-                  context.setValues({ [this.state.card.code + "_tk"]: e.currentTarget.value })
-              } />
-                </div>
+                
             </div>
             )}
             </FormContext.Consumer>
@@ -88,7 +103,7 @@ export class CardWithToken extends React.Component<CardItemProps, CardItemState>
                 <div className="crdtkn-header">
                     
                     <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" name={this.state.card.code + "_ob"} onChange={
+                        <input className="form-check-input" type="checkbox" name={this.state.card.code} onChange={
                 (e: React.FormEvent<HTMLInputElement>) =>
                   context.setValues({ [this.state.card.code + "_ob"]: e.currentTarget.value })
               } />
@@ -110,7 +125,7 @@ export class CardWithToken extends React.Component<CardItemProps, CardItemState>
                                 context.setValues({ [this.state.card.code + "_tk"]: value });
                             }
                         }>-</span>
-                        <input type="number" className="count" name="qty" value={this.state.tokens} disabled onChange={
+                        <input type="number" className="count" name={this.state.card.code + "_tk"} value={this.state.tokens} onChange={
                 (e: React.FormEvent<HTMLInputElement>) =>
                   context.setValues({ [this.state.card.code + "_tk"]: e.currentTarget.value })
               } />
@@ -254,63 +269,72 @@ export class FilterWonder extends React.Component<FLeadersProps, FLeadersState> 
             wonders3.push(<option value={wonders[i].code}>{wonders[i].name}</option>);
 
         return (
-            <div className="card">
-                <div className="card-header">
-                    Wonders
-                </div>
-                <div className="card-body">
+            <div>
+                    <h6>Wonders</h6>
                     <FormContext.Consumer>
                     {(context: IFormContext) => (
 
-                        <div className="row">
-                            <div className="col">
-                                <select name="wonder0"                        
-                                    onChange={
-                                    (e: React.FormEvent<HTMLSelectElement>) =>
-                                    context.setValues({ ["wonder0"]: e.currentTarget.value })
-                                    }
-                                >
-                                    <option value="">No one </option>
-                                {wonders0}
-                                </select>
+                        
+                            <div>
+                                <div className="crdtkn">
+                                    <div className="crdtkn-header">
+                                        <strong className="me-auto">A</strong>
+                                        <select name="wonder0"                        
+                                            onChange={
+                                            (e: React.FormEvent<HTMLSelectElement>) =>
+                                            context.setValues({ ["wonder0"]: e.currentTarget.value })
+                                            }
+                                        >
+                                            <option value="">No one </option>
+                                        {wonders0}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="crdtkn">
+                                    <div className="crdtkn-header">
+                                        <strong className="me-auto">I</strong>
+                                        <select name="wonder1"
+                                            onChange={
+                                            (e: React.FormEvent<HTMLSelectElement>) =>
+                                            context.setValues({ ["wonder1"]: e.currentTarget.value })
+                                            }
+                                        >
+                                            <option value="">No one </option>
+                                        {wonders1}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="crdtkn">
+                                    <div className="crdtkn-header">
+                                        <strong className="me-auto">II</strong>
+                                        <select name="wonder2"
+                                            onChange={
+                                            (e: React.FormEvent<HTMLSelectElement>) =>
+                                            context.setValues({ ["wonder2"]: e.currentTarget.value })
+                                            }
+                                        >
+                                            <option value="">No one </option>
+                                        {wonders2}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="crdtkn">
+                                    <div className="crdtkn-header">
+                                        <strong className="me-auto">III</strong>
+                                        <select name="wonder3"
+                                            onChange={
+                                            (e: React.FormEvent<HTMLSelectElement>) =>
+                                            context.setValues({ ["wonder3"]: e.currentTarget.value })
+                                            }
+                                        >
+                                            <option value="">No one </option>
+                                        {wonders3}
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="col">
-                                <select name="wonder1"
-                                    onChange={
-                                    (e: React.FormEvent<HTMLSelectElement>) =>
-                                    context.setValues({ ["wonder1"]: e.currentTarget.value })
-                                    }
-                                >
-                                    <option value="">No one </option>
-                                {wonders1}
-                                </select>
-                            </div>
-                            <div className="col">
-                                <select name="wonder2"
-                                    onChange={
-                                    (e: React.FormEvent<HTMLSelectElement>) =>
-                                    context.setValues({ ["wonder2"]: e.currentTarget.value })
-                                    }
-                                >
-                                    <option value="">No one </option>
-                                {wonders2}
-                                </select>
-                            </div>
-                            <div className="col">
-                                <select name="wonder3"
-                                    onChange={
-                                    (e: React.FormEvent<HTMLSelectElement>) =>
-                                    context.setValues({ ["wonder3"]: e.currentTarget.value })
-                                    }
-                                >
-                                    <option value="">No one </option>
-                                {wonders3}
-                                </select>
-                            </div>
-                        </div>
                     )}
                     </FormContext.Consumer>
-                </div>
             </div>           
         );
     }
