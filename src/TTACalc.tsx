@@ -55,7 +55,6 @@ function FillArray(a: Array<BoardCard>)
 
 interface LogItem {
     msg: string;
-    cardName: string;
 }
 
 export function StrenghtCalculation(s: Scene)
@@ -90,7 +89,7 @@ export function StrenghtCalculation(s: Scene)
     let artCount: number = 0;
     let airCount: number = 0;
 
-
+    let tempCount: number = 0;
     s.Infantry.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
             infArray.push({
@@ -98,11 +97,14 @@ export function StrenghtCalculation(s: Scene)
                 obsolete : (Math.abs(c.card.age-s.Age)>1)
             });
         }
-
-        strengthFromMilitary += (c.yellowToken * c.card.strength);
+        tempCount += (c.yellowToken * c.card.strength);
     });
     infCount = infArray.length;
+    strengthFromMilitary += tempCount;
+    if (tempCount>0)
+        logs.push({msg:"Infantry: " + tempCount});
 
+    tempCount = 0;
     s.Cavallery.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
             cavArray.push({
@@ -110,10 +112,14 @@ export function StrenghtCalculation(s: Scene)
                 obsolete : (Math.abs(c.card.age-s.Age)>1)
             });
         }
-        strengthFromMilitary += (c.yellowToken * c.card.strength);
+        tempCount += (c.yellowToken * c.card.strength);
     });
     cavCount = cavArray.length;
+    strengthFromMilitary += tempCount;
+    if (tempCount>0)
+        logs.push({msg:"Cavallery: " + tempCount});
 
+    tempCount = 0;
     s.Artillery.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
             artArray.push({
@@ -122,10 +128,14 @@ export function StrenghtCalculation(s: Scene)
             });
         }
 
-        strengthFromMilitary += (c.yellowToken * c.card.strength);
+        tempCount += (c.yellowToken * c.card.strength);
     });
     artCount = artArray.length;
+    strengthFromMilitary += tempCount;
+    if (tempCount>0)
+        logs.push({msg:"Artillery: " + tempCount});
 
+    tempCount = 0;
     if (s.AirForce != null)
     {
         for (let index = 0; index < s.AirForce.yellowToken; index++) {
@@ -134,11 +144,12 @@ export function StrenghtCalculation(s: Scene)
                 obsolete: false
             });
         }
-        strengthFromMilitary += (s.AirForce.yellowToken * s.AirForce.card.strength);
+        tempCount += (s.AirForce.yellowToken * s.AirForce.card.strength);
     }
     airCount = airArray.length;
-
-
+    strengthFromMilitary += tempCount;
+    if (tempCount>0)
+        logs.push({msg:"Artillery: " + tempCount});
 
     if ((s.Leader != null)&&(s.Leader.code=="LEA33"))
     {
@@ -201,6 +212,15 @@ export function StrenghtCalculation(s: Scene)
         strengthFromTactic = (countTactics * s.Tactic.strength) + (countTacticsObs * s.Tactic.strengthObs);
     }
 
+    if (strengthFromTactic>0)
+    {
+        logs.push({
+            msg: "Obsolete: " + countTacticsObs + "\n" +
+                "Modern: " + countTactics + "\n" + 
+                "Tactics: " + strengthFromTactic
+        });
+    }
+
     let strengthFromAirMod: number = 0;
     if (s.AirForce != null)
     {
@@ -210,14 +230,20 @@ export function StrenghtCalculation(s: Scene)
 
         airToken += tokenUsed;
         strengthFromAirMod += Math.min(s.AirForce.yellowToken, countTacticsObs) * s.Tactic.strengthObs;
+
+        if (strengthFromAirMod>0)
+            logs.push({msg: "Airforce Mod: " + strengthFromTactic});
     }
 
     // SPECIAL BLUE CARD
     let strengthFromSpecials = 0;
     if (s.Special != null)
         s.Special.forEach(blueCard => {
-            strengthFromSpecials += blueCard.card.strength;
+            strengthFromSpecials = Math.max(strengthFromSpecials, blueCard.card.strength);
         });
+    if (strengthFromSpecials>0)
+        logs.push({msg: "Blue card: " + strengthFromSpecials});
+
 
     // URBAN CARD (Arena)
     let strengthFromArena = 0;
@@ -225,6 +251,8 @@ export function StrenghtCalculation(s: Scene)
         s.Urbans.forEach(urbanCard => {
             strengthFromArena += urbanCard.card.strength;
         });
+    if (strengthFromArena>0)
+        logs.push({msg: "Arena: " + strengthFromArena});
 
     // Wonder
     let strengthFromWonder = 0;
@@ -244,6 +272,8 @@ export function StrenghtCalculation(s: Scene)
 
             strengthFromWonder += wonderCard.card.strength;
         });
+    if (strengthFromWonder>0)
+        logs.push({msg: "Wonder: " + strengthFromWonder});
     
     // Leaders
     let strengthFromLeader = 0;
@@ -274,6 +304,8 @@ export function StrenghtCalculation(s: Scene)
         }
         strengthFromLeader += s.Leader.card.strength;
     }
+    if (strengthFromLeader>0)
+        logs.push({msg: "Leader: " + strengthFromLeader});
 
     // TOTAL
     let strengthTotal: number = 
@@ -288,19 +320,23 @@ export function StrenghtCalculation(s: Scene)
     if (s.Governament != null)
         strengthTotal += s.Governament.card.strength;
 
-    console.log("--[  Military ]--");
-    console.log("Strength", strengthFromMilitary);
-    console.log("--[  Tactics ]--");
-    console.log("Obsolete", countTacticsObs);
-    console.log("Modern", countTactics);
-    console.log("Strength", strengthFromTactic);
-    console.log("--[  Air Mod ]--");
-    console.log("Strength", strengthFromAirMod);
-    console.log("----------------");
-    console.log("--[ Leader ]--");
-    console.log("Strength", strengthFromLeader);
-    console.log("----------------");
-    console.log("TOTAL", strengthTotal);
+    //console.log("--[  Military ]--");
+    //console.log("Strength", strengthFromMilitary);
+    //console.log("--[  Tactics ]--");
+    //console.log("Obsolete", countTacticsObs);
+    //console.log("Modern", countTactics);
+    //console.log("Strength", strengthFromTactic);
+    //console.log("--[  Air Mod ]--");
+    //console.log("Strength", strengthFromAirMod);
+    //console.log("----------------");
+    //console.log("--[ Leader ]--");
+    //console.log("Strength", strengthFromLeader);
+    //console.log("----------------");
+    
+    logs.forEach(l => {
+        console.log(l.msg)
+    });
+    console.log("TOTAL", strengthTotal);
     console.log("----------------");
 
     return 1;
