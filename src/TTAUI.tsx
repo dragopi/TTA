@@ -224,6 +224,97 @@ export class FilterTactics extends React.Component<FLeadersProps, FLeadersState>
     }
 }
 
+export class FilterWonder extends React.Component<FLeadersProps, FLeadersState> {
+    state: FLeadersState = {};
+
+    cardClick = (): void => {
+        console.log('card click');
+    }
+
+    render() {
+
+        var wonders = TTARepoCards.Instance.GetWonders(0);
+        var wonders0 = [];
+        for (var i = 0; i < wonders.length; i++) 
+            wonders0.push(<option value={wonders[i].code}>{wonders[i].name}</option>);
+
+        wonders = TTARepoCards.Instance.GetWonders(1);
+        var wonders1 = [];
+        for (var i = 0; i < wonders.length; i++) 
+            wonders1.push(<option value={wonders[i].code}>{wonders[i].name}</option>);
+        
+        wonders = TTARepoCards.Instance.GetWonders(2);
+        var wonders2 = [];
+        for (var i = 0; i < wonders.length; i++) 
+            wonders2.push(<option value={wonders[i].code}>{wonders[i].name}</option>);
+
+        wonders = TTARepoCards.Instance.GetWonders(3);
+        var wonders3 = [];
+        for (var i = 0; i < wonders.length; i++) 
+            wonders3.push(<option value={wonders[i].code}>{wonders[i].name}</option>);
+
+        return (
+            <div className="card">
+                <div className="card-header">
+                    Wonders
+                </div>
+                <div className="card-body">
+                    <FormContext.Consumer>
+                    {(context: IFormContext) => (
+
+                        <div className="row">
+                            <div className="col">
+                                <select name="wonder0"                        
+                                    onChange={
+                                    (e: React.FormEvent<HTMLSelectElement>) =>
+                                    context.setValues({ ["wonder0"]: e.currentTarget.value })
+                                    }
+                                >
+                                    <option value="">No one </option>
+                                {wonders0}
+                                </select>
+                            </div>
+                            <div className="col">
+                                <select name="wonder1"
+                                    onChange={
+                                    (e: React.FormEvent<HTMLSelectElement>) =>
+                                    context.setValues({ ["wonder1"]: e.currentTarget.value })
+                                    }
+                                >
+                                    <option value="">No one </option>
+                                {wonders1}
+                                </select>
+                            </div>
+                            <div className="col">
+                                <select name="wonder2"
+                                    onChange={
+                                    (e: React.FormEvent<HTMLSelectElement>) =>
+                                    context.setValues({ ["wonder2"]: e.currentTarget.value })
+                                    }
+                                >
+                                    <option value="">No one </option>
+                                {wonders2}
+                                </select>
+                            </div>
+                            <div className="col">
+                                <select name="wonder3"
+                                    onChange={
+                                    (e: React.FormEvent<HTMLSelectElement>) =>
+                                    context.setValues({ ["wonder3"]: e.currentTarget.value })
+                                    }
+                                >
+                                    <option value="">No one </option>
+                                {wonders3}
+                                </select>
+                            </div>
+                        </div>
+                    )}
+                    </FormContext.Consumer>
+                </div>
+            </div>           
+        );
+    }
+}
 
 
 type FilterCategoryProps =  {

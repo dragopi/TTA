@@ -78,6 +78,27 @@ function CalculateScene(values: IValues)
   
   if (values["tactic"])
     s.Tactic = TTARepoCards.Instance.GetTactic(values["tactic"]);
+  
+  if (values["wonder0"])
+    s.Wonders.push({
+      code: values["wonder0"],
+      yellowToken: 0
+    });
+  if (values["wonder1"])
+    s.Wonders.push({
+      code: values["wonder1"],
+      yellowToken: 0
+    });
+  if (values["wonder2"])
+    s.Wonders.push({
+      code: values["wonder2"],
+      yellowToken: 0
+    });
+  if (values["wonder3"])
+    s.Wonders.push({
+      code: values["wonder3"],
+      yellowToken: 0
+    });
 
   for (let key in values) {
     let value = values[key];

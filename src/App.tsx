@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { CardItem, FilterCategory, FilterLeaders, FilterTactics } from './TTAUI';
+import { CardItem, FilterCategory, FilterLeaders, FilterTactics, FilterWonder } from './TTAUI';
 import { Form } from "./Forms";
 
 function App() {
@@ -16,6 +16,8 @@ function App() {
         <FilterLeaders />
 
         <FilterTactics />
+
+        <FilterWonder />
 
         <div className="card">
             <div className="card-header">
