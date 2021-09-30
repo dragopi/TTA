@@ -3037,4 +3037,53 @@ export class TTARepoCards {
         tactics.push(this.internalTacticRepo.get("TAC17"));
         return tactics;
     }
+
+    public GetWonders(age:number) {
+        let wonders = Array<TTACard>();
+        if (age==0)
+        {
+            wonders.push(this.internalRepo.get("WON01"));
+            wonders.push(this.internalRepo.get("WON02"));
+            wonders.push(this.internalRepo.get("WON03"));
+            wonders.push(this.internalRepo.get("WON04"));
+            wonders.push(this.internalRepo.get("WON17"));
+            wonders.push(this.internalRepo.get("WON18"));
+            wonders.push(this.internalRepo.get("WON19"));
+            wonders.push(this.internalRepo.get("WON20"));
+        }
+        else if (age==1)
+        {
+            wonders.push(this.internalRepo.get("WON05"));
+            wonders.push(this.internalRepo.get("WON06"));
+            wonders.push(this.internalRepo.get("WON07"));
+            wonders.push(this.internalRepo.get("WON08"));
+            wonders.push(this.internalRepo.get("WON21"));
+            wonders.push(this.internalRepo.get("WON22"));
+            wonders.push(this.internalRepo.get("WON23"));
+            wonders.push(this.internalRepo.get("WON24"));
+        }
+        else if (age==2)
+        {
+            wonders.push(this.internalRepo.get("WON09"));
+            wonders.push(this.internalRepo.get("WON10"));
+            wonders.push(this.internalRepo.get("WON11"));
+            wonders.push(this.internalRepo.get("WON12"));
+            wonders.push(this.internalRepo.get("WON25"));
+            wonders.push(this.internalRepo.get("WON26"));
+            wonders.push(this.internalRepo.get("WON27"));
+            wonders.push(this.internalRepo.get("WON28"));
+        }
+        else if (age==3)
+        {
+            wonders.push(this.internalRepo.get("WON13"));
+            wonders.push(this.internalRepo.get("WON14"));
+            wonders.push(this.internalRepo.get("WON15"));
+            wonders.push(this.internalRepo.get("WON16"));
+            wonders.push(this.internalRepo.get("WON29"));
+            wonders.push(this.internalRepo.get("WON30"));
+            wonders.push(this.internalRepo.get("WON31"));
+            wonders.push(this.internalRepo.get("WON32"));
+        }
+        return wonders;
+    }
 }
