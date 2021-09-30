@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { CardItem, FilterCategory, FilterLeaders, FilterTactics, FilterWonder } from './TTAUI';
+import { CardItem, CardWithToken, FilterCategory, FilterLeaders, FilterTactics, FilterWonder } from './TTAUI';
 import { Form } from "./Forms";
 
 function App() {
@@ -13,75 +13,97 @@ function App() {
         render={() => (
           <React.Fragment>
 
-        <FilterLeaders />
-
-        <FilterTactics />
-
-        <FilterWonder />
-
-        <div className="card">
-            <div className="card-header">
-                Infantry
+        <div className="row">
+            <div className="col">
+              <h6>Age</h6>
             </div>
-            <div className="card-body d-flex">
+            <div className="col">
+              <FilterLeaders />
+            </div>
+            <div className="col">
+              <FilterTactics />
+            </div>
+            <div className="col">
+              <FilterWonder />
+            </div>
+        </div>
+
+        <div className="row">
+            <div className="col">
+              <h6>Infantry</h6>
               <CardItem code="MIN01" />
               <CardItem code="MIN02" />
               <CardItem code="MIN03" />
               <CardItem code="MIN04" />
             </div>
-        </div>
-
-          <FilterCategory descr="Cavallery" render={() => (
-            <div className="d-flex">
+            <div className="col">
+              <h6>Cavallery</h6>
               <CardItem code="MCA01" />
               <CardItem code="MCA02" />
               <CardItem code="MCA03" />
             </div>
-          )} />
-
-          <FilterCategory descr="Artillery" render={() => (
-            <div className="d-flex">
+            <div className="col">
+              <h6>Artillery</h6>
               <CardItem code="MAR01" />
               <CardItem code="MAR02" />
             </div>
-          )} />
-
-          <FilterCategory descr="Air Force" render={() => (
-            <div className="d-flex">
+            <div className="col">
+              <h6>Air Force</h6>
               <CardItem code="MAI01" />
             </div>
-          )} />
-
-          <FilterCategory descr="Farm" render={() => (
-            <div className="d-flex">
+        </div>
+        
+        <div className="row">
+            <div className="col">
+              <h6>Farm</h6>
               <CardItem code="PFA01" />
               <CardItem code="PFA02" />
               <CardItem code="PFA03" />
               <CardItem code="PFA04" />
             </div>
-          )} />
-          <FilterCategory descr="Mine" render={() => (
-            <div className="d-flex">
+            <div className="col">
+              <h6>Mine</h6>
               <CardItem code="PMI01" />
               <CardItem code="PMI02" />
               <CardItem code="PMI03" />
               <CardItem code="PMI04" />
             </div>
-          )} />
-          <FilterCategory descr="Lab" render={() => (
-            <div className="d-flex">
+            <div className="col">
+              <h6>Lab</h6>
               <CardItem code="ULA01" />
               <CardItem code="ULA02" />
               <CardItem code="ULA03" />
+              <CardItem code="ULA04" />
             </div>
-          )} />
-          <FilterCategory descr="Theology" render={() => (
-            <div className="d-flex">
+        </div>
+        
+        <div className="row">
+            <div className="col">
+              <h6>Theology</h6>
               <CardItem code="UTH01" />
               <CardItem code="UTH02" />
               <CardItem code="UTH03" />
             </div>
-          )} />
+            <div className="col">
+              <h6>Arena</h6>
+              <CardItem code="UAR01" />
+              <CardItem code="UAR02" />
+              <CardItem code="UAR03" />
+            </div>
+            <div className="col">
+              <h6>Theatre</h6>
+              <CardItem code="UTE01" />
+              <CardItem code="UTE02" />
+              <CardItem code="UTE03" />
+            </div>
+            <div className="col">
+              <h6>Press</h6>
+              <CardItem code="ULI01" />
+              <CardItem code="ULI02" />
+              <CardItem code="ULI03" />
+            </div>
+        </div>
+          
 
           </React.Fragment>
         )}
