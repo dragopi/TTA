@@ -147,7 +147,8 @@ export function StrenghtCalculation(s: Scene)
                 for (let index = 0; index < c.yellowToken; index++) {
                     infArray.push({
                         assignedCard: c,
-                        obsolete : (Math.abs(c.card.age-s.Age)>1)
+                        // Each farm count as age "A" infantry -> A = 0
+                        obsolete : (Math.abs(0-s.Age)>1)
                     });
                 }
         });
