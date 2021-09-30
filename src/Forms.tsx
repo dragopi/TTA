@@ -58,11 +58,14 @@ function CalculateScene(values: IValues)
   let s: Scene = {
     Age: 1,
     Leader: null,
+    Governament: null,
+    Wonders: [],
     Infantry: [],
     Cavallery: [],
     Artillery: [],
     AirForce: null,
-    Wonders: [],
+    Special: [],
+    Productions: [],
     Urbans: [],
     Tactic: null
   };
