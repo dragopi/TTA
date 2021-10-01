@@ -151,18 +151,26 @@ export function StrenghtCalculation(s: Scene)
     if (tempCount>0)
         logs.push({msg:"Artillery: " + tempCount});
 
-    if ((s.Leader != null)&&(s.Leader.code=="LEA33"))
+    let genghisMod: boolean = false;
+    if (s.Leader != null)
     {
-        s.Productions.forEach(c => {
-            if (c.card.subtype=="Farm")
-                for (let index = 0; index < c.yellowToken; index++) {
-                    infArray.push({
-                        assignedCard: c,
-                        // Each farm count as age "A" infantry -> A = 0
-                        obsolete : (Math.abs(0-s.Age)>1)
-                    });
-                }
-        });
+        if (s.Leader.code=="LEA33") // Zizka
+        {
+            s.Productions.forEach(c => {
+                if (c.card.subtype=="Farm")
+                    for (let index = 0; index < c.yellowToken; index++) {
+                        infArray.push({
+                            assignedCard: c,
+                            // Each farm count as age "A" infantry -> A = 0
+                            obsolete : (Math.abs(0-s.Age)>1)
+                        });
+                    }
+            });
+        }
+        else if (s.Leader.code=="LEA10") // Genghis
+        {
+            genghisMod = true;
+        }
     }
 
     if (s.Tactic!=null)
@@ -176,18 +184,33 @@ export function StrenghtCalculation(s: Scene)
             let nArt: number = 0;
             let isObsolete: boolean = false;
 
+            console.log("cavArray.length: " + cavArray.length);
+            if ((nCav!=s.Tactic.ncav) && (cavArray.length>0))
+            {
+                if (cavArray.pop().obsolete)
+                    isObsolete = true;
+                nCav++;
+            }
+            console.log("nCav: " + nCav);
+            console.log("s.Tactic.ncav: " + s.Tactic.ncav);
+            console.log("isObsolete: " + isObsolete);
+
+            if ((nCav!=s.Tactic.ncav) && (genghisMod))
+            {
+                if ((s.Tactic.ncav-nCav-infArray.length) <= 0 )
+                    while ((nCav!=s.Tactic.ncav) && (infArray.length>0))
+                    {
+                        if (infArray.pop().obsolete)
+                            isObsolete = true;
+                        nCav++;
+                    }    
+            }
+
             while ((nInf!=s.Tactic.ninf) && (infArray.length>0))
             {
                 if (infArray.pop().obsolete)
                     isObsolete = true;
                 nInf++;
-            }
-            
-            if ((nCav!=s.Tactic.ncav) && (cavArray.length>0))
-            {
-                if (cavArray.pop().obsolete)
-                    isObsolete = true;
-                nCav++;
             }
 
             if ((nArt!=s.Tactic.nart) && (artArray.length>0))
@@ -207,9 +230,16 @@ export function StrenghtCalculation(s: Scene)
                     countTactics++;
             }
 
+            console.log("findTactic: " + findTactic);
+            console.log("countTacticsObs: " + countTacticsObs);
+            console.log("countTactics: " + countTactics);
+
         } while (findTactic);
 
-        strengthFromTactic = (countTactics * s.Tactic.strength) + (countTacticsObs * s.Tactic.strengthObs);
+        if (s.Tactic.strengthObs>0)
+            strengthFromTactic = (countTactics * s.Tactic.strength) + (countTacticsObs * s.Tactic.strengthObs);
+        else
+            strengthFromTactic = ((countTactics+countTacticsObs) * s.Tactic.strength);
     }
 
     if (strengthFromTactic>0)
