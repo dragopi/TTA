@@ -57,6 +57,13 @@ interface LogItem {
     msg: string;
 }
 
+function OrderByAge(a: Array<BoardCard>)
+{
+    a.sort(function(a,b){
+        return a.card.age - b.card.age;
+    });
+}
+
 function FillCardsInScene(s: Scene)
 {
     FillCard(s.Leader);
@@ -72,6 +79,14 @@ function FillCardsInScene(s: Scene)
     FillArray(s.Special);
     FillArray(s.Productions);
     FillArray(s.Urbans);
+
+    OrderByAge(s.Wonders);
+    OrderByAge(s.Infantry);
+    OrderByAge(s.Cavallery);
+    OrderByAge(s.Artillery);
+    OrderByAge(s.Special);
+    OrderByAge(s.Productions);
+    OrderByAge(s.Urbans);
 }
 
 export function StrenghtCalculation(s: Scene)
