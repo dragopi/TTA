@@ -1,10 +1,12 @@
 import React from "react";
-import {TTACard, TTARepoCards} from "./TTARepo"
+import {TTARepoCards} from "./TTARepo"
+import { TTACard } from "./TTATypes";
 import {
     IErrors,
     IFormContext,
     FormContext,
   } from "./Forms";
+
 
 type CardItemProps =  {
     code: string;

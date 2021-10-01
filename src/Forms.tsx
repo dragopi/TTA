@@ -1,6 +1,7 @@
 import * as React from "react";
-import { BoardCard, Scene, StrenghtCalculation, TTASceneCalculation } from "./TTACalc";
-import { TTACard, TTARepoCards } from "./TTARepo";
+import { TTACard, BoardCard, Scene } from "./TTATypes";
+import { StrenghtCalculation, TTASceneCalculation } from "./TTACalc";
+import { TTARepoCards } from "./TTARepo";
 
 export interface IFormContext
   extends IFormState {

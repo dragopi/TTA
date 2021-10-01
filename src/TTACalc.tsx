@@ -1,4 +1,5 @@
-import { TTACard, TTARepoCards, TTATacticCard } from "./TTARepo";
+import { BoardCard, Scene } from "./TTATypes";
+import { TTARepoCards } from "./TTARepo";
 
 export enum CardType {
     Leader,
@@ -11,31 +12,6 @@ export enum CardType {
     Tactic
 }
 
-export interface BoardCard {
-    code: string;
-    card?: TTACard;
-    yellowToken: number;
-}
-
-interface Token {
-    assignedCard: BoardCard;
-    obsolete: boolean;
-}
-
-export interface Scene {
-    Age: number;
-    Leader?: BoardCard;
-    Governament?: BoardCard;
-    Wonders?: Array<BoardCard>;
-    Infantry: Array<BoardCard>;
-    Cavallery: Array<BoardCard>;
-    Artillery: Array<BoardCard>;
-    AirForce: BoardCard;
-    Special?: Array<BoardCard>;
-    Productions?: Array<BoardCard>;
-    Urbans?: Array<BoardCard>;
-    Tactic: TTATacticCard;
-}
 
 function FillCard(c: BoardCard)
 {
@@ -88,6 +64,11 @@ function FillCardsInScene(s: Scene)
     OrderByAge(s.Productions);
     OrderByAge(s.Urbans);
 }
+
+interface Token {
+        assignedCard: BoardCard;
+        obsolete: boolean;
+    }
 
 export function StrenghtCalculation(s: Scene)
 {

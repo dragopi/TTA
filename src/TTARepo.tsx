@@ -1,35 +1,15 @@
-export type TTACard = {
-    code: string;
-    type: string;
-    subtype: string;
-    name: string;
-    age: number;
-    light_cost: number;
-    rock_cost: number;
+import { TTACard, TTATacticCard } from "./TTATypes";
+
+export type SceneValuesModifier = {
     food: number;
     resource: number;
     culture: number;
     strength: number;
     happy: number;
     science: number;
-    ca: number;
-    ma: number;
-    text: string;
-    pop?: number;
-    box?: number;
 };
 
-export type TTATacticCard = {
-    code: string,
-    name: string,
-    age: number,
-    strength: number,
-    strengthObs: number,
-    ninf: number,
-    ncav: number,
-    nart: number,
-    nair: number
-}
+
 
 let CARD_PFA01: TTACard = {
     code: "PFA01",
