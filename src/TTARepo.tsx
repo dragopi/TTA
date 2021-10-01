@@ -15,6 +15,8 @@ export type TTACard = {
     ca: number;
     ma: number;
     text: string;
+    pop?: number;
+    box?: number;
 };
 
 export type TTATacticCard = {
@@ -2779,6 +2781,279 @@ let CARD_TAC17: TTATacticCard = {
     nair: 0
 }
 
+let CARD_TER01: TTACard = {
+    code: "TER01",
+    name: "Vast Territory",
+    age: 1,
+    strength: 0,
+    pop: 3,
+    box: -1,
+    happy: 0,
+    ca: 0,
+    ma: 0,
+    text: "Add 3 food",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER02: TTACard = {
+    code: "TER02",
+    name: "Wealthy Territory",
+    age: 1,
+    strength: 0,
+    pop: 0,
+    box: 3,
+    happy: 0,
+    ca: 0,
+    ma: 0,
+    text: "add 6 rock",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER03: TTACard = {
+    code: "TER03",
+    name: "Inhabited Territory",
+    age: 1,
+    strength: 0,
+    pop: 2,
+    box: 0,
+    happy: 0,
+    ca: 0,
+    ma: 0,
+    text: "Add 1 pop to reserve and 1 ready to play",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER04: TTACard = {
+    code: "TER04",
+    name: "Strategic Territory",
+    age: 1,
+    strength: 2,
+    pop: 0,
+    box: 0,
+    happy: 0,
+    ca: 0,
+    ma: 0,
+    text: "Add 3 military card",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER05: TTACard = {
+    code: "TER05",
+    name: "Historic Territory",
+    age: 1,
+    strength: 0,
+    pop: 0,
+    box: 0,
+    happy: 1,
+    ca: 0,
+    ma: 0,
+    text: "Add 6 culture point",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER06: TTACard = {
+    code: "TER06",
+    name: "Developed Territory",
+    age: 1,
+    strength: 0,
+    pop: 1,
+    box: 1,
+    happy: 0,
+    ca: 0,
+    ma: 0,
+    text: "Add 3 science",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER07: TTACard = {
+    code: "TER07",
+    name: "Vast Territory",
+    age: 2,
+    strength: 0,
+    pop: 4,
+    box: -1,
+    happy: 0,
+    ca: 0,
+    ma: 0,
+    text: "Add 4 food",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER08: TTACard = {
+    code: "TER08",
+    name: "Wealthy Territory",
+    age: 2,
+    strength: 0,
+    pop: 0,
+    box: 4,
+    happy: 0,
+    ca: 0,
+    ma: 0,
+    text: "Add 9 rock",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER09: TTACard = {
+    code: "TER09",
+    name: "Inhabited Territory",
+    age: 2,
+    strength: 0,
+    pop: 3,
+    box: 0,
+    happy: 0,
+    ca: 0,
+    ma: 0,
+    text: "Add 3 pop to reserve and 2 ready to play",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER10: TTACard = {
+    code: "TER10",
+    name: "Strategic Territory",
+    age: 2,
+    strength: 4,
+    pop: 0,
+    box: 0,
+    happy: 0,
+    ca: 0,
+    ma: 0,
+    text: "Add 5 military card",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER11: TTACard = {
+    code: "TER11",
+    name: "Historic Territory",
+    age: 2,
+    strength: 0,
+    pop: 0,
+    box: 0,
+    happy: 2,
+    ca: 0,
+    ma: 0,
+    text: "Add 11 culture point",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER12: TTACard = {
+    code: "TER12",
+    name: "Developed Territory",
+    age: 1,
+    strength: 0,
+    pop: 2,
+    box: 2,
+    happy: 0,
+    ca: 0,
+    ma: 0,
+    text: "Add 5 science",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
+let CARD_TER13: TTACard = {
+    code: "TER13",
+    name: "Autonomous Territory",
+    age: 2,
+    strength: 0,
+    pop: 0,
+    box: -2,
+    happy: 0,
+    ca: 1,
+    ma: 1,
+    text: "Choose one: Gain 4 science, 5 rock, 6 food, or 7 culture point.",
+    type: "Territory",
+    subtype: "Territory",
+    light_cost: 0,
+    rock_cost: 0,
+    food: 0,
+    resource: 0,
+    culture: 0,
+    science: 0
+}
+
 export class TTARepoCards {
 
     private static _instance: TTARepoCards;
@@ -2919,7 +3194,20 @@ export class TTARepoCards {
             ["SCL03", CARD_SCL03],
             ["SCO01", CARD_SCO01],
             ["SCO02", CARD_SCO02],
-            ["SCO03", CARD_SCO03]
+            ["SCO03", CARD_SCO03],
+            ["TER01", CARD_TER01],
+            ["TER02", CARD_TER02],
+            ["TER03", CARD_TER03],
+            ["TER04", CARD_TER04],
+            ["TER05", CARD_TER05],
+            ["TER06", CARD_TER06],
+            ["TER07", CARD_TER07],
+            ["TER08", CARD_TER08],
+            ["TER09", CARD_TER09],
+            ["TER10", CARD_TER10],
+            ["TER11", CARD_TER11],
+            ["TER12", CARD_TER12],
+            ["TER13", CARD_TER13]
         ]);
     }
 
@@ -3085,5 +3373,23 @@ export class TTARepoCards {
             wonders.push(this.internalRepo.get("WON32"));
         }
         return wonders;
+    }
+
+    public GetTerritories() {
+        let territories = Array<TTACard>();
+        territories.push(this.internalRepo.get("TER01"));
+        territories.push(this.internalRepo.get("TER02"));
+        territories.push(this.internalRepo.get("TER03"));
+        territories.push(this.internalRepo.get("TER04"));
+        territories.push(this.internalRepo.get("TER05"));
+        territories.push(this.internalRepo.get("TER06"));
+        territories.push(this.internalRepo.get("TER07"));
+        territories.push(this.internalRepo.get("TER08"));
+        territories.push(this.internalRepo.get("TER09"));
+        territories.push(this.internalRepo.get("TER10"));
+        territories.push(this.internalRepo.get("TER11"));
+        territories.push(this.internalRepo.get("TER12"));
+        territories.push(this.internalRepo.get("TER13"));
+        return territories;
     }
 }
