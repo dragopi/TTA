@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BoardCard, Scene, StrenghtCalculation } from "./TTACalc";
+import { BoardCard, Scene, StrenghtCalculation, TTASceneCalculation } from "./TTACalc";
 import { TTACard, TTARepoCards } from "./TTARepo";
 
 export interface IFormContext
@@ -131,6 +131,7 @@ function CalculateScene(values: IValues)
   console.log(s);
   console.log("CalculateScene: END");
   StrenghtCalculation(s);
+  TTASceneCalculation(s);
 }
 
 export class Form extends React.Component<IFormProps, IFormState> {
