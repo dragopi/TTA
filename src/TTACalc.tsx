@@ -57,22 +57,26 @@ interface LogItem {
     msg: string;
 }
 
+function FillCardsInScene(s: Scene)
+{
+    FillCard(s.Leader);
+    FillCard(s.Governament);
+    FillCard(s.AirForce);
+    FillCard(s.Leader);
+    FillCard(s.Governament);
+    FillArray(s.Wonders);
+    FillArray(s.Infantry);
+    FillArray(s.Cavallery);
+    FillArray(s.Artillery);
+    FillCard(s.AirForce);
+    FillArray(s.Special);
+    FillArray(s.Productions);
+    FillArray(s.Urbans);
+}
+
 export function StrenghtCalculation(s: Scene)
 {
     let logs: LogItem[] = [];
-    FillCard(s.Leader);
-    FillCard(s.Governament);
-    FillCard(s.AirForce);
-    FillCard(s.Leader);
-    FillCard(s.Governament);
-    FillArray(s.Wonders);
-    FillArray(s.Infantry);
-    FillArray(s.Cavallery);
-    FillArray(s.Artillery);
-    FillCard(s.AirForce);
-    FillArray(s.Special);
-    FillArray(s.Productions);
-    FillArray(s.Urbans);
 
     let countTactics: number = 0;
     let countTacticsObs: number = 0;
@@ -88,6 +92,8 @@ export function StrenghtCalculation(s: Scene)
     let cavCount: number = 0;
     let artCount: number = 0;
     let airCount: number = 0;
+
+    FillCardsInScene(s);
 
     let tempCount: number = 0;
     s.Infantry.forEach(c => {
@@ -189,7 +195,6 @@ export function StrenghtCalculation(s: Scene)
             let nArt: number = 0;
             let isObsolete: boolean = false;
 
-            console.log("cavArray.length: " + cavArray.length);
             while ((nCav!=s.Tactic.ncav) && (cavArray.length>0))
             {
                 if (cavArray.pop().obsolete)
@@ -385,38 +390,58 @@ export function StrenghtCalculation(s: Scene)
     return 1;
 }
 
-let tactic: TTATacticCard = {
-    age: 1,
-    name: "Asd Tactic",
-    ninf: 2,
-    ncav: 0,
-    nart: 0,
-    strength: 10,
-    strengthObs: null,
-    code: "",
-    nair: 0
+export class TTASceneValue {
+    private value: number;
+    private logs: LogItem[];
+
+    constructor() {
+        this.Reset();
+    }
+
+    public Value() {
+        return this.value;
+    }
+
+    public AddValue(v: number, m: string = "")
+    {
+        this.value += v;
+        if (m!="")
+            this.logs.push({msg: m + ": " + v});
+    }
+
+    public Logs() {
+        return this.logs;
+    }
+
+    public Reset() {
+        this.value = 0;
+        this.logs = [];
+    }
 }
 
-let infAgeA: BoardCard = {
-    code: "MIN01",
-    yellowToken: 3
-}
 
-let aircraft: BoardCard = {
-    code: "MAI01",
-    yellowToken: 2
-}
+export function TTASceneCalculation(s: Scene)
+{
+    let culture: TTASceneValue = new TTASceneValue();
 
-let s: Scene = {
-    Age: 1,
-    Leader: {code:"LEA08", yellowToken:0},
-    Infantry: [infAgeA],
-    Cavallery: [],
-    Artillery: [],
-    AirForce: aircraft,
-    Wonders: [{code:"WON05", yellowToken:0}],
-    Urbans: [{code:"UTE01", yellowToken:2}],
-    Tactic: tactic
-}
+    let cultureTemp: number;
+    s.Urbans.forEach(c => {
+        cultureTemp = c.card.culture * c.yellowToken;
+        if (cultureTemp>0)
+            culture.AddValue(cultureTemp, c.card.name);
+    });
 
-console.log( StrenghtCalculation(s) );
+    s.Wonders.forEach(c => {
+        cultureTemp = c.card.culture;
+        if (cultureTemp>0)
+            culture.AddValue(cultureTemp, c.card.name);
+    });
+
+    console.log("--- CULTURE ---");
+    culture.Logs().forEach(l => {
+        console.log(l.msg)
+    });
+    console.log("---");
+    console.log("TOTAL", culture.Value());
+
+}
