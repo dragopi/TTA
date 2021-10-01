@@ -152,6 +152,7 @@ export function StrenghtCalculation(s: Scene)
         logs.push({msg:"Artillery: " + tempCount});
 
     let genghisMod: boolean = false;
+    let dietrichMod: boolean = false;
     if (s.Leader != null)
     {
         if (s.Leader.code=="LEA33") // Zizka
@@ -171,6 +172,10 @@ export function StrenghtCalculation(s: Scene)
         {
             genghisMod = true;
         }
+        else if (s.Leader.code=="LEA44") // Dietrich
+        {
+            dietrichMod = true;
+        }
     }
 
     if (s.Tactic!=null)
@@ -185,15 +190,12 @@ export function StrenghtCalculation(s: Scene)
             let isObsolete: boolean = false;
 
             console.log("cavArray.length: " + cavArray.length);
-            if ((nCav!=s.Tactic.ncav) && (cavArray.length>0))
+            while ((nCav!=s.Tactic.ncav) && (cavArray.length>0))
             {
                 if (cavArray.pop().obsolete)
                     isObsolete = true;
                 nCav++;
             }
-            console.log("nCav: " + nCav);
-            console.log("s.Tactic.ncav: " + s.Tactic.ncav);
-            console.log("isObsolete: " + isObsolete);
 
             if ((nCav!=s.Tactic.ncav) && (genghisMod))
             {
@@ -212,13 +214,24 @@ export function StrenghtCalculation(s: Scene)
                     isObsolete = true;
                 nInf++;
             }
-
-            if ((nArt!=s.Tactic.nart) && (artArray.length>0))
+            
+            while ((nArt!=s.Tactic.nart) && (artArray.length>0))
             {
                 if (artArray.pop().obsolete)
                     isObsolete = true;
                 nArt++;
             }
+            
+
+            if (dietrichMod)
+            {
+                if ((nArt>0)&&(nArt<s.Tactic.nart))
+                    nArt++;
+                else if ((nCav>0)&&(nCav<s.Tactic.ncav))
+                    nCav++;
+                else if ((nInf>0)&&(nInf<s.Tactic.ninf))
+                    nInf++;
+            }
 
             findTactic = ((nInf == s.Tactic.ninf) && (nCav == s.Tactic.ncav) && (nArt == s.Tactic.nart))
 
@@ -229,10 +242,6 @@ export function StrenghtCalculation(s: Scene)
                 else
                     countTactics++;
             }
-
-            console.log("findTactic: " + findTactic);
-            console.log("countTacticsObs: " + countTacticsObs);
-            console.log("countTactics: " + countTactics);
 
         } while (findTactic);
 
@@ -331,6 +340,10 @@ export function StrenghtCalculation(s: Scene)
         else if (s.Leader.card.code == "LEA06") // Alexander
         {
             strengthFromLeader += (infArray.length+cavArray.length)
+        }
+        else if (s.Leader.card.code == "LEA43") // Sklodowska
+        {
+            // TODO: Your best lab gives you strength equal to its level
         }
         strengthFromLeader += s.Leader.card.strength;
     }
