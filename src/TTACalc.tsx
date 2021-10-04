@@ -433,6 +433,10 @@ export function TTASceneCalculation(s: Scene)
             culture.AddValue(cultureTemp, c.card.name);
     });
 
+    if (s.Leader)
+        if (s.Leader.card.getSceneValuesModifier)
+            console.log(s.Leader.card.getSceneValuesModifier(s));
+
     console.log("--- CULTURE ---");
     culture.Logs().forEach(l => {
         console.log(l.msg)

@@ -17,6 +17,25 @@ export type TTACard = {
     text: string;
     pop?: number;
     box?: number;
+    getSceneValuesModifier?: (s: Scene) => void;
+};
+
+export class SceneValuesModifier {
+    public food: number;
+    public resource: number;
+    public culture: number;
+    public strength: number;
+    public happy: number;
+    public science: number;
+
+    constructor() {
+        this.food = 0;
+        this.resource = 0;
+        this.culture = 0;
+        this.strength = 0;
+        this.happy = 0;
+        this.science = 0;
+    }
 };
 
 export type TTATacticCard = {

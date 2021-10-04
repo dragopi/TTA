@@ -1,14 +1,4 @@
-import { TTACard, TTATacticCard } from "./TTATypes";
-
-export type SceneValuesModifier = {
-    food: number;
-    resource: number;
-    culture: number;
-    strength: number;
-    happy: number;
-    science: number;
-};
-
+import { TTACard, TTATacticCard, SceneValuesModifier, Scene } from "./TTATypes";
 
 
 let CARD_PFA01: TTACard = {
@@ -1718,7 +1708,19 @@ let CARD_LEA24: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Each of your labs produces culture: 1 per level; each lab produces 1 less science"
+    text: "Each of your labs produces culture: 1 per level; each lab produces 1 less science",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        
+        s.Urbans.forEach(c => {
+            if ((c.card.code.startsWith("ULA"))&&(c.yellowToken>0))
+            {
+                result.culture += (c.card.age * c.yellowToken);
+                result.science -= (c.yellowToken);
+            }
+        });
+        return result;
+    }
 }
 
 let CARD_LEA25: TTACard = {
@@ -1808,7 +1810,7 @@ let CARD_LEA29: TTACard = {
     food: null,
     resource: null,
     culture: null,
-    strength: null,
+    strength: 1,
     happy: null,
     science: null,
     ca: null,
@@ -1851,6 +1853,7 @@ let CARD_LEA31: TTACard = {
     science: null,
     ca: null,
     ma: null,
+    box: 2,
     text: "You produce an extra resource and gains two extra Blue tokens. During colonization, you may pay 1, 3, or 6 resource to gain +1, +2, +3 colonization point."
 }
 
@@ -1888,7 +1891,7 @@ let CARD_LEA33: TTACard = {
     happy: null,
     science: null,
     ca: null,
-    ma: null,
+    ma: 1,
     text: "You gain an extra military action. For Purpose of tactics, each of your farm can be considered as an Age A infantry or artillery unit. Each of your armies produce 1 culture."
 }
 
@@ -2041,7 +2044,30 @@ let CARD_LEA41: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Developing an urban building technology cost you 1 science less for each other type of urban buildings you have. Your best urban building of each type produce 1 extra culture."
+    text: "Developing an urban building technology cost you 1 science less for each other type of urban buildings you have. Your best urban building of each type produce 1 extra culture.",
+    getSceneValuesModifier: (s:Scene) => {
+        let levelLab: number = 0;
+        let levelTheology: number = 0;
+        let levelTheater: number = 0;
+        let levelLibrary: number = 0;
+        let levelArena: number = 0;
+        s.Urbans.forEach(c => {
+            if ((c.card.code.startsWith("UTH"))&&(c.yellowToken>0))
+                levelTheater = Math.max(levelTheater, c.card.age);
+            else if ((c.card.code.startsWith("UTE"))&&(c.yellowToken>0))
+                levelTheology = Math.max(levelTheology, c.card.age);
+            else if ((c.card.code.startsWith("ULI"))&&(c.yellowToken>0))
+                levelLibrary = Math.max(levelLibrary, c.card.age);
+            else if ((c.card.code.startsWith("UAR"))&&(c.yellowToken>0))
+                levelArena = Math.max(levelArena, c.card.age);
+                else if ((c.card.code.startsWith("ULA"))&&(c.yellowToken>0))
+                levelLab= Math.max(levelLab, c.card.age);
+        });
+
+        let result = new SceneValuesModifier();
+        result.culture = (levelTheater + levelTheology + levelLibrary + levelArena + levelLab);
+        return result;
+    }
 }
 
 let CARD_LEA42: TTACard = {
@@ -2060,7 +2086,17 @@ let CARD_LEA42: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Each of your temples gives you one happy face less. Each of your labs and libraries produces 1 extra culture. Taking a technology card cost you 1 civil action less, but no less than 1."
+    text: "Each of your temples gives you one happy face less. Each of your labs and libraries produces 1 extra culture. Taking a technology card cost you 1 civil action less, but no less than 1.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        s.Urbans.forEach(c => {
+            if (c.card.subtype == "Temple")
+                result.happy -= c.yellowToken;
+            else if (c.card.code.startsWith("ULA")||c.card.code.startsWith("ULI"))
+                result.culture += c.yellowToken;
+        });
+        return result;
+    }
 }
 
 let CARD_LEA43: TTACard = {
@@ -2079,7 +2115,25 @@ let CARD_LEA43: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Your best mine produces science equal to its level. Your best lab gives you strength equal to its level. Sklodowska produces culture equal to the better of these two."
+    text: "Your best mine produces science equal to its level. Your best lab gives you strength equal to its level. Sklodowska produces culture equal to the better of these two.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        let levelMine: number = 0;
+        s.Productions.forEach(c => {
+            if ((c.card.subtype == "Mine")&&(c.yellowToken>0))
+                levelMine = Math.max(levelMine, c.card.age);
+        });
+        let levelLab: number = 0;
+        s.Urbans.forEach(c => {
+            if ((c.card.subtype == "Lab")&&(c.yellowToken>0))
+                levelLab = Math.max(levelLab, c.card.age);
+        });
+
+        result.science = levelMine;
+        result.strength = levelLab;
+        result.culture = Math.max(levelMine, levelLab);
+        return result;
+    }
 }
 
 let CARD_LEA44: TTACard = {
@@ -2098,7 +2152,24 @@ let CARD_LEA44: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Each of your best theaters produces an extra 1 culture and 1 happy face. One of your infantry, cavalry, or artillery units counts twice for purpose of tactics."
+    text: "Each of your best theaters produces an extra 1 culture and 1 happy face. One of your infantry, cavalry, or artillery units counts twice for purpose of tactics.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        let levelTheater: number = 0;
+        let yellowToken: number = 0;
+        s.Urbans.forEach(c => {
+            if ((c.card.subtype == "Theater")&&(c.yellowToken>0))
+                if (c.card.age>levelTheater)
+                {
+                    levelTheater = c.card.age;
+                    yellowToken = c.yellowToken;
+                }
+        });
+        
+        result.happy = yellowToken;
+        result.culture = yellowToken;
+        return result;
+    }
 }
 
 let CARD_LEA45: TTACard = {
@@ -2117,7 +2188,17 @@ let CARD_LEA45: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Your best lab gives you happy faces equal to its level. Whenever you develop a technology, you may pay 1 resource to score 4 culture."
+    text: "Your best lab gives you happy faces equal to its level. Whenever you develop a technology, you may pay 1 resource to score 4 culture.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        let levelLab: number = 0;
+        s.Urbans.forEach(c => {
+            if ((c.card.subtype == "Lab")&&(c.yellowToken>0))
+                levelLab = Math.max(levelLab, c.card.age);
+        });
+        result.happy = levelLab;
+        return result;
+    }
 }
 
 let CARD_LEA46: TTACard = {
@@ -2136,7 +2217,12 @@ let CARD_LEA46: TTACard = {
     science: null,
     ca: 1,
     ma: null,
-    text: "You gain an extra civil action and produce 2 culture. If you have no discontent workers, taking this card costs 2 civil actions more. Ate the end of your turn, score 1 culture for each surplus happy face."
+    text: "You gain an extra civil action and produce 2 culture. If you have no discontent workers, taking this card costs 2 civil actions more. Ate the end of your turn, score 1 culture for each surplus happy face.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        // TODO: Add Population value and hapy face sum
+        return result;
+    }
 }
 
 let CARD_LEA47: TTACard = {
@@ -2155,7 +2241,15 @@ let CARD_LEA47: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Each of your arenas produces 2 culture. Once per game, before your political action, you may declare the Olympic Games: score 8 culture, and until the start of your next turn, whoever plays a war or aggression loses 8 culture."
+    text: "Each of your arenas produces 2 culture. Once per game, before your political action, you may declare the Olympic Games: score 8 culture, and until the start of your next turn, whoever plays a war or aggression loses 8 culture.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        s.Urbans.forEach(c => {
+            if (c.card.subtype == "Arena")
+                result.culture += c.yellowToken;
+        });
+        return result;
+    }
 }
 
 let CARD_LEA48: TTACard = {
@@ -2174,7 +2268,21 @@ let CARD_LEA48: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Your best library and theater each produce extra culture equal to their levels. At the beginning of your Politics Phase, you may look at one player's military cards. You cannot choose the same player on two consecutive turns."
+    text: "Your best library and theater each produce extra culture equal to their levels. At the beginning of your Politics Phase, you may look at one player's military cards. You cannot choose the same player on two consecutive turns.",
+    getSceneValuesModifier: (s:Scene) => {
+        let levelTheater: number = 0;
+        let levelLibrary: number = 0;
+        s.Urbans.forEach(c => {
+            if ((c.card.subtype == "Theater")&&(c.yellowToken>0))
+                levelTheater = Math.max(levelTheater, c.card.age);
+            else if ((c.card.subtype == "Library")&&(c.yellowToken>0))
+                levelLibrary = Math.max(levelLibrary, c.card.age);
+        });
+
+        let result = new SceneValuesModifier();
+        result.culture = (levelTheater + levelLibrary);
+        return result;
+    }
 }
 
 let CARD_GOV01: TTACard = {
@@ -3255,7 +3363,6 @@ export class TTARepoCards {
         leaders.push(this.internalRepo.get("LEA21"));
         leaders.push(this.internalRepo.get("LEA22"));
         leaders.push(this.internalRepo.get("LEA23"));
-        leaders.push(this.internalRepo.get("LEA24"));
         leaders.push(this.internalRepo.get("LEA24"));
         leaders.push(this.internalRepo.get("LEA25"));
         leaders.push(this.internalRepo.get("LEA26"));
