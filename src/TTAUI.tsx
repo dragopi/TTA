@@ -356,6 +356,11 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         <h5 className="mb-1">Strength</h5>
                         <strong>{this.state.values.strength.Value()}</strong>
                     </div>
+                    <small className="text-muted">
+                        {this.state.values.strength.Logs().map((item, i) => {      
+                            return (<span>{item.msg}<br /></span>) 
+                        })}
+                    </small>
                 </a>
                 <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
@@ -366,31 +371,51 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         {this.state.values.culture.Logs().map((item, i) => {      
                             return (<span>{item.msg}<br /></span>) 
                         })}
-                        </small>
+                    </small>
                 </a>
                 <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Food</h5>
                         <strong>{this.state.values.food.Value()}</strong>
                     </div>
+                    <small className="text-muted">
+                        {this.state.values.food.Logs().map((item, i) => {      
+                            return (<span>{item.msg}<br /></span>) 
+                        })}
+                    </small>
                 </a>
                 <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Rock</h5>
                         <strong>{this.state.values.resource.Value()}</strong>
                     </div>
+                    <small className="text-muted">
+                        {this.state.values.resource.Logs().map((item, i) => {      
+                            return (<span>{item.msg}<br /></span>) 
+                        })}
+                    </small>
                 </a>
                 <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Science</h5>
                         <strong>{this.state.values.science.Value()}</strong>
                     </div>
+                    <small className="text-muted">
+                        {this.state.values.science.Logs().map((item, i) => {      
+                            return (<span>{item.msg}<br /></span>) 
+                        })}
+                    </small>
                 </a>
                 <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Happy</h5>
                         <strong>{this.state.values.happy.Value()}</strong>
                     </div>
+                    <small className="text-muted">
+                        {this.state.values.happy.Logs().map((item, i) => {      
+                            return (<span>{item.msg}<br /></span>) 
+                        })}
+                    </small>
                 </a>
             </div>    
         );

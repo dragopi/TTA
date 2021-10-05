@@ -72,6 +72,8 @@ interface Token {
 
 export function StrenghtCalculation(s: Scene)
 {
+    let resultStrength = new TTASceneValue();
+
     let logs: LogItem[] = [];
 
     let countTactics: number = 0;
@@ -104,7 +106,7 @@ export function StrenghtCalculation(s: Scene)
     infCount = infArray.length;
     strengthFromMilitary += tempCount;
     if (tempCount>0)
-        logs.push({msg:"Infantry: " + tempCount});
+        resultStrength.AddValue(tempCount, "Infantry");
 
     tempCount = 0;
     s.Cavallery.forEach(c => {
@@ -119,7 +121,7 @@ export function StrenghtCalculation(s: Scene)
     cavCount = cavArray.length;
     strengthFromMilitary += tempCount;
     if (tempCount>0)
-        logs.push({msg:"Cavallery: " + tempCount});
+        resultStrength.AddValue(tempCount, "Cavallery");
 
     tempCount = 0;
     s.Artillery.forEach(c => {
@@ -135,7 +137,7 @@ export function StrenghtCalculation(s: Scene)
     artCount = artArray.length;
     strengthFromMilitary += tempCount;
     if (tempCount>0)
-        logs.push({msg:"Artillery: " + tempCount});
+        resultStrength.AddValue(tempCount, "Artillery");
 
     tempCount = 0;
     if (s.AirForce != null)
@@ -151,7 +153,7 @@ export function StrenghtCalculation(s: Scene)
     airCount = airArray.length;
     strengthFromMilitary += tempCount;
     if (tempCount>0)
-        logs.push({msg:"Artillery: " + tempCount});
+        resultStrength.AddValue(tempCount, "Air force");
 
     let genghisMod: boolean = false;
     let dietrichMod: boolean = false;
@@ -254,11 +256,7 @@ export function StrenghtCalculation(s: Scene)
 
     if (strengthFromTactic>0)
     {
-        logs.push({
-            msg: "Obsolete: " + countTacticsObs + "\n" +
-                "Modern: " + countTactics + "\n" + 
-                "Tactics: " + strengthFromTactic
-        });
+        resultStrength.AddValue(strengthFromTactic, "Tactics (Obsolete: " + countTacticsObs + " - Modern: " + countTactics + ")");
     }
 
     let strengthFromAirMod: number = 0;
@@ -272,7 +270,7 @@ export function StrenghtCalculation(s: Scene)
         strengthFromAirMod += Math.min(s.AirForce.yellowToken, countTacticsObs) * s.Tactic.strengthObs;
 
         if (strengthFromAirMod>0)
-            logs.push({msg: "Airforce Mod: " + strengthFromTactic});
+            resultStrength.AddValue(strengthFromAirMod, "Air force ability");
     }
 
     // SPECIAL BLUE CARD
@@ -282,8 +280,7 @@ export function StrenghtCalculation(s: Scene)
             strengthFromSpecials = Math.max(strengthFromSpecials, blueCard.card.strength);
         });
     if (strengthFromSpecials>0)
-        logs.push({msg: "Blue card: " + strengthFromSpecials});
-
+        resultStrength.AddValue(strengthFromSpecials, "Blu cards");
 
     // URBAN CARD (Arena)
     let strengthFromArena = 0;
@@ -292,28 +289,37 @@ export function StrenghtCalculation(s: Scene)
             strengthFromArena += urbanCard.card.strength;
         });
     if (strengthFromArena>0)
-        logs.push({msg: "Arena: " + strengthFromArena});
+        resultStrength.AddValue(strengthFromArena, "Arena");
 
     // Wonder
     let strengthFromWonder = 0;
+    let tempWonder = 0;
     if (s.Wonders != null)
         s.Wonders.forEach(wonderCard => {
 
             if (wonderCard.card.code == "WON05")    // GreatWall
             {
                 s.Infantry.forEach(c => {
-                    strengthFromWonder += c.yellowToken            
+                    tempWonder += c.yellowToken            
                 });
 
                 s.Artillery.forEach(c => {
-                    strengthFromWonder += c.yellowToken            
+                    tempWonder += c.yellowToken            
                 });
-            }
 
-            strengthFromWonder += wonderCard.card.strength;
+                if (tempWonder>0)
+                {
+                    resultStrength.AddValue(tempWonder, "Wonder: Great Wall ability");
+                }
+                strengthFromWonder += tempWonder;
+            }
+            
+            if (wonderCard.card.strength>0)
+            {
+                resultStrength.AddValue(wonderCard.card.strength, "Wonder: " + wonderCard.card.name);
+                strengthFromWonder += wonderCard.card.strength;
+            }
         });
-    if (strengthFromWonder>0)
-        logs.push({msg: "Wonder: " + strengthFromWonder});
     
     // Leaders
     let strengthFromLeader = 0;
@@ -349,7 +355,7 @@ export function StrenghtCalculation(s: Scene)
         strengthFromLeader += s.Leader.card.strength;
     }
     if (strengthFromLeader>0)
-        logs.push({msg: "Leader: " + strengthFromLeader});
+        resultStrength.AddValue(strengthFromLeader, "Leader");
 
     // TOTAL
     let strengthTotal: number = 
@@ -362,7 +368,11 @@ export function StrenghtCalculation(s: Scene)
         strengthFromLeader;
 
     if (s.Governament != null)
-        strengthTotal += s.Governament.card.strength;
+        if (s.Governament.card.strength>0)
+        {
+            strengthTotal += s.Governament.card.strength;
+            resultStrength.AddValue(s.Governament.card.strength, "Governament");
+        }
 
     //console.log("--[  Military ]--");
     //console.log("Strength", strengthFromMilitary);
@@ -383,7 +393,7 @@ export function StrenghtCalculation(s: Scene)
     console.log("TOTAL", strengthTotal);
     console.log("----------------");
 
-    return 1;
+    return resultStrength;
 }
 
 export class TTASceneValue {
@@ -437,6 +447,8 @@ export class TTASceneValues {
 export function TTASceneCalculation(s: Scene)
 {
     let result: TTASceneValues = new TTASceneValues();
+
+    result.strength = StrenghtCalculation(s);
 
     let cultureTemp: number;
     s.Urbans.forEach(c => {
