@@ -1,7 +1,4 @@
 import * as React from "react";
-import { TTACard, BoardCard, Scene } from "./TTATypes";
-import { StrenghtCalculation, TTASceneCalculation } from "./TTACalc";
-import { TTARepoCards } from "./TTARepo";
 
 export interface IFormContext
   extends IFormState {
@@ -43,97 +40,9 @@ export interface IFormState {
 }
 
 
-function MakeBoardCard(card: TTACard, values: IValues)
-{
-  return {
-    code: card.code,
-    card: card,
-    yellowToken: Number((values[card.code+"_tk"])?values[card.code+"_tk"]:0)
-  }
-}
 
-function CalculateScene(values: IValues)
-{
-  console.log("CalculateScene: START");
 
-  let s: Scene = {
-    Age: 1,
-    Leader: null,
-    Governament: null,
-    Wonders: [],
-    Infantry: [],
-    Cavallery: [],
-    Artillery: [],
-    AirForce: null,
-    Special: [],
-    Productions: [],
-    Urbans: [],
-    Tactic: null
-  };
 
-  if (values["age"])
-    s.Age = values["age"];
-
-  if (values["leader"])
-    s.Leader = {
-      code: values["leader"],
-      yellowToken: 0
-    };
-  
-  if (values["tactic"])
-    s.Tactic = TTARepoCards.Instance.GetTactic(values["tactic"]);
-  
-  if (values["wonder0"])
-    s.Wonders.push({
-      code: values["wonder0"],
-      yellowToken: 0
-    });
-  if (values["wonder1"])
-    s.Wonders.push({
-      code: values["wonder1"],
-      yellowToken: 0
-    });
-  if (values["wonder2"])
-    s.Wonders.push({
-      code: values["wonder2"],
-      yellowToken: 0
-    });
-  if (values["wonder3"])
-    s.Wonders.push({
-      code: values["wonder3"],
-      yellowToken: 0
-    });
-
-  for (let key in values) {
-    let value = values[key];
-    //console.log(key + " => " + value);
-    if (!key.includes("_"))
-    {
-      let card = TTARepoCards.Instance.Get(key);
-      if (card!=null)
-      {
-        if (card.code.startsWith("MIN"))
-          s.Infantry.push(MakeBoardCard(card, values));
-        else if (card.code.startsWith("MCA"))
-          s.Cavallery.push(MakeBoardCard(card, values));
-        else if (card.code.startsWith("MAR"))
-          s.Artillery.push(MakeBoardCard(card, values));
-        else if (card.code.startsWith("MAI"))
-          s.AirForce=(MakeBoardCard(card, values));
-        else if (card.code.startsWith("WON"))
-          s.Wonders.push(MakeBoardCard(card, values));
-        else if (card.code.startsWith("P"))
-          s.Productions.push(MakeBoardCard(card, values));
-        else if (card.code.startsWith("U"))
-          s.Urbans.push(MakeBoardCard(card, values));
-      }
-    }
-  }
-  console.log(s);
-  console.log("CalculateScene: END");
-  StrenghtCalculation(s);
-  TTASceneCalculation(s);
-}
 
 export class Form extends React.Component<IFormProps, IFormState> {
   constructor(props: IFormProps) {

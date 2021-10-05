@@ -351,10 +351,45 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
 
         return (
             <div className="list-group">
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start active">
+                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Strength</h5>
                         <strong>{this.state.values.strength.Value()}</strong>
+                    </div>
+                </a>
+                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1">Culture</h5>
+                        <strong>{this.state.values.culture.Value()}</strong>
+                    </div>
+                    <small className="text-muted">
+                        {this.state.values.culture.Logs().map((item, i) => {      
+                            return (<span>{item.msg}<br /></span>) 
+                        })}
+                        </small>
+                </a>
+                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1">Food</h5>
+                        <strong>{this.state.values.food.Value()}</strong>
+                    </div>
+                </a>
+                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1">Rock</h5>
+                        <strong>{this.state.values.resource.Value()}</strong>
+                    </div>
+                </a>
+                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1">Science</h5>
+                        <strong>{this.state.values.science.Value()}</strong>
+                    </div>
+                </a>
+                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1">Happy</h5>
+                        <strong>{this.state.values.happy.Value()}</strong>
                     </div>
                 </a>
             </div>    

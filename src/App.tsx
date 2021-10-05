@@ -2,20 +2,19 @@ import React, { useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { CardItem, FilterAge, FilterLeaders, FilterTactics, FilterWonder, SceneResult } from './TTAUI';
-import { Form, IValues } from "./Forms";
-import { TTASceneValues } from './TTACalc';
+import { Form } from "./Forms";
+import { TTASceneCalculation } from './TTACalc';
+import { MakeScene } from './TTARepo';
 
 
 function App() {  
 
   const sceneRef = useRef(null)
 
-  function CalcScene(v: IValues) {
+  function CalcScene(v: [key: string]) {
     console.log(v);
-
-    let o = new TTASceneValues();
-    o.strength.AddValue(3);
-
+    let s = MakeScene(v);
+    let o = TTASceneCalculation(s);
     sceneRef.current.setState({values: o});
   }
 

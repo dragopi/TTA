@@ -436,19 +436,19 @@ export class TTASceneValues {
 
 export function TTASceneCalculation(s: Scene)
 {
-    let culture: TTASceneValue = new TTASceneValue();
+    let result: TTASceneValues = new TTASceneValues();
 
     let cultureTemp: number;
     s.Urbans.forEach(c => {
         cultureTemp = c.card.culture * c.yellowToken;
         if (cultureTemp>0)
-            culture.AddValue(cultureTemp, c.card.name);
+            result.culture.AddValue(cultureTemp, c.card.name);
     });
 
     s.Wonders.forEach(c => {
         cultureTemp = c.card.culture;
         if (cultureTemp>0)
-            culture.AddValue(cultureTemp, c.card.name);
+            result.culture.AddValue(cultureTemp, c.card.name);
     });
 
     if (s.Leader)
@@ -456,10 +456,11 @@ export function TTASceneCalculation(s: Scene)
             console.log(s.Leader.card.getSceneValuesModifier(s));
 
     console.log("--- CULTURE ---");
-    culture.Logs().forEach(l => {
+    result.culture.Logs().forEach(l => {
         console.log(l.msg)
     });
     console.log("---");
-    console.log("TOTAL", culture.Value());
+    console.log("TOTAL", result.culture.Value());
 
+    return result;
 }
