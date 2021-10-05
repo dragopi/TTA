@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { CardItem, CardWithToken, FilterAge, FilterCategory, FilterLeaders, FilterTactics, FilterWonder, SceneResult } from './TTAUI';
+import { CardItem, FilterAge, FilterLeaders, FilterTactics, FilterWonder, SceneResult } from './TTAUI';
 import { Form, IValues } from "./Forms";
 import { TTASceneValues } from './TTACalc';
 
