@@ -415,6 +415,24 @@ export class TTASceneValue {
     }
 }
 
+export class TTASceneValues {
+    public food: TTASceneValue;
+    public resource: TTASceneValue;
+    public culture: TTASceneValue;
+    public strength: TTASceneValue;
+    public happy: TTASceneValue;
+    public science: TTASceneValue;
+
+    constructor() {
+        this.food = new TTASceneValue();
+        this.resource = new TTASceneValue();
+        this.culture = new TTASceneValue();
+        this.strength = new TTASceneValue();
+        this.happy = new TTASceneValue();
+        this.science = new TTASceneValue();
+    }
+};
+
 
 export function TTASceneCalculation(s: Scene)
 {

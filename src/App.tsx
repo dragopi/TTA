@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { CardItem, CardWithToken, FilterAge, FilterCategory, FilterLeaders, FilterTactics, FilterWonder } from './TTAUI';
-import { Form } from "./Forms";
+import { CardItem, CardWithToken, FilterAge, FilterCategory, FilterLeaders, FilterTactics, FilterWonder, SceneResult } from './TTAUI';
+import { Form, IValues } from "./Forms";
+import { TTASceneValues } from './TTACalc';
 
-function App() {
+
+function App() {  
+
+  const sceneRef = useRef(null)
+
+  function CalcScene(v: IValues) {
+    console.log(v);
+
+    let o = new TTASceneValues();
+    o.strength.AddValue(3);
+
+    sceneRef.current.setState({values: o});
+  }
+
+
   return (
     <div>
 
+      <div className="row">
+        <div className="col-9">
+
       <Form 
         action="http://localhost:4351/api/contactus"
+        onSubmitData={CalcScene}
         render={() => (
           <React.Fragment>
 
@@ -111,7 +130,11 @@ function App() {
       
       />
 
-
+        </div>
+        <div className="col-3">
+          <SceneResult ref={sceneRef} />  
+        </div>
+      </div>
     </div>
   );
 }
