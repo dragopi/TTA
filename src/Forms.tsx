@@ -17,7 +17,7 @@ export const FormContext = React.createContext<IFormContext|undefined>(undefined
 interface IFormProps {
   /* The http path that the form will be posted to */
   action: string;
-
+  onSubmitData: (IValues) => void;
   render: () => React.ReactNode;
 }
 
@@ -175,7 +175,8 @@ export class Form extends React.Component<IFormProps, IFormState> {
     e.preventDefault();
 
     //console.log(this.state.values);
-    CalculateScene(this.state.values);
+    //CalculateScene(this.state.values);
+    this.props.onSubmitData(this.state.values);
 
     if (this.validateForm()) {
       const submitSuccess: boolean = await this.submitForm();
