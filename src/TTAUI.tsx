@@ -1,6 +1,7 @@
 import React from "react";
 import {TTARepoCards} from "./TTARepo"
 import { TTACard } from "./TTATypes";
+import { TTASceneValues } from "./TTACalc";
 import {
     IErrors,
     IFormContext,
@@ -429,26 +430,30 @@ export class FilterCategory extends React.Component<FilterCategoryProps, FilterC
     }
 }
 
-/*
-            <div className="toast">
-                <div className="toast-header">
-                    
-                    <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+
+type TTASceneValuesProps =  {
+}
+
+type TTASceneValuesState = {
+    values: TTASceneValues;
+}
+
+export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneValuesState> {
+    state: TTASceneValuesState = {
+        values: new TTASceneValues()
+    };
+
+    render() {
+
+        return (
+            <div className="list-group">
+                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start active">
+                    <div className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1">Strength</h5>
+                        <strong>{this.state.values.strength.Value()}</strong>
                     </div>
-
-                    <strong className="me-auto">{this.state.card.name}</strong>
-                    <small>{this.state.card.type}</small>
-                </div>
-                <div className="toast-body">
-                
-                    <button type="button" className={this.state.onBoard ? 'btn btn-primary position-relative' : 'btn btn-outline-primary position-relative'} onClick={this.buttonClick}>    
-                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {this.state.tokens}
-                            <span className="visually-hidden">unread messages</span>
-                        </span>
-                    </button>
-
-                </div>
-            </div>
-*/
+                </a>
+            </div>    
+        );
+    }
+}
