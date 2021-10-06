@@ -1032,7 +1032,17 @@ let CARD_WON18: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Gain an extra yellow token and an extra blue token. This effect varies by age: At Age Ⅰ: produce 1 resource. At Age Ⅱ: produce 1 science. At Age Ⅲ: produce 2 culture."
+    text: "Gain an extra yellow token and an extra blue token. This effect varies by age: At Age Ⅰ: produce 1 resource. At Age Ⅱ: produce 1 science. At Age Ⅲ: produce 2 culture.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        if (s.Age==1)
+            result.resource = 1;
+        else if (s.Age==2)
+            result.science = 1;
+        else if (s.Age>2)
+            result.culture = 1;
+        return result;
+    }
 }
 
 let CARD_WON19: TTACard = {
