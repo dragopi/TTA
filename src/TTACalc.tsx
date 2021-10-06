@@ -243,33 +243,10 @@ export function StrenghtCalculation(s: Scene)
             resultStrength.AddValue(strengthFromAirMod, "Air force ability");
     }
 
-    // SPECIAL BLUE CARD
-    let strengthFromSpecials = 0;
-    if (s.Special != null)
-        s.Special.forEach(blueCard => {
-            strengthFromSpecials = Math.max(strengthFromSpecials, blueCard.card.strength);
-        });
-    if (strengthFromSpecials>0)
-        resultStrength.AddValue(strengthFromSpecials, "Blu cards");
-
     // TOTAL
     let strengthTotal: number = 
         strengthFromTactic + 
-        strengthFromAirMod + 
-        strengthFromSpecials;
-
-    //console.log("--[  Military ]--");
-    //console.log("Strength", strengthFromMilitary);
-    //console.log("--[  Tactics ]--");
-    //console.log("Obsolete", countTacticsObs);
-    //console.log("Modern", countTactics);
-    //console.log("Strength", strengthFromTactic);
-    //console.log("--[  Air Mod ]--");
-    //console.log("Strength", strengthFromAirMod);
-    //console.log("----------------");
-    //console.log("--[ Leader ]--");
-    //console.log("Strength", strengthFromLeader);
-    //console.log("----------------");
+        strengthFromAirMod;
     
     logs.forEach(l => {
         console.log(l.msg)
@@ -362,6 +339,8 @@ function ElabCard(s: Scene, c: BoardCard, r: TTASceneValues, evalToken: Boolean 
                     r.science.AddValue(sv.science, c.card.name + " (Mod)");
                 if (sv.happy!=0)
                     r.happy.AddValue(sv.happy, c.card.name + " (Mod)");
+                if (sv.strength!=0)
+                    r.strength.AddValue(sv.strength, c.card.name + " (Mod)");
 
             }
         }
