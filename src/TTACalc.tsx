@@ -1,4 +1,4 @@
-import { BoardCard, Scene } from "./TTATypes";
+import { BoardCard, Scene, SceneValuesModifier } from "./TTATypes";
 import { TTARepoCards } from "./TTARepo";
 
 export enum CardType {
@@ -79,7 +79,6 @@ export function StrenghtCalculation(s: Scene)
     let countTactics: number = 0;
     let countTacticsObs: number = 0;
 
-    let strengthFromMilitary: number = 0;
     let strengthFromTactic: number = 0;
 
     let infArray: Array<Token> = [];
@@ -93,7 +92,6 @@ export function StrenghtCalculation(s: Scene)
 
     FillCardsInScene(s);
 
-    let tempCount: number = 0;
     s.Infantry.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
             infArray.push({
@@ -101,14 +99,9 @@ export function StrenghtCalculation(s: Scene)
                 obsolete : (Math.abs(c.card.age-s.Age)>1)
             });
         }
-        tempCount += (c.yellowToken * c.card.strength);
     });
     infCount = infArray.length;
-    strengthFromMilitary += tempCount;
-    if (tempCount>0)
-        resultStrength.AddValue(tempCount, "Infantry");
 
-    tempCount = 0;
     s.Cavallery.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
             cavArray.push({
@@ -116,14 +109,9 @@ export function StrenghtCalculation(s: Scene)
                 obsolete : (Math.abs(c.card.age-s.Age)>1)
             });
         }
-        tempCount += (c.yellowToken * c.card.strength);
     });
     cavCount = cavArray.length;
-    strengthFromMilitary += tempCount;
-    if (tempCount>0)
-        resultStrength.AddValue(tempCount, "Cavallery");
 
-    tempCount = 0;
     s.Artillery.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
             artArray.push({
@@ -131,15 +119,9 @@ export function StrenghtCalculation(s: Scene)
                 obsolete : (Math.abs(c.card.age-s.Age)>1)
             });
         }
-
-        tempCount += (c.yellowToken * c.card.strength);
     });
     artCount = artArray.length;
-    strengthFromMilitary += tempCount;
-    if (tempCount>0)
-        resultStrength.AddValue(tempCount, "Artillery");
 
-    tempCount = 0;
     if (s.AirForce != null)
     {
         for (let index = 0; index < s.AirForce.yellowToken; index++) {
@@ -148,12 +130,8 @@ export function StrenghtCalculation(s: Scene)
                 obsolete: false
             });
         }
-        tempCount += (s.AirForce.yellowToken * s.AirForce.card.strength);
     }
     airCount = airArray.length;
-    strengthFromMilitary += tempCount;
-    if (tempCount>0)
-        resultStrength.AddValue(tempCount, "Air force");
 
     let genghisMod: boolean = false;
     let dietrichMod: boolean = false;
@@ -282,15 +260,6 @@ export function StrenghtCalculation(s: Scene)
     if (strengthFromSpecials>0)
         resultStrength.AddValue(strengthFromSpecials, "Blu cards");
 
-    // URBAN CARD (Arena)
-    let strengthFromArena = 0;
-    if (s.Urbans != null)
-        s.Urbans.forEach(urbanCard => {
-            strengthFromArena += urbanCard.card.strength;
-        });
-    if (strengthFromArena>0)
-        resultStrength.AddValue(strengthFromArena, "Arena");
-
     // Wonder
     let strengthFromWonder = 0;
     let tempWonder = 0;
@@ -320,59 +289,13 @@ export function StrenghtCalculation(s: Scene)
                 strengthFromWonder += wonderCard.card.strength;
             }
         });
-    
-    // Leaders
-    let strengthFromLeader = 0;
-    if (s.Leader!=null)
-    {
-        if (s.Leader.card.code == "LEA08") // Joan of Arc
-        {
-            if (s.Urbans!=null)
-                s.Urbans.forEach(c => {
-                    if (c.card.code.startsWith("UTE"))  // "U"rban "TE"mple
-                    strengthFromLeader += (c.yellowToken * c.card.happy)           
-                });
-        }
-        else if (s.Leader.card.code == "LEA15") // Napoleon
-        {
-            if (infCount>0)
-                strengthFromLeader += 2;
-            if (cavCount>0)
-                strengthFromLeader += 2;
-            if (artCount>0)
-                strengthFromLeader += 2;
-            if (airCount>0)
-                strengthFromLeader += 2;
-        }
-        else if (s.Leader.card.code == "LEA06") // Alexander
-        {
-            strengthFromLeader += (infArray.length+cavArray.length)
-        }
-        else if (s.Leader.card.code == "LEA43") // Sklodowska
-        {
-            // TODO: Your best lab gives you strength equal to its level
-        }
-        strengthFromLeader += s.Leader.card.strength;
-    }
-    if (strengthFromLeader>0)
-        resultStrength.AddValue(strengthFromLeader, "Leader");
 
     // TOTAL
     let strengthTotal: number = 
-        strengthFromMilitary + 
         strengthFromTactic + 
         strengthFromAirMod + 
         strengthFromSpecials +
-        strengthFromArena +
-        strengthFromWonder +
-        strengthFromLeader;
-
-    if (s.Governament != null)
-        if (s.Governament.card.strength>0)
-        {
-            strengthTotal += s.Governament.card.strength;
-            resultStrength.AddValue(s.Governament.card.strength, "Governament");
-        }
+        strengthFromWonder;
 
     //console.log("--[  Military ]--");
     //console.log("Strength", strengthFromMilitary);
@@ -443,6 +366,70 @@ export class TTASceneValues {
     }
 };
 
+function ElabCard(s: Scene, c: BoardCard, r: TTASceneValues, evalToken: Boolean = true)
+{
+    if (c!=null)
+        if (c.card!=null)
+        {
+            let nTk = 1
+            if (evalToken)
+                nTk = c.yellowToken;
+
+            if ((c.card.happy * nTk)>0)
+                r.happy.AddValue(c.card.happy*nTk, c.card.name);
+            if ((c.card.food * nTk)>0)
+                r.food.AddValue(c.card.food*nTk, c.card.name);
+            if ((c.card.resource * nTk)>0)
+                r.resource.AddValue(c.card.resource * nTk, c.card.name);
+            if ((c.card.science * nTk)>0)
+                r.science.AddValue(c.card.science * nTk, c.card.name);
+            if ((c.card.culture * nTk)>0)
+                r.culture.AddValue(c.card.culture * nTk, c.card.name);
+            if ((c.card.strength * nTk)>0)
+                r.strength.AddValue(c.card.strength * nTk, c.card.name);
+
+            if (c.card.getSceneValuesModifier)
+            {
+                let sv: SceneValuesModifier = c.card.getSceneValuesModifier(s);
+                if (sv.culture!=0)
+                    r.culture.AddValue(sv.culture, c.card.name + " (Mod)");
+                if (sv.food!=0)
+                    r.food.AddValue(sv.food, c.card.name + " (Mod)");
+                if (sv.resource!=0)
+                    r.resource.AddValue(sv.resource, c.card.name + " (Mod)");
+                if (sv.science!=0)
+                    r.science.AddValue(sv.science, c.card.name + " (Mod)");
+                if (sv.happy!=0)
+                    r.happy.AddValue(sv.happy, c.card.name + " (Mod)");
+
+            }
+        }
+}
+
+function ElabCards(s:Scene, r: TTASceneValues) {
+
+    s.Infantry.forEach(item => {
+        ElabCard(s, item,r);
+    });
+    s.Cavallery.forEach(item => {
+        ElabCard(s, item,r);
+    });
+    s.Artillery.forEach(item => {
+        ElabCard(s, item,r);
+    });
+    ElabCard(s, s.AirForce, r);
+    s.Productions.forEach(item => {
+        ElabCard(s, item,r);
+    });
+    s.Urbans.forEach(item => {
+        ElabCard(s, item,r);
+    });
+    s.Special.forEach(item => {
+        ElabCard(s, item,r, false);
+    });
+    ElabCard(s, s.Governament, r, false);
+    ElabCard(s, s.Leader, r, false);
+}
 
 export function TTASceneCalculation(s: Scene)
 {
@@ -450,6 +437,8 @@ export function TTASceneCalculation(s: Scene)
 
     result.strength = StrenghtCalculation(s);
 
+    ElabCards(s, result);
+    /*
     let cultureTemp: number;
     s.Urbans.forEach(c => {
         cultureTemp = c.card.culture * c.yellowToken;
@@ -462,11 +451,12 @@ export function TTASceneCalculation(s: Scene)
         if (cultureTemp>0)
             result.culture.AddValue(cultureTemp, c.card.name);
     });
+    
 
     if (s.Leader)
         if (s.Leader.card.getSceneValuesModifier)
             console.log(s.Leader.card.getSceneValuesModifier(s));
-
+    */
     console.log("--- CULTURE ---");
     result.culture.Logs().forEach(l => {
         console.log(l.msg)
