@@ -3601,6 +3601,19 @@ export class TTARepoCards {
         territories.push(this.internalRepo.get("TER13"));
         return territories;
     }
+
+    public GetGovernaments() {
+        let governaments = Array<TTACard>();
+        governaments.push(this.internalRepo.get("GOV01"));
+        governaments.push(this.internalRepo.get("GOV02"));
+        governaments.push(this.internalRepo.get("GOV03"));
+        governaments.push(this.internalRepo.get("GOV04"));
+        governaments.push(this.internalRepo.get("GOV05"));
+        governaments.push(this.internalRepo.get("GOV06"));
+        governaments.push(this.internalRepo.get("GOV07"));
+        governaments.push(this.internalRepo.get("GOV08"));
+        return governaments;
+    }
 }
 
 function MakeBoardCard(card: TTACard, values: [key: string])
@@ -3637,6 +3650,12 @@ export function MakeScene(values: [key: string])
   if (values["leader"])
     s.Leader = {
       code: values["leader"],
+      yellowToken: 0
+    };
+
+  if (values["governament"])
+    s.Leader = {
+      code: values["governament"],
       yellowToken: 0
     };
   

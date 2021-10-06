@@ -339,6 +339,43 @@ export class FilterAge extends React.Component<FLeadersProps, FLeadersState> {
     }
 }
 
+export class FilterGovernament extends React.Component<FLeadersProps, FLeadersState> {
+    state: FLeadersState = {};
+
+    render() {
+
+        var governaments = TTARepoCards.Instance.GetGovernaments();
+        var indents = [];
+        for (var i = 0; i < governaments.length; i++) {
+            var gov = governaments[i];
+            //indents.push(<CardItem code={leader.code} />);
+            indents.push(<option value={gov.code}>{gov.name}</option>);
+        }
+
+        return (
+            <div className="card">
+                <div className="card-header">
+                    Governament
+                </div>
+                <div className="card-body">
+                    <FormContext.Consumer>
+                    {(context: IFormContext) => (
+                        <select name="leader"                        
+                            onChange={
+                            (e: React.FormEvent<HTMLSelectElement>) =>
+                            context.setValues({ ["governament"]: e.currentTarget.value })
+                            }
+                        >
+                        {indents}
+                        </select>
+                    )}
+                    </FormContext.Consumer>
+                </div>
+            </div>           
+        );
+    }
+}
+
 type TTASceneValuesProps =  {
 }
 
