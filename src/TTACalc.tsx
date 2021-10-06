@@ -260,42 +260,11 @@ export function StrenghtCalculation(s: Scene)
     if (strengthFromSpecials>0)
         resultStrength.AddValue(strengthFromSpecials, "Blu cards");
 
-    // Wonder
-    let strengthFromWonder = 0;
-    let tempWonder = 0;
-    if (s.Wonders != null)
-        s.Wonders.forEach(wonderCard => {
-
-            if (wonderCard.card.code == "WON05")    // GreatWall
-            {
-                s.Infantry.forEach(c => {
-                    tempWonder += c.yellowToken            
-                });
-
-                s.Artillery.forEach(c => {
-                    tempWonder += c.yellowToken            
-                });
-
-                if (tempWonder>0)
-                {
-                    resultStrength.AddValue(tempWonder, "Wonder: Great Wall ability");
-                }
-                strengthFromWonder += tempWonder;
-            }
-            
-            if (wonderCard.card.strength>0)
-            {
-                resultStrength.AddValue(wonderCard.card.strength, "Wonder: " + wonderCard.card.name);
-                strengthFromWonder += wonderCard.card.strength;
-            }
-        });
-
     // TOTAL
     let strengthTotal: number = 
         strengthFromTactic + 
         strengthFromAirMod + 
-        strengthFromSpecials +
-        strengthFromWonder;
+        strengthFromSpecials;
 
     //console.log("--[  Military ]--");
     //console.log("Strength", strengthFromMilitary);

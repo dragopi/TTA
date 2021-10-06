@@ -773,7 +773,19 @@ let CARD_WON05: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Adds +1 to your strength for each infantry and artillery unit"
+    text: "Adds +1 to your strength for each infantry and artillery unit",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        let countToken: number = 0;
+        s.Infantry.forEach(c => {
+            countToken += c.yellowToken            
+        });
+        s.Artillery.forEach(c => {
+            countToken += c.yellowToken
+        });
+        result.strength += countToken;
+        return result;
+    }
 }
 
 let CARD_WON06: TTACard = {
