@@ -1,5 +1,5 @@
 import { BoardCard, Scene, SceneValuesModifier } from "./TTATypes";
-import { TTARepoCards } from "./TTARepo";
+import { TTARepoCards, GetBestFromArray } from "./TTARepo";
 
 export enum CardType {
     Leader,
@@ -85,10 +85,6 @@ export function StrenghtCalculation(s: Scene)
     let cavArray: Array<Token> = [];
     let artArray: Array<Token> = [];
     let airArray: Array<Token> = [];
-    let infCount: number = 0;
-    let cavCount: number = 0;
-    let artCount: number = 0;
-    let airCount: number = 0;
 
     FillCardsInScene(s);
 
@@ -100,7 +96,6 @@ export function StrenghtCalculation(s: Scene)
             });
         }
     });
-    infCount = infArray.length;
 
     s.Cavallery.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
@@ -110,7 +105,6 @@ export function StrenghtCalculation(s: Scene)
             });
         }
     });
-    cavCount = cavArray.length;
 
     s.Artillery.forEach(c => {
         for (let index = 0; index < c.yellowToken; index++) {
@@ -120,7 +114,6 @@ export function StrenghtCalculation(s: Scene)
             });
         }
     });
-    artCount = artArray.length;
 
     if (s.AirForce != null)
     {
@@ -131,7 +124,6 @@ export function StrenghtCalculation(s: Scene)
             });
         }
     }
-    airCount = airArray.length;
 
     let genghisMod: boolean = false;
     let dietrichMod: boolean = false;
@@ -393,9 +385,20 @@ function ElabCards(s:Scene, r: TTASceneValues) {
     s.Urbans.forEach(item => {
         ElabCard(s, item,r);
     });
-    s.Special.forEach(item => {
+    s.Wonders.forEach(item => {
         ElabCard(s, item,r, false);
     });
+
+    // Special
+    let bestMil = GetBestFromArray(s.Special, "SMI");
+    let bestCol = GetBestFromArray(s.Special, "SCL");
+    let bestCiv = GetBestFromArray(s.Special, "SCI");
+    let bestCon = GetBestFromArray(s.Special, "SCO");
+    ElabCard(s, bestMil, r, false);
+    ElabCard(s, bestCol, r, false);
+    ElabCard(s, bestCiv, r, false);
+    ElabCard(s, bestCon, r, false);
+    
     ElabCard(s, s.Governament, r, false);
     ElabCard(s, s.Leader, r, false);
 }

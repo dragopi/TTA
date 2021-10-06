@@ -18,7 +18,7 @@ function GetBestLibrary(s: Scene)
     return GetBestFromArray(s.Urbans, "ULI");
 }
 
-function GetBestFromArray(a: Array<BoardCard>, codeprefix: string)
+export function GetBestFromArray(a: Array<BoardCard>, codeprefix: string)
 {
     let result: BoardCard = null;
     let nAge: number = -1;
