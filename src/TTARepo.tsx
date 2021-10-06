@@ -1621,7 +1621,14 @@ let CARD_LEA14: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "When colonizing, each colonization bonus card has an additional +1. Colonies produce 2 culture each"
+    text: "When colonizing, each colonization bonus card has an additional +1. Colonies produce 2 culture each",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        s.Territories.forEach(c => {
+            result.culture += 2;
+        });
+        return result;
+    }
 }
 
 let CARD_LEA15: TTACard = {
