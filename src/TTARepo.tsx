@@ -1,5 +1,39 @@
-import { TTACard, TTATacticCard, SceneValuesModifier, Scene } from "./TTATypes";
+import { TTACard, TTATacticCard, SceneValuesModifier, Scene, BoardCard } from "./TTATypes";
 
+
+function GetBestLab(s: Scene)
+{
+    return GetBestFromArray(s.Urbans, "ULA");
+}
+function GetBestTemple(s: Scene)
+{
+    return GetBestFromArray(s.Urbans, "UTE");
+}
+function GetBestTheater(s: Scene)
+{
+    return GetBestFromArray(s.Urbans, "UTH");
+}
+function GetBestLibrary(s: Scene)
+{
+    return GetBestFromArray(s.Urbans, "ULI");
+}
+
+function GetBestFromArray(a: Array<BoardCard>, codeprefix: string)
+{
+    let result: BoardCard = null;
+    let nAge: number = -1;
+    a.forEach(c => {
+        if((c.code.startsWith(codeprefix))&&(c.yellowToken>0))
+        {
+            if(c.card.age>nAge)
+            {
+                result = c;
+                nAge = c.card.age;
+            }
+        }
+    });
+    return result;
+}
 
 let CARD_PFA01: TTACard = {
     code: "PFA01",
@@ -1271,7 +1305,7 @@ let CARD_LEA01: TTACard = {
     science: null,
     ca: null,
     ma: 1,
-    text: null
+    text: "You gain +1 strength and +1 military action. Once per game, you may play another political action after already playing one."
 }
 
 let CARD_LEA02: TTACard = {
@@ -1286,11 +1320,11 @@ let CARD_LEA02: TTACard = {
     resource: null,
     culture: null,
     strength: null,
-    happy: null,
+    happy: 1,
     science: null,
     ca: null,
     ma: null,
-    text: "Each round, you have extra 1 resource for building military; up to 2 warriors produce 1 culture each"
+    text: "Each round, you have extra 1 resource for building military; +1 happy face. When you replace Homer, instead of getting a civil action back, you may slide Homer under one of your finished wonders; that wonder now has +1 happy face. This happy face is not removed due to Ravages of Time."
 }
 
 let CARD_LEA03: TTACard = {
@@ -1328,7 +1362,7 @@ let CARD_LEA04: TTACard = {
     science: null,
     ca: 1,
     ma: -1,
-    text: null
+    text: "You can use a military action as a civil action. Taking a leader from the card row costs you 1 action less."
 }
 
 let CARD_LEA05: TTACard = {
@@ -1366,7 +1400,21 @@ let CARD_LEA06: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Each of your military units gives you an additional +1 strength"
+    text: "Each of your military units gives you an additional +1 strength. As a political action, you may remove Alexander the Great from play to add a yellow token to your yellow bank.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        s.Infantry.forEach(c => {
+            result.strength += c.yellowToken;
+        });
+        s.Cavallery.forEach(c => {
+            result.strength += c.yellowToken;
+        });
+        s.Artillery.forEach(c => {
+            result.strength += c.yellowToken;
+        });
+        result.strength += s.AirForce.yellowToken;
+        return result;
+    }
 }
 
 let CARD_LEA07: TTACard = {
@@ -1385,7 +1433,18 @@ let CARD_LEA07: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Temples, theaters, & wonders produce 1 extra culture per happy face; 1 less civil action for wonder cards"
+    text: "Temples, theaters, & wonders produce 1 extra culture per happy face; you don't spend extra civil actions per wonder for wonder cards",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        s.Urbans.forEach(c => {
+            if (c.card.code.startsWith("UT"))
+                result.culture += (c.card.happy * c.yellowToken);
+        });
+        s.Wonders.forEach(c => {
+            result.culture += (c.card.happy);
+        });
+        return result;
+    }
 }
 
 let CARD_LEA08: TTACard = {
@@ -1398,13 +1457,23 @@ let CARD_LEA08: TTACard = {
     rock_cost: null,
     food: null,
     resource: null,
-    culture: null,
+    culture: 1,
     strength: null,
     happy: null,
     science: null,
     ca: null,
-    ma: null,
-    text: "Temples give you +1 strength for each happy face; score 5 culture when aggression or war played on you"
+    ma: 1,
+    text: "Temples and your government give you +1 strength for each happy face, during the Politics Phase you can see the top card of the Current Events deck.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        if (s.Governament)
+            result.strength += s.Governament.card.happy;
+        s.Urbans.forEach(c => {
+            if(c.card.code.startsWith("UTE"))
+                result.strength += (c.card.happy * c.yellowToken);
+        });
+        return result;
+    }
 }
 
 let CARD_LEA09: TTACard = {
@@ -1423,7 +1492,19 @@ let CARD_LEA09: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Best lab or library produces extra science: +1 per level; When you play a technology card, produce 1 resource"
+    text: "Best lab or library produces extra science: +1 per level; When you play a technology card, produce 1 resource",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        let bestLab = GetBestLab(s);
+        let bestLib = GetBestLibrary(s);
+        if ((bestLab)&&(bestLib))
+            result.science += Math.max(bestLab.card.age+1, bestLib.card.age);
+        else if (bestLib)
+            result.science += bestLib.card.age;
+        else if (bestLab)
+            result.science += (bestLab.card.age+1);
+        return result;
+    }
 }
 
 let CARD_LEA10: TTACard = {
@@ -1442,7 +1523,7 @@ let CARD_LEA10: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Ignore effects of your tactics card. Each of your cavalry units get +1 strength and produces +1 culture"
+    text: "You may count one of your infantry as calvary for tactics purposes. Gives +3 culture if your civilization is one of the two strongest (strongest in 2 player) civilizations."
 }
 
 let CARD_LEA11: TTACard = {
@@ -1480,7 +1561,7 @@ let CARD_LEA12: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "For 1 civil action, you can increase your population by 1 worker, and build a new military unit with it. Costs 1 food and 1 resource less"
+    text: "For 1 military action, you can increase your population by 1 worker, and build a new military unit with it. Costs 1 food and 1 resource less."
 }
 
 let CARD_LEA13: TTACard = {
@@ -1495,11 +1576,11 @@ let CARD_LEA13: TTACard = {
     resource: null,
     culture: null,
     strength: null,
-    happy: null,
+    happy: 1,
     science: null,
     ca: null,
     ma: null,
-    text: "Each of your libraries produces an extra 1 culture. Each library-theater pair produces an additional 2 culture"
+    text: "Each library-theater pair produces an additional 2 culture. If you have a library you can discover and build theaters for one science/resource less, and vice versa. +1 happy face."
 }
 
 let CARD_LEA14: TTACard = {
@@ -1536,8 +1617,27 @@ let CARD_LEA15: TTACard = {
     happy: null,
     science: null,
     ca: null,
-    ma: 1,
-    text: "\nThe tactics bonus of your best army is doubled"
+    ma: 2,
+    text: "You get a +2 military bonus for each different type of unit you have",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        let countArmy: number = 0;
+        s.Infantry.forEach(c => {countArmy += c.yellowToken;});
+        if(countArmy>0)
+            result.strength += 2;
+        countArmy = 0;
+        s.Cavallery.forEach(c => {countArmy += c.yellowToken;});
+        if(countArmy>0)
+            result.strength += 2;
+        countArmy = 0;
+        s.Artillery.forEach(c => {countArmy += c.yellowToken;});
+        if(countArmy>0)
+            result.strength += 2;
+        countArmy = 0;
+        if (s.AirForce.yellowToken>0)
+            result.strength += 2;
+        return result;
+    }
 }
 
 let CARD_LEA16: TTACard = {
@@ -1556,7 +1656,7 @@ let CARD_LEA16: TTACard = {
     science: null,
     ca: null,
     ma: 1,
-    text: "Revolution costs you all your military actions instead of all your civil actions"
+    text: "Revolutions cost you all your military actions instead of all your civil actions. Gain 3 culture when declaring a revolution."
 }
 
 let CARD_LEA17: TTACard = {
@@ -1632,7 +1732,7 @@ let CARD_LEA20: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "You may not play aggression or war cards; opponents pay 2x the military actions to play them against you"
+    text: "Mahatma Gandhi produces +2 culture. You may not play aggression or war cards; opponents pay 2x the military actions to play them against you."
 }
 
 let CARD_LEA21: TTACard = {
@@ -1689,14 +1789,14 @@ let CARD_LEA23: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Military unit techs cost you 3 science less; defense bonus cards count twice; when war is declared on you, new units cost 2 resource less to build"
+    text: "Each turn, you can choose to either gain 3 culture or 3 resources for military units + 3 science for military unit technologies."
 }
 
 let CARD_LEA24: TTACard = {
     code: "LEA24",
     type: "Leader",
     subtype: "Leader",
-    name: "Game Designer",
+    name: "Sid Meier",
     age: 3,
     light_cost: null,
     rock_cost: null,
@@ -2121,12 +2221,12 @@ let CARD_LEA43: TTACard = {
         let levelMine: number = 0;
         s.Productions.forEach(c => {
             if ((c.card.subtype == "Mine")&&(c.yellowToken>0))
-                levelMine = Math.max(levelMine, c.card.age);
+                levelMine = Math.max(levelMine, (c.card.age+1));
         });
         let levelLab: number = 0;
         s.Urbans.forEach(c => {
             if ((c.card.subtype == "Lab")&&(c.yellowToken>0))
-                levelLab = Math.max(levelLab, c.card.age);
+                levelLab = Math.max(levelLab, (c.card.age+1));
         });
 
         result.science = levelMine;
@@ -2194,7 +2294,7 @@ let CARD_LEA45: TTACard = {
         let levelLab: number = 0;
         s.Urbans.forEach(c => {
             if ((c.card.subtype == "Lab")&&(c.yellowToken>0))
-                levelLab = Math.max(levelLab, c.card.age);
+                levelLab = Math.max(levelLab, (c.card.age)+1);
         });
         result.happy = levelLab;
         return result;
@@ -2246,7 +2346,7 @@ let CARD_LEA47: TTACard = {
         let result = new SceneValuesModifier();
         s.Urbans.forEach(c => {
             if (c.card.subtype == "Arena")
-                result.culture += c.yellowToken;
+                result.culture += (c.yellowToken*2);
         });
         return result;
     }
