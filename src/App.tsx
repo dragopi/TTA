@@ -100,9 +100,9 @@ function App() {
         <div className="row">
             <div className="col">
               <h6>Theology</h6>
-              <CardItem code="UTH01" />
-              <CardItem code="UTH02" />
-              <CardItem code="UTH03" />
+              <CardItem code="UTE01" />
+              <CardItem code="UTE02" />
+              <CardItem code="UTE03" />
             </div>
             <div className="col">
               <h6>Arena</h6>
@@ -112,9 +112,9 @@ function App() {
             </div>
             <div className="col">
               <h6>Theatre</h6>
-              <CardItem code="UTE01" />
-              <CardItem code="UTE02" />
-              <CardItem code="UTE03" />
+              <CardItem code="UTH01" />
+              <CardItem code="UTH02" />
+              <CardItem code="UTH03" />
             </div>
             <div className="col">
               <h6>Press</h6>
