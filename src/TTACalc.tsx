@@ -221,12 +221,17 @@ export function StrenghtCalculation(s: Scene)
         if (s.Tactic.strengthObs>0)
             strengthFromTactic = (countTactics * s.Tactic.strength) + (countTacticsObs * s.Tactic.strengthObs);
         else
-            strengthFromTactic = ((countTactics+countTacticsObs) * s.Tactic.strength);
+        {            
+            let tacticValue: number = s.Tactic.strength;
+            if (s.Tactic.code == "TAC12") //Hussars
+                tacticValue += s.Age;
+            strengthFromTactic = ((countTactics+countTacticsObs) * tacticValue);
+        }
     }
 
     if (strengthFromTactic>0)
     {
-        resultStrength.AddValue(strengthFromTactic, "Tactics (Obsolete: " + countTacticsObs + " - Modern: " + countTactics + ")");
+        resultStrength.AddValue(strengthFromTactic, "Tactics (Obs: " + countTacticsObs + " - Mod: " + countTactics + ")");
     }
 
     let strengthFromAirMod: number = 0;
