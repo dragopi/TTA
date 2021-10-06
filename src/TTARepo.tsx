@@ -3652,7 +3652,7 @@ export function MakeScene(values: [key: string])
     Tactic: null
   };
 
-  if (values["age"])
+  if (values["age"]!=null)
     s.Age = values["age"];
 
   if (values["leader"])
