@@ -1089,7 +1089,17 @@ let CARD_WON21: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "1 blue token. Your best Age A or Age I farm and your best Age A and Age I mine produce one extra blue token."
+    text: "1 blue token. Your best Age A or Age I farm and your best Age A and Age I mine produce one extra blue token.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        let bestFarm = GetBestFromArray(s.Productions, "PFA");
+        if (bestFarm)
+            result.food += (bestFarm.card.food);
+        let bestMine = GetBestFromArray(s.Productions, "PMI");
+        if (bestMine)
+            result.resource += (bestMine.card.resource);
+        return result;
+    }
 }
 
 let CARD_WON22: TTACard = {
@@ -3676,6 +3686,8 @@ export function MakeScene(values: [key: string])
           s.Productions.push(MakeBoardCard(card, values));
         else if (card.code.startsWith("U"))
           s.Urbans.push(MakeBoardCard(card, values));
+          else if (card.code.startsWith("S"))
+          s.Special.push(MakeBoardCard(card, values));
       }
     }
   }
