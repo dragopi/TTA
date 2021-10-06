@@ -122,6 +122,33 @@ function App() {
               <CardItem code="ULI03" />
             </div>
         </div>
+
+        <div className="row">
+            <div className="col">
+              <h6>Military</h6>
+              <CardItem code="SMI01" />
+              <CardItem code="SMI02" />
+              <CardItem code="SMI03" />
+            </div>
+            <div className="col">
+              <h6>Civil</h6>
+              <CardItem code="SCI01" />
+              <CardItem code="SCI02" />
+              <CardItem code="SCI03" />
+            </div>
+            <div className="col">
+              <h6>Colonization</h6>
+              <CardItem code="SCL01" />
+              <CardItem code="SCL02" />
+              <CardItem code="SCL03" />
+            </div>
+            <div className="col">
+              <h6>Construction</h6>
+              <CardItem code="SCO01" />
+              <CardItem code="SCO02" />
+              <CardItem code="SCO03" />
+            </div>
+        </div>
           
 
           </React.Fragment>
