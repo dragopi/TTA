@@ -150,6 +150,30 @@ function App() {
               <CardItem code="SCO03" needToken={false} />
             </div>
         </div>
+        <h6>Territories</h6>
+        <div className="row">
+            <div className="col">
+              <CardItem code="TER01" needToken={false} />
+              <CardItem code="TER02" needToken={false} />
+              <CardItem code="TER03" needToken={false} />
+            </div>
+            <div className="col">
+              <CardItem code="TER04" needToken={false} />
+              <CardItem code="TER05" needToken={false} />
+              <CardItem code="TER06" needToken={false} />
+            </div>
+            <div className="col">
+              <CardItem code="TER07" needToken={false} />
+              <CardItem code="TER08" needToken={false} />
+              <CardItem code="TER09" needToken={false} />
+            </div>
+            <div className="col">
+              <CardItem code="TER10" needToken={false} />
+              <CardItem code="TER11" needToken={false} />
+              <CardItem code="TER12" needToken={false} />
+              <CardItem code="TER13" needToken={false} />
+            </div>
+        </div>
           
 
           </React.Fragment>

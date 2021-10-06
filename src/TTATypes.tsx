@@ -67,5 +67,6 @@ export interface Scene {
     Special?: Array<BoardCard>;
     Productions?: Array<BoardCard>;
     Urbans?: Array<BoardCard>;
+    Territories?: Array<BoardCard>;
     Tactic: TTATacticCard;
 }

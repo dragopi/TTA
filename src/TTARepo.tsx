@@ -3641,6 +3641,7 @@ export function MakeScene(values: [key: string])
     Special: [],
     Productions: [],
     Urbans: [],
+    Territories: [],
     Tactic: null
   };
 
@@ -3709,6 +3710,12 @@ export function MakeScene(values: [key: string])
           s.Urbans.push(MakeBoardCard(card, values));
         else if (card.code.startsWith("S"))
           s.Special.push({
+            code: card.code,
+            card: card,
+            yellowToken: 1
+          });
+        else if (card.code.startsWith("TER"))
+          s.Territories.push({
             code: card.code,
             card: card,
             yellowToken: 1

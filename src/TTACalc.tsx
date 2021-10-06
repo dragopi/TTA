@@ -364,6 +364,9 @@ function ElabCards(s:Scene, r: TTASceneValues) {
     s.Urbans.forEach(item => {
         ElabCard(s, item,r);
     });
+    s.Territories.forEach(item => {
+        ElabCard(s, item,r);
+    });
     s.Wonders.forEach(item => {
         ElabCard(s, item,r, false);
     });
