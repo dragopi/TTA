@@ -3667,6 +3667,8 @@ export function MakeScene(values: [key: string])
   for (let key in values) {
     let value = values[key];
     //console.log(key + " => " + value);
+    if (value != "on")
+        continue;
     if (!key.includes("_"))
     {
       let card = TTARepoCards.Instance.Get(key);
@@ -3686,8 +3688,12 @@ export function MakeScene(values: [key: string])
           s.Productions.push(MakeBoardCard(card, values));
         else if (card.code.startsWith("U"))
           s.Urbans.push(MakeBoardCard(card, values));
-          else if (card.code.startsWith("S"))
-          s.Special.push(MakeBoardCard(card, values));
+        else if (card.code.startsWith("S"))
+          s.Special.push({
+            code: card.code,
+            card: card,
+            yellowToken: 1
+          });
       }
     }
   }

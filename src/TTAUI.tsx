@@ -11,12 +11,13 @@ import {
 
 type CardItemProps =  {
     code: string;
+    needToken?: boolean;
 }
 
 type CardItemState = {
     card: TTACard;
     onBoard: boolean;
-    needToken: boolean;
+    showToken: boolean;
     tokens: number;
 }
 
@@ -26,7 +27,7 @@ export class CardItem extends React.Component<CardItemProps, CardItemState> {
         card: TTARepoCards.Instance.Get(this.props.code),
         onBoard: false,
         tokens: 0,
-        needToken: false
+        showToken: (this.props.needToken !== false)
     };
 
     buttonClick = (e: React.FormEvent<HTMLButtonElement>): void => {
@@ -51,12 +52,17 @@ export class CardItem extends React.Component<CardItemProps, CardItemState> {
                     
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" name={this.state.card.code} onChange={
-                (e: React.FormEvent<HTMLInputElement>) =>
-                  context.setValues({ [this.state.card.code]: e.currentTarget.value })
+                (e: React.FormEvent<HTMLInputElement>) => {
+                    if (e.currentTarget.checked)
+                        context.setValues({ [this.state.card.code]: e.currentTarget.value });
+                    else
+                        context.setValues({ [this.state.card.code]: 'off' });
+                }
               } />
                     </div>
 
                     <strong className="me-auto">{this.state.card.name}</strong>
+                    {this.state.showToken && (
                     <small>
 
                         <select name={this.state.card.code + "_tk"}
@@ -72,12 +78,10 @@ export class CardItem extends React.Component<CardItemProps, CardItemState> {
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
                         </select>
 
                     </small>
+                    )}
                 </div>
                 
             </div>

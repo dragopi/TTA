@@ -126,27 +126,27 @@ function App() {
         <div className="row">
             <div className="col">
               <h6>Military</h6>
-              <CardItem code="SMI01" />
-              <CardItem code="SMI02" />
-              <CardItem code="SMI03" />
+              <CardItem code="SMI01" needToken={false} />
+              <CardItem code="SMI02" needToken={false} />
+              <CardItem code="SMI03" needToken={false} />
             </div>
             <div className="col">
               <h6>Civil</h6>
-              <CardItem code="SCI01" />
-              <CardItem code="SCI02" />
-              <CardItem code="SCI03" />
+              <CardItem code="SCI01" needToken={false} />
+              <CardItem code="SCI02" needToken={false} />
+              <CardItem code="SCI03" needToken={false} />
             </div>
             <div className="col">
               <h6>Colonization</h6>
-              <CardItem code="SCL01" />
-              <CardItem code="SCL02" />
-              <CardItem code="SCL03" />
+              <CardItem code="SCL01" needToken={false} />
+              <CardItem code="SCL02" needToken={false} />
+              <CardItem code="SCL03" needToken={false} />
             </div>
             <div className="col">
               <h6>Construction</h6>
-              <CardItem code="SCO01" />
-              <CardItem code="SCO02" />
-              <CardItem code="SCO03" />
+              <CardItem code="SCO01" needToken={false} />
+              <CardItem code="SCO02" needToken={false} />
+              <CardItem code="SCO03" needToken={false} />
             </div>
         </div>
           
