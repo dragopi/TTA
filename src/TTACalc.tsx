@@ -367,9 +367,6 @@ function ElabCards(s:Scene, r: TTASceneValues) {
     s.Territories.forEach(item => {
         ElabCard(s, item,r);
     });
-    s.Wonders.forEach(item => {
-        ElabCard(s, item,r, false);
-    });
 
     // Special
     let bestMil = GetBestFromArray(s.Special, "SMI");
@@ -382,6 +379,21 @@ function ElabCards(s:Scene, r: TTASceneValues) {
     ElabCard(s, bestCon, r, false);
     
     ElabCard(s, s.Governament, r, false);
+
+    s.Wonders.forEach(item => {
+        ElabCard(s, item,r, false);
+    });
+
+    s.Wonders.forEach(item => {
+        if (item.code=="WON06") // St. Peter's Basilica
+            if (r.happy.Value()>0)
+            {
+                // -1 because "St. Peter's Basilica" does not increase it's own happy face by 1.
+                r.happy.AddValue(r.happy.Value()-1, item.card.name + " (Mod)"); 
+            }
+    });
+
+    
     ElabCard(s, s.Leader, r, false);
 }
 

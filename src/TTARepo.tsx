@@ -800,11 +800,11 @@ let CARD_WON06: TTACard = {
     resource: null,
     culture: 2,
     strength: null,
-    happy: null,
+    happy: 1,
     science: null,
     ca: null,
     ma: null,
-    text: "Each of your happy faces counts twice"
+    text: "Each of your other cards that produce at least 1 happy face produce 1 more happy face. St. Peter's Basilica produces +2 culture and +1 happy face. St. Peter's Basilica does not increase it's own happy face by 1."
 }
 
 let CARD_WON07: TTACard = {
