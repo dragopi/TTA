@@ -149,6 +149,18 @@ export function StrenghtCalculation(s: Scene)
     if (s.Tactic!=null)
     {
         let findTactic: boolean = false;
+        let tacticStrength: number = s.Tactic.strength;
+        let tacticStrengthObs: number = s.Tactic.strengthObs;
+
+        if (s.Tactic.code == "TAC12") //Hussars
+        {
+            let maxAge: number = 0;
+            s.Cavallery.forEach(c=>{
+                if (c.workers>0)
+                    maxAge = Math.max(maxAge, c.card.age);
+            });
+            tacticStrength += maxAge;
+        }
 
         do {
 
@@ -213,34 +225,29 @@ export function StrenghtCalculation(s: Scene)
         } while (findTactic);
 
         if (s.Tactic.strengthObs>0)
-            strengthFromTactic = (countTactics * s.Tactic.strength) + (countTacticsObs * s.Tactic.strengthObs);
+            strengthFromTactic = (countTactics * tacticStrength) + (countTacticsObs * tacticStrengthObs);
         else
-        {            
-            let tacticValue: number = s.Tactic.strength;
-            if (s.Tactic.code == "TAC12") //Hussars
-                tacticValue += s.Age;
-            strengthFromTactic = ((countTactics+countTacticsObs) * tacticValue);
+            strengthFromTactic = ((countTactics+countTacticsObs) * tacticStrength);    
+
+        if (strengthFromTactic>0)
+        {
+            resultStrength.AddValue(strengthFromTactic, "Tactics (Obs: " + countTacticsObs + " - Mod: " + countTactics + ")");
+
+            let strengthFromAirMod: number = 0;
+            if (s.AirForce != null)
+            {
+                let airToken: number = s.AirForce.workers;
+                let tokenUsed = Math.min(s.AirForce.workers, countTactics);
+                strengthFromAirMod += tokenUsed * tacticStrength;
+
+                airToken += tokenUsed;
+                strengthFromAirMod += Math.min(s.AirForce.workers, countTacticsObs) * tacticStrengthObs;
+
+                if (strengthFromAirMod>0)
+                    resultStrength.AddValue(strengthFromAirMod, "Air force ability");
+            }
         }
     }
-
-    if (strengthFromTactic>0)
-    {
-        resultStrength.AddValue(strengthFromTactic, "Tactics (Obs: " + countTacticsObs + " - Mod: " + countTactics + ")");
-    }
-
-    let strengthFromAirMod: number = 0;
-    if (s.AirForce != null)
-    {
-        let airToken = s.AirForce.workers;
-        let tokenUsed = Math.min(s.AirForce.workers, countTactics);
-        strengthFromAirMod += tokenUsed * s.Tactic.strength;
-
-        airToken += tokenUsed;
-        strengthFromAirMod += Math.min(s.AirForce.workers, countTacticsObs) * s.Tactic.strengthObs;
-
-        if (strengthFromAirMod>0)
-            resultStrength.AddValue(strengthFromAirMod, "Air force ability");
-    }
 
     return resultStrength;
 }
