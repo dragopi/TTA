@@ -237,11 +237,12 @@ export function StrenghtCalculation(s: Scene)
             if (s.AirForce != null)
             {
                 let airToken: number = s.AirForce.workers;
-                let tokenUsed = Math.min(s.AirForce.workers, countTactics);
+                let tokenUsed = Math.min(airToken, countTactics);
                 strengthFromAirMod += tokenUsed * tacticStrength;
 
-                airToken += tokenUsed;
-                strengthFromAirMod += Math.min(s.AirForce.workers, countTacticsObs) * tacticStrengthObs;
+                airToken -= tokenUsed;
+                if (airToken>0)
+                    strengthFromAirMod += Math.min(s.AirForce.workers, countTacticsObs) * tacticStrengthObs;
 
                 if (strengthFromAirMod>0)
                     resultStrength.AddValue(strengthFromAirMod, "Air force ability");
