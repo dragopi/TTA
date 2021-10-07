@@ -89,7 +89,7 @@ export function StrenghtCalculation(s: Scene)
     FillCardsInScene(s);
 
     s.Infantry.forEach(c => {
-        for (let index = 0; index < c.yellowToken; index++) {
+        for (let index = 0; index < c.workers; index++) {
             infArray.push({
                 assignedCard: c,
                 obsolete : (Math.abs(c.card.age-s.Age)>1)
@@ -98,7 +98,7 @@ export function StrenghtCalculation(s: Scene)
     });
 
     s.Cavallery.forEach(c => {
-        for (let index = 0; index < c.yellowToken; index++) {
+        for (let index = 0; index < c.workers; index++) {
             cavArray.push({
                 assignedCard: c,
                 obsolete : (Math.abs(c.card.age-s.Age)>1)
@@ -107,7 +107,7 @@ export function StrenghtCalculation(s: Scene)
     });
 
     s.Artillery.forEach(c => {
-        for (let index = 0; index < c.yellowToken; index++) {
+        for (let index = 0; index < c.workers; index++) {
             artArray.push({
                 assignedCard: c,
                 obsolete : (Math.abs(c.card.age-s.Age)>1)
@@ -117,7 +117,7 @@ export function StrenghtCalculation(s: Scene)
 
     if (s.AirForce != null)
     {
-        for (let index = 0; index < s.AirForce.yellowToken; index++) {
+        for (let index = 0; index < s.AirForce.workers; index++) {
             airArray.push({
                 assignedCard: s.AirForce,
                 obsolete: false
@@ -133,7 +133,7 @@ export function StrenghtCalculation(s: Scene)
         {
             s.Productions.forEach(c => {
                 if (c.card.subtype=="Farm")
-                    for (let index = 0; index < c.yellowToken; index++) {
+                    for (let index = 0; index < c.workers; index++) {
                         infArray.push({
                             assignedCard: c,
                             // Each farm count as age "A" infantry -> A = 0
@@ -237,12 +237,12 @@ export function StrenghtCalculation(s: Scene)
     let strengthFromAirMod: number = 0;
     if (s.AirForce != null)
     {
-        let airToken = s.AirForce.yellowToken;
-        let tokenUsed = Math.min(s.AirForce.yellowToken, countTactics);
+        let airToken = s.AirForce.workers;
+        let tokenUsed = Math.min(s.AirForce.workers, countTactics);
         strengthFromAirMod += tokenUsed * s.Tactic.strength;
 
         airToken += tokenUsed;
-        strengthFromAirMod += Math.min(s.AirForce.yellowToken, countTacticsObs) * s.Tactic.strengthObs;
+        strengthFromAirMod += Math.min(s.AirForce.workers, countTacticsObs) * s.Tactic.strengthObs;
 
         if (strengthFromAirMod>0)
             resultStrength.AddValue(strengthFromAirMod, "Air force ability");
@@ -316,7 +316,7 @@ function ElabCard(s: Scene, c: BoardCard, r: TTASceneValues, evalToken: Boolean 
         {
             let nTk = 1
             if (evalToken)
-                nTk = c.yellowToken;
+                nTk = c.workers;
 
             if ((c.card.happy * nTk)>0)
                 r.happy.AddValue(c.card.happy*nTk, c.card.name);
@@ -412,7 +412,7 @@ export function TTASceneCalculation(s: Scene)
     /*
     let cultureTemp: number;
     s.Urbans.forEach(c => {
-        cultureTemp = c.card.culture * c.yellowToken;
+        cultureTemp = c.card.culture * c.workers;
         if (cultureTemp>0)
             result.culture.AddValue(cultureTemp, c.card.name);
     });

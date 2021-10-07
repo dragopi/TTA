@@ -52,7 +52,7 @@ export type TTATacticCard = {
 export interface BoardCard {
     code: string;
     card?: TTACard;
-    yellowToken: number;
+    workers: number;
 }
 
 export interface Scene {

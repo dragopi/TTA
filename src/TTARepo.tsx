@@ -23,7 +23,7 @@ export function GetBestFromArray(a: Array<BoardCard>, codeprefix: string)
     let result: BoardCard = null;
     let nAge: number = -1;
     a.forEach(c => {
-        if((c.code.startsWith(codeprefix))&&(c.yellowToken>0))
+        if((c.code.startsWith(codeprefix))&&(c.workers>0))
         {
             if(c.card.age>nAge)
             {
@@ -778,10 +778,10 @@ let CARD_WON05: TTACard = {
         let result = new SceneValuesModifier();
         let countToken: number = 0;
         s.Infantry.forEach(c => {
-            countToken += c.yellowToken            
+            countToken += c.workers            
         });
         s.Artillery.forEach(c => {
-            countToken += c.yellowToken
+            countToken += c.workers
         });
         result.strength += countToken;
         return result;
@@ -1436,15 +1436,15 @@ let CARD_LEA06: TTACard = {
     getSceneValuesModifier: (s:Scene) => {
         let result = new SceneValuesModifier();
         s.Infantry.forEach(c => {
-            result.strength += c.yellowToken;
+            result.strength += c.workers;
         });
         s.Cavallery.forEach(c => {
-            result.strength += c.yellowToken;
+            result.strength += c.workers;
         });
         s.Artillery.forEach(c => {
-            result.strength += c.yellowToken;
+            result.strength += c.workers;
         });
-        result.strength += s.AirForce.yellowToken;
+        result.strength += s.AirForce.workers;
         return result;
     }
 }
@@ -1470,7 +1470,7 @@ let CARD_LEA07: TTACard = {
         let result = new SceneValuesModifier();
         s.Urbans.forEach(c => {
             if (c.card.code.startsWith("UT"))
-                result.culture += (c.card.happy * c.yellowToken);
+                result.culture += (c.card.happy * c.workers);
         });
         s.Wonders.forEach(c => {
             result.culture += (c.card.happy);
@@ -1502,7 +1502,7 @@ let CARD_LEA08: TTACard = {
             result.strength += s.Governament.card.happy;
         s.Urbans.forEach(c => {
             if(c.card.code.startsWith("UTE"))
-                result.strength += (c.card.happy * c.yellowToken);
+                result.strength += (c.card.happy * c.workers);
         });
         return result;
     }
@@ -1661,19 +1661,19 @@ let CARD_LEA15: TTACard = {
     getSceneValuesModifier: (s:Scene) => {
         let result = new SceneValuesModifier();
         let countArmy: number = 0;
-        s.Infantry.forEach(c => {countArmy += c.yellowToken;});
+        s.Infantry.forEach(c => {countArmy += c.workers;});
         if(countArmy>0)
             result.strength += 2;
         countArmy = 0;
-        s.Cavallery.forEach(c => {countArmy += c.yellowToken;});
+        s.Cavallery.forEach(c => {countArmy += c.workers;});
         if(countArmy>0)
             result.strength += 2;
         countArmy = 0;
-        s.Artillery.forEach(c => {countArmy += c.yellowToken;});
+        s.Artillery.forEach(c => {countArmy += c.workers;});
         if(countArmy>0)
             result.strength += 2;
         countArmy = 0;
-        if (s.AirForce.yellowToken>0)
+        if (s.AirForce.workers>0)
             result.strength += 2;
         return result;
     }
@@ -1852,10 +1852,10 @@ let CARD_LEA24: TTACard = {
         let result = new SceneValuesModifier();
         
         s.Urbans.forEach(c => {
-            if ((c.card.code.startsWith("ULA"))&&(c.yellowToken>0))
+            if ((c.card.code.startsWith("ULA"))&&(c.workers>0))
             {
-                result.culture += (c.card.age * c.yellowToken);
-                result.science -= (c.yellowToken);
+                result.culture += (c.card.age * c.workers);
+                result.science -= (c.workers);
             }
         });
         return result;
@@ -2191,15 +2191,15 @@ let CARD_LEA41: TTACard = {
         let levelLibrary: number = 0;
         let levelArena: number = 0;
         s.Urbans.forEach(c => {
-            if ((c.card.code.startsWith("UTH"))&&(c.yellowToken>0))
+            if ((c.card.code.startsWith("UTH"))&&(c.workers>0))
                 levelTheater = Math.max(levelTheater, c.card.age);
-            else if ((c.card.code.startsWith("UTE"))&&(c.yellowToken>0))
+            else if ((c.card.code.startsWith("UTE"))&&(c.workers>0))
                 levelTheology = Math.max(levelTheology, c.card.age);
-            else if ((c.card.code.startsWith("ULI"))&&(c.yellowToken>0))
+            else if ((c.card.code.startsWith("ULI"))&&(c.workers>0))
                 levelLibrary = Math.max(levelLibrary, c.card.age);
-            else if ((c.card.code.startsWith("UAR"))&&(c.yellowToken>0))
+            else if ((c.card.code.startsWith("UAR"))&&(c.workers>0))
                 levelArena = Math.max(levelArena, c.card.age);
-                else if ((c.card.code.startsWith("ULA"))&&(c.yellowToken>0))
+                else if ((c.card.code.startsWith("ULA"))&&(c.workers>0))
                 levelLab= Math.max(levelLab, c.card.age);
         });
 
@@ -2230,9 +2230,9 @@ let CARD_LEA42: TTACard = {
         let result = new SceneValuesModifier();
         s.Urbans.forEach(c => {
             if (c.card.subtype == "Temple")
-                result.happy -= c.yellowToken;
+                result.happy -= c.workers;
             else if (c.card.code.startsWith("ULA")||c.card.code.startsWith("ULI"))
-                result.culture += c.yellowToken;
+                result.culture += c.workers;
         });
         return result;
     }
@@ -2259,12 +2259,12 @@ let CARD_LEA43: TTACard = {
         let result = new SceneValuesModifier();
         let levelMine: number = 0;
         s.Productions.forEach(c => {
-            if ((c.card.subtype == "Mine")&&(c.yellowToken>0))
+            if ((c.card.subtype == "Mine")&&(c.workers>0))
                 levelMine = Math.max(levelMine, (c.card.age+1));
         });
         let levelLab: number = 0;
         s.Urbans.forEach(c => {
-            if ((c.card.subtype == "Lab")&&(c.yellowToken>0))
+            if ((c.card.subtype == "Lab")&&(c.workers>0))
                 levelLab = Math.max(levelLab, (c.card.age+1));
         });
 
@@ -2295,18 +2295,18 @@ let CARD_LEA44: TTACard = {
     getSceneValuesModifier: (s:Scene) => {
         let result = new SceneValuesModifier();
         let levelTheater: number = 0;
-        let yellowToken: number = 0;
+        let workers: number = 0;
         s.Urbans.forEach(c => {
-            if ((c.card.subtype == "Theater")&&(c.yellowToken>0))
+            if ((c.card.subtype == "Theater")&&(c.workers>0))
                 if (c.card.age>levelTheater)
                 {
                     levelTheater = c.card.age;
-                    yellowToken = c.yellowToken;
+                    workers = c.workers;
                 }
         });
         
-        result.happy = yellowToken;
-        result.culture = yellowToken;
+        result.happy = workers;
+        result.culture = workers;
         return result;
     }
 }
@@ -2332,7 +2332,7 @@ let CARD_LEA45: TTACard = {
         let result = new SceneValuesModifier();
         let levelLab: number = 0;
         s.Urbans.forEach(c => {
-            if ((c.card.subtype == "Lab")&&(c.yellowToken>0))
+            if ((c.card.subtype == "Lab")&&(c.workers>0))
                 levelLab = Math.max(levelLab, (c.card.age)+1);
         });
         result.happy = levelLab;
@@ -2385,7 +2385,7 @@ let CARD_LEA47: TTACard = {
         let result = new SceneValuesModifier();
         s.Urbans.forEach(c => {
             if (c.card.subtype == "Arena")
-                result.culture += (c.yellowToken*2);
+                result.culture += (c.workers*2);
         });
         return result;
     }
@@ -2412,9 +2412,9 @@ let CARD_LEA48: TTACard = {
         let levelTheater: number = 0;
         let levelLibrary: number = 0;
         s.Urbans.forEach(c => {
-            if ((c.card.subtype == "Theater")&&(c.yellowToken>0))
+            if ((c.card.subtype == "Theater")&&(c.workers>0))
                 levelTheater = Math.max(levelTheater, c.card.age);
-            else if ((c.card.subtype == "Library")&&(c.yellowToken>0))
+            else if ((c.card.subtype == "Library")&&(c.workers>0))
                 levelLibrary = Math.max(levelLibrary, c.card.age);
         });
 
@@ -3638,7 +3638,7 @@ function MakeBoardCard(card: TTACard, values: [key: string])
   return {
     code: card.code,
     card: card,
-    yellowToken: Number((values[card.code+"_tk"])?values[card.code+"_tk"]:0)
+    workers: Number((values[card.code+"_tk"])?values[card.code+"_tk"]:0)
   }
 }
 
@@ -3668,13 +3668,13 @@ export function MakeScene(values: [key: string])
   if (values["leader"])
     s.Leader = {
       code: values["leader"],
-      yellowToken: 0
+      workers: 0
     };
 
   if (values["governament"])
     s.Leader = {
       code: values["governament"],
-      yellowToken: 0
+      workers: 0
     };
   
   if (values["tactic"])
@@ -3683,22 +3683,22 @@ export function MakeScene(values: [key: string])
   if (values["wonder0"])
     s.Wonders.push({
       code: values["wonder0"],
-      yellowToken: 0
+      workers: 0
     });
   if (values["wonder1"])
     s.Wonders.push({
       code: values["wonder1"],
-      yellowToken: 0
+      workers: 0
     });
   if (values["wonder2"])
     s.Wonders.push({
       code: values["wonder2"],
-      yellowToken: 0
+      workers: 0
     });
   if (values["wonder3"])
     s.Wonders.push({
       code: values["wonder3"],
-      yellowToken: 0
+      workers: 0
     });
 
   for (let key in values) {
@@ -3729,13 +3729,13 @@ export function MakeScene(values: [key: string])
           s.Special.push({
             code: card.code,
             card: card,
-            yellowToken: 1
+            workers: 1
           });
         else if (card.code.startsWith("TER"))
           s.Territories.push({
             code: card.code,
             card: card,
-            yellowToken: 1
+            workers: 1
           });
       }
     }
