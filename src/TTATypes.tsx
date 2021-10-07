@@ -17,7 +17,7 @@ export type TTACard = {
     text: string;
     pop?: number;
     box?: number;
-    getSceneValuesModifier?: (s: Scene) => (SceneValuesModifier);
+    getSceneValuesModifier?: (s: Scene, currentValues: TTASceneValues) => (SceneValuesModifier);
 };
 
 export class SceneValuesModifier {

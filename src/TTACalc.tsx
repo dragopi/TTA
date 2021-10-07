@@ -273,7 +273,7 @@ function ElabCard(s: Scene, c: BoardCard, r: TTASceneValues, evalToken: Boolean 
 
             if (c.card.getSceneValuesModifier)
             {
-                let sv: SceneValuesModifier = c.card.getSceneValuesModifier(s);
+                let sv: SceneValuesModifier = c.card.getSceneValuesModifier(s, r);
                 if (sv.culture!=0)
                     r.culture.AddValue(sv.culture, c.card.name + " (Mod)");
                 if (sv.food!=0)

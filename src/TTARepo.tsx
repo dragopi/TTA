@@ -1,4 +1,4 @@
-import { TTACard, TTATacticCard, SceneValuesModifier, Scene, BoardCard } from "./TTATypes";
+import { TTACard, TTATacticCard, SceneValuesModifier, Scene, BoardCard, TTASceneValues } from "./TTATypes";
 
 
 function GetBestLab(s: Scene)
@@ -2357,9 +2357,20 @@ let CARD_LEA46: TTACard = {
     ca: 1,
     ma: null,
     text: "You gain an extra civil action and produce 2 culture. If you have no discontent workers, taking this card costs 2 civil actions more. Ate the end of your turn, score 1 culture for each surplus happy face.",
-    getSceneValuesModifier: (s:Scene) => {
+    getSceneValuesModifier: (s:Scene, currentValues: TTASceneValues) => {
         let result = new SceneValuesModifier();
-        // TODO: Add Population value and hapy face sum
+        let happy = currentValues.happy.Value();
+        let faceNeed: number = 0;
+        if (s.yellowToken>16)
+            faceNeed = 1;
+        else if (s.yellowToken>12)
+            faceNeed = 2;
+        else
+            faceNeed = (6 - Math.ceil(s.yellowToken / 2)) + 2;
+        console.log("faceNeed: " + faceNeed);
+        console.log("happy: " + happy);
+        if ((happy-faceNeed)>0)
+            result.culture += (happy-faceNeed);
         return result;
     }
 }
