@@ -426,9 +426,11 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
 
     render() {
 
+        let defClass: string = "list-group-item list-group-item-action flex-column align-items-start";
+
         return (
             <div className="list-group">
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="#" className={(this.state.values.strength.Logs().length>0) ? defClass : defClass+" valNotChanged"}>
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Strength</h5>
                         <strong>{this.state.values.strength.Value()}</strong>
@@ -439,7 +441,7 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         })}
                     </small>
                 </a>
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="#" className={(this.state.values.culture.Logs().length>0) ? defClass : defClass+" valNotChanged"}>
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Culture</h5>
                         <strong>{this.state.values.culture.Value()}</strong>
@@ -450,7 +452,7 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         })}
                     </small>
                 </a>
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="#" className={(this.state.values.food.Logs().length>0) ? defClass : defClass+" valNotChanged"}>
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Food</h5>
                         <strong>{this.state.values.food.Value()}</strong>
@@ -461,9 +463,9 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         })}
                     </small>
                 </a>
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="#" className={(this.state.values.resource.Logs().length>0) ? defClass : defClass+" valNotChanged"}>
                     <div className="d-flex w-100 justify-content-between">
-                        <h5 className="mb-1">Rock</h5>
+                        <h5 className="mb-1">Resource</h5>
                         <strong>{this.state.values.resource.Value()}</strong>
                     </div>
                     <small className="text-muted">
@@ -472,7 +474,7 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         })}
                     </small>
                 </a>
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="#" className={(this.state.values.science.Logs().length>0) ? defClass : defClass+" valNotChanged"}>
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Science</h5>
                         <strong>{this.state.values.science.Value()}</strong>
@@ -483,7 +485,7 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         })}
                     </small>
                 </a>
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="#" className={(this.state.values.happy.Logs().length>0) ? defClass : defClass+" valNotChanged"}>
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Happy</h5>
                         <strong>{this.state.values.happy.Value()}</strong>
@@ -494,7 +496,7 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         })}
                     </small>
                 </a>
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="#" className={(this.state.values.ca.Logs().length>0) ? defClass : defClass+" valNotChanged"}>
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Civ action</h5>
                         <strong>{this.state.values.ca.Value()}</strong>
@@ -505,7 +507,7 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         })}
                     </small>
                 </a>
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="#" className={(this.state.values.ma.Logs().length>0) ? defClass : defClass+" valNotChanged"}>
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">Mil actions</h5>
                         <strong>{this.state.values.ma.Value()}</strong>

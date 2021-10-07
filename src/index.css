@@ -40,3 +40,12 @@ code {
   padding: .75rem;
   word-wrap: break-word;
 }
+
+.valNotChanged {
+  background-color: rgb(240, 240, 240);
+}
+.valNotChanged h5,
+.valNotChanged>div>strong {
+  font-weight: normal;
+  color: #acacac;
+}
