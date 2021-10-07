@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { CardItem, FilterAge, FilterLeaders, FilterTactics, FilterWonder, SceneResult, FilterGovernament } from './TTAUI';
+import { CardItem, FilterAge, FilterLeaders, FilterTactics, FilterWonder, SceneResult, FilterGovernament, FilterYellowTokens } from './TTAUI';
 import { Form } from "./Forms";
 import { TTASceneCalculation } from './TTACalc';
 import { MakeScene } from './TTARepo';
@@ -37,11 +37,11 @@ function App() {
               <FilterAge />
             </div>
             <div className="col">
+              <h6>General</h6>
               <FilterLeaders />
               <FilterGovernament />
-            </div>
-            <div className="col">
               <FilterTactics />
+              <FilterYellowTokens />
             </div>
             <div className="col ttawon">
               <FilterWonder />

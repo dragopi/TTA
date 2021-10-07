@@ -105,10 +105,6 @@ type FLeadersState = {
 export class FilterLeaders extends React.Component<FLeadersProps, FLeadersState> {
     state: FLeadersState = {};
 
-    cardClick = (): void => {
-        console.log('card click');
-    }
-
     render() {
 
         var leaders = TTARepoCards.Instance.GetLeaders();
@@ -120,11 +116,9 @@ export class FilterLeaders extends React.Component<FLeadersProps, FLeadersState>
         }
 
         return (
-            <div className="card">
-                <div className="card-header">
-                    Leader
-                </div>
-                <div className="card-body">
+            <div className="crdtkn">
+                <div className="crdtkn-header">
+                    <strong className="me-auto">Leader</strong>
                     <FormContext.Consumer>
                     {(context: IFormContext) => (
                         <select name="leader"                        
@@ -139,7 +133,7 @@ export class FilterLeaders extends React.Component<FLeadersProps, FLeadersState>
                     )}
                     </FormContext.Consumer>
                 </div>
-            </div>           
+            </div>          
         );
     }
 }
@@ -159,26 +153,24 @@ export class FilterTactics extends React.Component<FLeadersProps, FLeadersState>
         }
 
         return (
-            <div className="card">
-                <div className="card-header">
-                    Tactic
-                </div>
-                <div className="card-body">
+            <div className="crdtkn">
+                <div className="crdtkn-header">
+                    <strong className="me-auto">Tactic</strong>
                     <FormContext.Consumer>
-                    {(context: IFormContext) => (
-                        <select name="tactic"                        
-                            onChange={
-                            (e: React.FormEvent<HTMLSelectElement>) =>
-                            context.setValues({ ["tactic"]: e.currentTarget.value })
-                            }
-                        >
-                            <option value="">No one </option>
-                        {indents}
-                        </select>
-                    )}
-                    </FormContext.Consumer>
+                {(context: IFormContext) => (
+                    <select name="tactic"                        
+                        onChange={
+                        (e: React.FormEvent<HTMLSelectElement>) =>
+                        context.setValues({ ["tactic"]: e.currentTarget.value })
+                        }
+                    >
+                        <option value="">No one </option>
+                    {indents}
+                    </select>
+                )}
+                </FormContext.Consumer>
                 </div>
-            </div>           
+            </div>
         );
     }
 }
@@ -352,11 +344,9 @@ export class FilterGovernament extends React.Component<FLeadersProps, FLeadersSt
         }
 
         return (
-            <div className="card">
-                <div className="card-header">
-                    Governament
-                </div>
-                <div className="card-body">
+            <div className="crdtkn">
+                <div className="crdtkn-header">
+                    <strong className="me-auto">Governament</strong>
                     <FormContext.Consumer>
                     {(context: IFormContext) => (
                         <select name="leader"                        
@@ -369,6 +359,21 @@ export class FilterGovernament extends React.Component<FLeadersProps, FLeadersSt
                         </select>
                     )}
                     </FormContext.Consumer>
+                </div>
+            </div>    
+        );
+    }
+}
+
+export class FilterYellowTokens extends React.Component<FLeadersProps, FLeadersState> {
+    state: FLeadersState = {};
+
+    render() {
+
+        return (
+            <div className="crdtkn">
+                <div className="crdtkn-header">
+                    <strong className="me-auto">YellowTokens</strong>
                     <FormContext.Consumer>
                     {(context: IFormContext) => (
                         <select name="tokens"                        
@@ -402,7 +407,7 @@ export class FilterGovernament extends React.Component<FLeadersProps, FLeadersSt
                     )}
                     </FormContext.Consumer>
                 </div>
-            </div>           
+            </div>    
         );
     }
 }
