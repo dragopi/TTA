@@ -402,12 +402,31 @@ function ElabCards(s:Scene, r: TTASceneValues) {
     ElabCard(s, s.Leader, r, false);
 }
 
+function ElabFoodConsumption(s:Scene, r: TTASceneValues)
+{
+    if (s.yellowToken<5)
+        r.food.AddValue(-6, "FoodConsumption");
+    else if (s.yellowToken<9)
+        r.food.AddValue(-4, "FoodConsumption");
+    else if (s.yellowToken<13)
+        r.food.AddValue(-3, "FoodConsumption");
+    else if (s.yellowToken<17)
+        r.food.AddValue(-2, "FoodConsumption");
+    else
+        r.food.AddValue(-1, "FoodConsumption");
+}
+
 export function TTASceneCalculation(s: Scene)
 {
     let result: TTASceneValues = new TTASceneValues();
 
+    // Consumption
+    ElabFoodConsumption(s, result);
+
+    // Tactic
     result.strength = StrenghtCalculation(s);
 
+    // All cards
     ElabCards(s, result);
     /*
     let cultureTemp: number;

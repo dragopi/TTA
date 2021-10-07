@@ -57,6 +57,7 @@ export interface BoardCard {
 
 export interface Scene {
     Age: number;
+    yellowToken: number;
     Leader?: BoardCard;
     Governament?: BoardCard;
     Wonders?: Array<BoardCard>;

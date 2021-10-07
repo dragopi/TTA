@@ -3647,7 +3647,8 @@ export function MakeScene(values: [key: string])
   console.log("CalculateScene: START");
 
   let s: Scene = {
-    Age: 1,
+    Age: 0,
+    yellowToken: 20,
     Leader: null,
     Governament: null,
     Wonders: [],
@@ -3664,6 +3665,9 @@ export function MakeScene(values: [key: string])
 
   if (values["age"]!=null)
     s.Age = values["age"];
+
+  if (values["tokens"]!=null)
+    s.yellowToken = parseInt(values["tokens"]);
 
   if (values["leader"])
     s.Leader = {
