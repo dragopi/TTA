@@ -9,13 +9,19 @@ import { MakeScene } from './TTARepo';
 
 function App() {  
 
-  const sceneRef = useRef(null)
+  const sceneRef = useRef(null);
+  const formRef = useRef(null);
 
   function CalcScene(v: [key: string]) {
     console.log(v);
     let s = MakeScene(v);
     let o = TTASceneCalculation(s);
     sceneRef.current.setState({values: o});
+  }
+
+  function BtnCalcClick()
+  {
+    console.log(formRef.current.handleSubmit(null));
   }
 
 
@@ -25,7 +31,7 @@ function App() {
       <div className="row">
         <div className="col-9">
 
-      <Form 
+      <Form ref={formRef}
         action="http://localhost:4351/api/contactus"
         onSubmitData={CalcScene}
         render={() => (
@@ -183,7 +189,12 @@ function App() {
 
         </div>
         <div className="col-3">
-          <SceneResult ref={sceneRef} />  
+          <div className="sticky-top">
+            <div className="d-grid gap-2 mb-2">
+              <a href="#" className="btn btn-primary btn-block btn-lg" onClick={BtnCalcClick}>Calculate Board</a>
+            </div>
+            <SceneResult ref={sceneRef} />  
+          </div>
         </div>
       </div>
     </div>

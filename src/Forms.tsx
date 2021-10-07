@@ -81,7 +81,8 @@ export class Form extends React.Component<IFormProps, IFormState> {
   private handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
-    e.preventDefault();
+    if (e)
+      e.preventDefault();
 
     //console.log(this.state.values);
     //CalculateScene(this.state.values);
