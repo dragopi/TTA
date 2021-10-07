@@ -298,6 +298,8 @@ export class TTASceneValues {
     public strength: TTASceneValue;
     public happy: TTASceneValue;
     public science: TTASceneValue;
+    public ca: TTASceneValue;
+    public ma: TTASceneValue;
 
     constructor() {
         this.food = new TTASceneValue();
@@ -306,6 +308,8 @@ export class TTASceneValues {
         this.strength = new TTASceneValue();
         this.happy = new TTASceneValue();
         this.science = new TTASceneValue();
+        this.ca = new TTASceneValue();
+        this.ma = new TTASceneValue();
     }
 };
 
@@ -330,6 +334,10 @@ function ElabCard(s: Scene, c: BoardCard, r: TTASceneValues, evalToken: Boolean 
                 r.culture.AddValue(c.card.culture * nTk, c.card.name);
             if ((c.card.strength * nTk)>0)
                 r.strength.AddValue(c.card.strength * nTk, c.card.name);
+            if ((c.card.ca * nTk)>0)
+                r.ca.AddValue(c.card.ca * nTk, c.card.name);
+            if ((c.card.ma * nTk)>0)
+                r.ma.AddValue(c.card.ma * nTk, c.card.name);
 
             if (c.card.getSceneValuesModifier)
             {
@@ -346,7 +354,6 @@ function ElabCard(s: Scene, c: BoardCard, r: TTASceneValues, evalToken: Boolean 
                     r.happy.AddValue(sv.happy, c.card.name + " (Mod)");
                 if (sv.strength!=0)
                     r.strength.AddValue(sv.strength, c.card.name + " (Mod)");
-
             }
         }
 }

@@ -490,6 +490,28 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         })}
                     </small>
                 </a>
+                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1">Civ action</h5>
+                        <strong>{this.state.values.ca.Value()}</strong>
+                    </div>
+                    <small className="text-muted">
+                        {this.state.values.ca.Logs().map((item, i) => {      
+                            return (<span>{item.msg}<br /></span>) 
+                        })}
+                    </small>
+                </a>
+                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1">Mil actions</h5>
+                        <strong>{this.state.values.ma.Value()}</strong>
+                    </div>
+                    <small className="text-muted">
+                        {this.state.values.ma.Logs().map((item, i) => {      
+                            return (<span>{item.msg}<br /></span>) 
+                        })}
+                    </small>
+                </a>
             </div>    
         );
     }
