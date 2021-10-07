@@ -37,3 +37,37 @@
   }
 }
 
+.ttawon .crdtkn-header {
+  background-color: rgb(241, 222, 253);
+}
+
+.ttamin .crdtkn-header,
+.ttamca .crdtkn-header,
+.ttamar .crdtkn-header,
+.ttamai .crdtkn-header {
+  background-color: rgb(255, 223, 223);
+}
+
+.ttapfa .crdtkn-header,
+.ttapmi .crdtkn-header {
+  background-color: rgb(252, 235, 209);
+}
+
+.ttaula .crdtkn-header,
+.ttaute .crdtkn-header,
+.ttauar .crdtkn-header,
+.ttauth .crdtkn-header,
+.ttauli .crdtkn-header {
+  background-color: rgb(234, 238, 241);
+}
+
+.ttasmi .crdtkn-header,
+.ttasci .crdtkn-header,
+.ttascl .crdtkn-header,
+.ttasco .crdtkn-header {
+  background-color: rgb(223, 241, 255);
+}
+
+.ttater .crdtkn-header {
+  background-color: rgb(223, 255, 227);
+}

@@ -43,52 +43,52 @@ function App() {
             <div className="col">
               <FilterTactics />
             </div>
-            <div className="col">
+            <div className="col ttawon">
               <FilterWonder />
             </div>
         </div>
 
         <div className="row">
-            <div className="col">
+            <div className="col ttamin">
               <h6>Infantry</h6>
               <CardItem code="MIN01" />
               <CardItem code="MIN02" />
               <CardItem code="MIN03" />
               <CardItem code="MIN04" />
             </div>
-            <div className="col">
+            <div className="col ttamca">
               <h6>Cavallery</h6>
               <CardItem code="MCA01" />
               <CardItem code="MCA02" />
               <CardItem code="MCA03" />
             </div>
-            <div className="col">
+            <div className="col ttamar">
               <h6>Artillery</h6>
               <CardItem code="MAR01" />
               <CardItem code="MAR02" />
             </div>
-            <div className="col">
+            <div className="col ttamai">
               <h6>Air Force</h6>
               <CardItem code="MAI01" />
             </div>
         </div>
         
         <div className="row">
-            <div className="col">
+            <div className="col ttapfa">
               <h6>Farm</h6>
               <CardItem code="PFA01" />
               <CardItem code="PFA02" />
               <CardItem code="PFA03" />
               <CardItem code="PFA04" />
             </div>
-            <div className="col">
+            <div className="col ttapmi">
               <h6>Mine</h6>
               <CardItem code="PMI01" />
               <CardItem code="PMI02" />
               <CardItem code="PMI03" />
               <CardItem code="PMI04" />
             </div>
-            <div className="col">
+            <div className="col ttaula">
               <h6>Lab</h6>
               <CardItem code="ULA01" />
               <CardItem code="ULA02" />
@@ -98,25 +98,25 @@ function App() {
         </div>
         
         <div className="row">
-            <div className="col">
+            <div className="col ttaute">
               <h6>Theology</h6>
               <CardItem code="UTE01" />
               <CardItem code="UTE02" />
               <CardItem code="UTE03" />
             </div>
-            <div className="col">
+            <div className="col ttauar">
               <h6>Arena</h6>
               <CardItem code="UAR01" />
               <CardItem code="UAR02" />
               <CardItem code="UAR03" />
             </div>
-            <div className="col">
+            <div className="col ttauth">
               <h6>Theatre</h6>
               <CardItem code="UTH01" />
               <CardItem code="UTH02" />
               <CardItem code="UTH03" />
             </div>
-            <div className="col">
+            <div className="col ttauli">
               <h6>Press</h6>
               <CardItem code="ULI01" />
               <CardItem code="ULI02" />
@@ -125,25 +125,25 @@ function App() {
         </div>
 
         <div className="row">
-            <div className="col">
+            <div className="col ttasmi">
               <h6>Military</h6>
               <CardItem code="SMI01" needToken={false} />
               <CardItem code="SMI02" needToken={false} />
               <CardItem code="SMI03" needToken={false} />
             </div>
-            <div className="col">
+            <div className="col ttasci">
               <h6>Civil</h6>
               <CardItem code="SCI01" needToken={false} />
               <CardItem code="SCI02" needToken={false} />
               <CardItem code="SCI03" needToken={false} />
             </div>
-            <div className="col">
+            <div className="col ttascl">
               <h6>Colonization</h6>
               <CardItem code="SCL01" needToken={false} />
               <CardItem code="SCL02" needToken={false} />
               <CardItem code="SCL03" needToken={false} />
             </div>
-            <div className="col">
+            <div className="col ttasco">
               <h6>Construction</h6>
               <CardItem code="SCO01" needToken={false} />
               <CardItem code="SCO02" needToken={false} />
@@ -151,7 +151,7 @@ function App() {
             </div>
         </div>
         <h6>Territories</h6>
-        <div className="row">
+        <div className="row ttater">
             <div className="col">
               <CardItem code="TER01" needToken={false} />
               <CardItem code="TER02" needToken={false} />
