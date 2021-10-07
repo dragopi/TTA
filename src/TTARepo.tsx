@@ -3686,11 +3686,15 @@ export function MakeScene(values: [key: string])
       workers: 0
     };
 
+  let codeGov: string = "GOV01";
   if (values["governament"])
-    s.Governament = {
-      code: values["governament"],
+    codeGov = values["governament"];
+  
+  s.Governament = {
+      code: codeGov,
       workers: 0
-    };
+  };
+  
   
   if (values["tactic"])
     s.Tactic = TTARepoCards.Instance.GetTactic(values["tactic"]);
