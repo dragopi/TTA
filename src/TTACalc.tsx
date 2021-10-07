@@ -1,4 +1,4 @@
-import { BoardCard, Scene, SceneValuesModifier } from "./TTATypes";
+import { BoardCard, Scene, SceneValuesModifier, TTASceneValue, TTASceneValues } from "./TTATypes";
 import { TTARepoCards, GetBestFromArray } from "./TTARepo";
 
 export enum CardType {
@@ -27,10 +27,6 @@ function FillArray(a: Array<BoardCard>)
             if (c.card==null)
                 c.card = TTARepoCards.Instance.Get(c.code)
         });
-}
-
-interface LogItem {
-    msg: string;
 }
 
 function OrderByAge(a: Array<BoardCard>)
@@ -73,8 +69,6 @@ interface Token {
 export function StrenghtCalculation(s: Scene)
 {
     let resultStrength = new TTASceneValue();
-
-    let logs: LogItem[] = [];
 
     let countTactics: number = 0;
     let countTacticsObs: number = 0;
@@ -248,70 +242,8 @@ export function StrenghtCalculation(s: Scene)
             resultStrength.AddValue(strengthFromAirMod, "Air force ability");
     }
 
-    // TOTAL
-    let strengthTotal: number = 
-        strengthFromTactic + 
-        strengthFromAirMod;
-    
-    logs.forEach(l => {
-        console.log(l.msg)
-    });
-    console.log("TOTAL", strengthTotal);
-    console.log("----------------");
-
     return resultStrength;
 }
-
-export class TTASceneValue {
-    private value: number;
-    private logs: LogItem[];
-
-    constructor() {
-        this.Reset();
-    }
-
-    public Value() {
-        return this.value;
-    }
-
-    public AddValue(v: number, m: string = "")
-    {
-        this.value += v;
-        if (m!="")
-            this.logs.push({msg: m + ": " + v});
-    }
-
-    public Logs() {
-        return this.logs;
-    }
-
-    public Reset() {
-        this.value = 0;
-        this.logs = [];
-    }
-}
-
-export class TTASceneValues {
-    public food: TTASceneValue;
-    public resource: TTASceneValue;
-    public culture: TTASceneValue;
-    public strength: TTASceneValue;
-    public happy: TTASceneValue;
-    public science: TTASceneValue;
-    public ca: TTASceneValue;
-    public ma: TTASceneValue;
-
-    constructor() {
-        this.food = new TTASceneValue();
-        this.resource = new TTASceneValue();
-        this.culture = new TTASceneValue();
-        this.strength = new TTASceneValue();
-        this.happy = new TTASceneValue();
-        this.science = new TTASceneValue();
-        this.ca = new TTASceneValue();
-        this.ma = new TTASceneValue();
-    }
-};
 
 function ElabCard(s: Scene, c: BoardCard, r: TTASceneValues, evalToken: Boolean = true)
 {

@@ -1,7 +1,6 @@
 import React from "react";
 import {TTARepoCards} from "./TTARepo"
-import { TTACard } from "./TTATypes";
-import { TTASceneValues } from "./TTACalc";
+import { TTACard, TTASceneValues } from "./TTATypes";
 import {
     IErrors,
     IFormContext,

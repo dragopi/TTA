@@ -71,3 +71,58 @@ export interface Scene {
     Territories?: Array<BoardCard>;
     Tactic: TTATacticCard;
 }
+
+interface LogItem {
+    msg: string;
+}
+
+export class TTASceneValue {
+    private value: number;
+    private logs: LogItem[];
+
+    constructor() {
+        this.Reset();
+    }
+
+    public Value() {
+        return this.value;
+    }
+
+    public AddValue(v: number, m: string = "")
+    {
+        this.value += v;
+        if (m!="")
+            this.logs.push({msg: m + ": " + v});
+    }
+
+    public Logs() {
+        return this.logs;
+    }
+
+    public Reset() {
+        this.value = 0;
+        this.logs = [];
+    }
+}
+
+export class TTASceneValues {
+    public food: TTASceneValue;
+    public resource: TTASceneValue;
+    public culture: TTASceneValue;
+    public strength: TTASceneValue;
+    public happy: TTASceneValue;
+    public science: TTASceneValue;
+    public ca: TTASceneValue;
+    public ma: TTASceneValue;
+
+    constructor() {
+        this.food = new TTASceneValue();
+        this.resource = new TTASceneValue();
+        this.culture = new TTASceneValue();
+        this.strength = new TTASceneValue();
+        this.happy = new TTASceneValue();
+        this.science = new TTASceneValue();
+        this.ca = new TTASceneValue();
+        this.ma = new TTASceneValue();
+    }
+};
