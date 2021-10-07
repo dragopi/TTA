@@ -88,10 +88,10 @@ export class Form extends React.Component<IFormProps, IFormState> {
     //CalculateScene(this.state.values);
     this.props.onSubmitData(this.state.values);
 
-    if (this.validateForm()) {
-      const submitSuccess: boolean = await this.submitForm();
-      this.setState({ submitSuccess });
-    }
+    //if (this.validateForm()) {
+    //  const submitSuccess: boolean = await this.submitForm();
+    //  this.setState({ submitSuccess });
+    //}
   };
 
   /**
@@ -125,6 +125,7 @@ export class Form extends React.Component<IFormProps, IFormState> {
           
           {this.props.render()}
 
+          {false && (
           <div className="form-group">
             <button
               type="submit"
@@ -134,6 +135,8 @@ export class Form extends React.Component<IFormProps, IFormState> {
               Submit
             </button>
           </div>
+          )}
+          
           {submitSuccess && (
             <div className="alert alert-info" role="alert">
               The form was successfully submitted!
