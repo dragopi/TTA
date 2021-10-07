@@ -3676,7 +3676,7 @@ export function MakeScene(values: [key: string])
     };
 
   if (values["governament"])
-    s.Leader = {
+    s.Governament = {
       code: values["governament"],
       workers: 0
     };
