@@ -114,6 +114,7 @@ export class TTASceneValues {
     public science: TTASceneValue;
     public ca: TTASceneValue;
     public ma: TTASceneValue;
+    public yellowToken: number;
 
     constructor() {
         this.food = new TTASceneValue();
@@ -124,5 +125,6 @@ export class TTASceneValues {
         this.science = new TTASceneValue();
         this.ca = new TTASceneValue();
         this.ma = new TTASceneValue();
+        this.yellowToken = 0;
     }
 };

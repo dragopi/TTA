@@ -365,6 +365,86 @@ export class FilterGovernament extends React.Component<FLeadersProps, FLeadersSt
     }
 }
 
+
+function GetYellowTokenBar(n: number, h: number)
+{
+    let svg : string = "";
+    svg +=  '<svg viewBox="0 0 500 90" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><defs>';
+    svg +=  '<filter id="drop-shadow-filter-0" x="-500%" y="-500%" width="1000%" height="1000%" bx:preset="drop-shadow 1 0 0 4 0.5 rgba(0,0,0,0.3)">';
+    svg +=  '<feGaussianBlur in="SourceAlpha" stdDeviation="4"></feGaussianBlur><feOffset dx="0" dy="0"></feOffset><feComponentTransfer result="offsetblur">';
+    svg +=  '<feFuncA id="spread-ctrl" type="linear" slope="1"></feFuncA></feComponentTransfer><feFlood flood-color="rgba(0,0,0,0.3)"></feFlood>';
+    svg +=  '<feComposite in2="offsetblur" operator="in"></feComposite><feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>';
+    svg +=  '<linearGradient gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="10" y2="20" id="gradient-0" gradientTransform="matrix(0, -0.974845, 0.974845, 0, -0.047753, 19.917264)"><stop offset="0" style="stop-color: rgb(255, 242, 0);"></stop><stop offset="1" style="stop-color: rgb(255, 204, 0);"></stop></linearGradient>';
+    svg +=  '</defs><g><rect width="58" height="58" style="fill: rgb(216, 216, 216);"></rect>';
+    if (n>0)
+        svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="16" cy="16" r="10"></circle>';
+    if (n>1)
+        svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="16" cy="42" r="10"></circle>';
+    if (n>2)
+        svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="42" cy="16" r="10"></circle>';
+    if (n>3)
+        svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="42" cy="42" r="10"></circle>';
+  
+    svg +=  '</g><g transform="matrix(1, 0, 0, 1, 62, 0)"><rect width="58" height="58" style="fill: rgb(216, 216, 216);"></rect>';
+    if (n>4)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="16" cy="16" r="10"></circle>';
+    if (n>5)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="16" cy="42" r="10"></circle>';
+    if (n>6)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="42" cy="16" r="10"></circle>';
+    if (n>7)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="42" cy="42" r="10"></circle>';
+    
+    svg +=  '</g><g transform="matrix(1, 0, 0, 1, 124, 0)"><rect width="58" height="58" style="fill: rgb(216, 216, 216);"></rect>';
+    if (n>8)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="16" cy="16" r="10"></circle>';
+    if (n>9)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="16" cy="42" r="10"></circle>';
+    if (n>10)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="42" cy="16" r="10"></circle>';
+    if (n>11)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="42" cy="42" r="10"></circle>';
+    
+    svg +=  '</g><g transform="matrix(1, 0, 0, 1, 186, 0)"><rect width="58" height="58" style="fill: rgb(216, 216, 216);"></rect>';
+    if (n>12)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="16" cy="16" r="10"></circle>';
+    if (n>13)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="16" cy="42" r="10"></circle>';
+    if (n>14)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="42" cy="16" r="10"></circle>';
+    if (n>15)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="42" cy="42" r="10"></circle>';
+    
+    svg +=  '</g><g transform="matrix(1, 0, 0, 1,248, 0)"><rect width="58" height="58" style="fill: rgb(216, 216, 216);"></rect>';
+    if (n>16)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="16" cy="16" r="10"></circle>';
+    if (n>17)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="16" cy="42" r="10"></circle>';
+    if (n>18)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="42" cy="16" r="10"></circle>';
+    if (n>19)
+      svg +=  '<circle style="fill: rgb(255, 247, 0); filter: url(#drop-shadow-filter-0);" cx="42" cy="42" r="10"></circle>';
+    
+    svg +=  '</g>';
+    if (h>7) svg += '<g transform="matrix(1, 0, 0, 1, 6, 64)"><rect x="0" y="0" width="20" height="20" style="fill: url(#gradient-0); stroke: rgb(0, 0, 0);" rx="3" ry="3"></rect><ellipse style="" cx="6.5" cy="7" rx="1.22" ry="2.565"></ellipse><ellipse style="stroke-linecap: round;" cx="13.5" cy="7" rx="1.22" ry="2.565"></ellipse><path d="M 4 13 C 6 17, 14 17, 16 13" style="stroke: rgb(0, 0, 0); fill: transparent; stroke-linecap: round;"></path></g>';
+    if (h>6) svg += '<g transform="matrix(1, 0, 0, 1, 32, 64)"><rect x="0" y="0" width="20" height="20" style="stroke: rgb(0, 0, 0); fill: url(#gradient-0);" rx="3" ry="3"></rect><ellipse style="" cx="6.5" cy="7" rx="1.22" ry="2.565"></ellipse><ellipse style="stroke-linecap: round;" cx="13.5" cy="7" rx="1.22" ry="2.565"></ellipse><path d="M 4 13 C 6 17, 14 17, 16 13" style="stroke: rgb(0, 0, 0); fill: transparent; stroke-linecap: round;"></path></g>';
+    if (h>5) svg += '<g transform="matrix(1, 0, 0, 1, 68, 64)"><rect x="0" y="0" width="20" height="20" style="stroke: rgb(0, 0, 0); fill: url(#gradient-0);" rx="3" ry="3"></rect><ellipse style="" cx="6.5" cy="7" rx="1.22" ry="2.565"></ellipse><ellipse style="stroke-linecap: round;" cx="13.5" cy="7" rx="1.22" ry="2.565"></ellipse><path d="M 4 13 C 6 17, 14 17, 16 13" style="stroke: rgb(0, 0, 0); fill: transparent; stroke-linecap: round;"></path></g>';
+    if (h>4) svg += '<g transform="matrix(1, 0, 0, 1, 94, 64)"><rect x="0" y="0" width="20" height="20" style="stroke: rgb(0, 0, 0); fill: url(#gradient-0);" rx="3" ry="3"></rect><ellipse style="" cx="6.5" cy="7" rx="1.22" ry="2.565"></ellipse><ellipse style="stroke-linecap: round;" cx="13.5" cy="7" rx="1.22" ry="2.565"></ellipse><path d="M 4 13 C 6 17, 14 17, 16 13" style="stroke: rgb(0, 0, 0); fill: transparent; stroke-linecap: round;"></path></g>';
+    if (h>3) svg += '<g transform="matrix(1, 0, 0, 1, 130, 64)"><rect x="0" y="0" width="20" height="20" style="stroke: rgb(0, 0, 0); fill: url(#gradient-0);" rx="3" ry="3"></rect><ellipse style="" cx="6.5" cy="7" rx="1.22" ry="2.565"></ellipse><ellipse style="stroke-linecap: round;" cx="13.5" cy="7" rx="1.22" ry="2.565"></ellipse><path d="M 4 13 C 6 17, 14 17, 16 13" style="stroke: rgb(0, 0, 0); fill: transparent; stroke-linecap: round;"></path></g>';
+    if (h>2) svg += '<g transform="matrix(1, 0, 0, 1, 156, 64)"><rect x="0" y="0" width="20" height="20" style="stroke: rgb(0, 0, 0); fill: url(#gradient-0);" rx="3" ry="3"></rect><ellipse style="" cx="6.5" cy="7" rx="1.22" ry="2.565"></ellipse><ellipse style="stroke-linecap: round;" cx="13.5" cy="7" rx="1.22" ry="2.565"></ellipse><path d="M 4 13 C 6 17, 14 17, 16 13" style="stroke: rgb(0, 0, 0); fill: transparent; stroke-linecap: round;"></path></g>';
+    if (h>1) svg += '<g transform="matrix(1, 0, 0, 1, 205, 64)"><rect x="0" y="0" width="20" height="20" style="stroke: rgb(0, 0, 0); fill: url(#gradient-0);" rx="3" ry="3"></rect><ellipse style="" cx="6.5" cy="7" rx="1.22" ry="2.565"></ellipse><ellipse style="stroke-linecap: round;" cx="13.5" cy="7" rx="1.22" ry="2.565"></ellipse><path d="M 4 13 C 6 17, 14 17, 16 13" style="stroke: rgb(0, 0, 0); fill: transparent; stroke-linecap: round;"></path></g>';
+    if (h>0) svg += '<g transform="matrix(1, 0, 0, 1, 269, 64)"><rect x="0" y="0" width="20" height="20" style="stroke: rgb(0, 0, 0); fill: url(#gradient-0);" rx="3" ry="3"></rect><ellipse style="" cx="6.5" cy="7" rx="1.22" ry="2.565"></ellipse><ellipse style="stroke-linecap: round;" cx="13.5" cy="7" rx="1.22" ry="2.565"></ellipse><path d="M 4 13 C 6 17, 14 17, 16 13" style="stroke: rgb(0, 0, 0); fill: transparent; stroke-linecap: round;"></path></g>';
+    svg +=  '</svg>';
+    //return svg;
+    
+    return (
+        <div>
+        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`} />
+        </div>
+    );
+    
+}
+
 export class FilterYellowTokens extends React.Component<FLeadersProps, FLeadersState> {
     state: FLeadersState = {};
 
@@ -427,7 +507,7 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
     render() {
 
         let defClass: string = "list-group-item list-group-item-action flex-column align-items-start";
-
+        let imgSvg = GetYellowTokenBar(this.state.values.yellowToken,this.state.values.happy.Value());
         return (
             <div className="list-group">
                 <a href="#" className={(this.state.values.strength.Logs().length>0) ? defClass : defClass+" valNotChanged"}>
@@ -518,7 +598,8 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
                         })}
                     </small>
                 </a>
-            </div>    
+                {imgSvg}   
+            </div> 
         );
     }
 }

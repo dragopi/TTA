@@ -367,6 +367,8 @@ export function TTASceneCalculation(s: Scene)
 {
     let result: TTASceneValues = new TTASceneValues();
 
+    result.yellowToken = s.yellowToken;
+
     // Consumption
     ElabFoodConsumption(s, result);
 
