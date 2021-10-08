@@ -2359,7 +2359,7 @@ let CARD_LEA46: TTACard = {
     text: "You gain an extra civil action and produce 2 culture. If you have no discontent workers, taking this card costs 2 civil actions more. Ate the end of your turn, score 1 culture for each surplus happy face.",
     getSceneValuesModifier: (s:Scene, currentValues: TTASceneValues) => {
         let result = new SceneValuesModifier();
-        let happy = currentValues.happy.Value();
+        let happy = Math.min(currentValues.happy.Value(), 8);
         let faceNeed: number = 0;
         if (s.yellowToken>16)
             faceNeed = 1;
