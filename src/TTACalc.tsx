@@ -82,72 +82,74 @@ export function StrenghtCalculation(s: Scene)
 
     FillCardsInScene(s);
 
-    s.Infantry.forEach(c => {
-        for (let index = 0; index < c.workers; index++) {
-            infArray.push({
-                assignedCard: c,
-                obsolete : (Math.abs(c.card.age-s.Age)>1)
-            });
-        }
-    });
-
-    s.Cavallery.forEach(c => {
-        for (let index = 0; index < c.workers; index++) {
-            cavArray.push({
-                assignedCard: c,
-                obsolete : (Math.abs(c.card.age-s.Age)>1)
-            });
-        }
-    });
-
-    s.Artillery.forEach(c => {
-        for (let index = 0; index < c.workers; index++) {
-            artArray.push({
-                assignedCard: c,
-                obsolete : (Math.abs(c.card.age-s.Age)>1)
-            });
-        }
-    });
-
-    if (s.AirForce != null)
-    {
-        for (let index = 0; index < s.AirForce.workers; index++) {
-            airArray.push({
-                assignedCard: s.AirForce,
-                obsolete: false
-            });
-        }
-    }
-
-    let genghisMod: boolean = false;
-    let dietrichMod: boolean = false;
-    if (s.Leader != null)
-    {
-        if (s.Leader.code=="LEA33") // Zizka
-        {
-            s.Productions.forEach(c => {
-                if (c.card.subtype=="Farm")
-                    for (let index = 0; index < c.workers; index++) {
-                        infArray.push({
-                            assignedCard: c,
-                            // Each farm count as age "A" infantry -> A = 0
-                            obsolete : (Math.abs(0-s.Age)>1)
-                        });
-                    }
-            });
-        }
-        else if (s.Leader.code=="LEA10") // Genghis
-        {
-            genghisMod = true;
-        }
-        else if (s.Leader.code=="LEA44") // Dietrich
-        {
-            dietrichMod = true;
-        }
-    }
-
     if (s.Tactic!=null)
     {
+        let ageTactic: number = s.Tactic.age;
+        s.Infantry.forEach(c => {
+            for (let index = 0; index < c.workers; index++) {
+                infArray.push({
+                    assignedCard: c,
+                    obsolete : (Math.abs(c.card.age-ageTactic)>1)
+                });
+            }
+        });
+
+        s.Cavallery.forEach(c => {
+            for (let index = 0; index < c.workers; index++) {
+                cavArray.push({
+                    assignedCard: c,
+                    obsolete : (Math.abs(c.card.age-ageTactic)>1)
+                });
+            }
+        });
+
+        s.Artillery.forEach(c => {
+            for (let index = 0; index < c.workers; index++) {
+                artArray.push({
+                    assignedCard: c,
+                    obsolete : (Math.abs(c.card.age-ageTactic)>1)
+                });
+            }
+        });
+
+        if (s.AirForce != null)
+        {
+            for (let index = 0; index < s.AirForce.workers; index++) {
+                airArray.push({
+                    assignedCard: s.AirForce,
+                    obsolete: false
+                });
+            }
+        }
+
+        let genghisMod: boolean = false;
+        let dietrichMod: boolean = false;
+        if (s.Leader != null)
+        {
+            if (s.Leader.code=="LEA33") // Zizka
+            {
+                s.Productions.forEach(c => {
+                    if (c.card.subtype=="Farm")
+                        for (let index = 0; index < c.workers; index++) {
+                            infArray.push({
+                                assignedCard: c,
+                                // Each farm count as age "A" infantry -> A = 0
+                                obsolete : (Math.abs(0-ageTactic)>1)
+                            });
+                        }
+                });
+            }
+            else if (s.Leader.code=="LEA10") // Genghis
+            {
+                genghisMod = true;
+            }
+            else if (s.Leader.code=="LEA44") // Dietrich
+            {
+                dietrichMod = true;
+            }
+        }
+
+    
         let findTactic: boolean = false;
         let tacticStrength: number = s.Tactic.strength;
         let tacticStrengthObs: number = s.Tactic.strengthObs;
