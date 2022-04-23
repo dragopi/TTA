@@ -729,13 +729,13 @@ let CARD_WON03: TTACard = {
     rock_cost: 6,
     food: null,
     resource: null,
-    culture: 1,
-    strength: 1,
+    culture: 0,
+    strength: 2,
     happy: null,
     science: null,
     ca: null,
     ma: null,
-    text: "You have +1 bonus when colonizing a new territory"
+    text: "At the start of Age II and Age III, you draw 3 military cards"
 }
 
 let CARD_WON04: TTACard = {
@@ -2435,6 +2435,37 @@ let CARD_LEA48: TTACard = {
     }
 }
 
+let CARD_LEA49: TTACard = {
+    code: "LEA49",
+    type: "Leader",
+    subtype: "Leader",
+    name: "Bill Gates",
+    age: 3,
+    light_cost: null,
+    rock_cost: null,
+    food: null,
+    resource: null,
+    culture: null,
+    strength: null,
+    happy: null,
+    science: null,
+    ca: null,
+    ma: null,
+    text: "Each of your labs also produces rocks equal to its level. When Bill Gates leaves play or at the end of the game, score culture equal to this additional production.",
+    getSceneValuesModifier: (s:Scene) => {
+        let levelLab: number = 0;
+        s.Urbans.forEach(c => {
+            if ((c.card.subtype == "Lab")&&(c.workers>0))
+                levelLab = Math.max(levelLab, c.card.age);
+        });
+
+        let result = new SceneValuesModifier();
+        result.resource = levelLab+1;
+        return result;
+    }
+}
+
+
 let CARD_GOV01: TTACard = {
     code: "GOV01",
     type: "Govt",
@@ -2559,7 +2590,7 @@ let CARD_GOV07: TTACard = {
     rock_cost: null,
     food: null,
     resource: null,
-    culture: 2,
+    culture: 3,
     strength: null,
     happy: null,
     science: null,
@@ -3413,6 +3444,7 @@ export class TTARepoCards {
             ["LEA46", CARD_LEA46],
             ["LEA47", CARD_LEA47],
             ["LEA48", CARD_LEA48],
+            ["LEA49", CARD_LEA49],
             ["GOV01", CARD_GOV01],
             ["GOV02", CARD_GOV02],
             ["GOV03", CARD_GOV03],
@@ -3538,6 +3570,7 @@ export class TTARepoCards {
         leaders.push(this.internalRepo.get("LEA46"));
         leaders.push(this.internalRepo.get("LEA47"));
         leaders.push(this.internalRepo.get("LEA48"));
+        leaders.push(this.internalRepo.get("LEA49"));
         return leaders;
     }
 
