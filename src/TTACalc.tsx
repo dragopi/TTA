@@ -355,14 +355,16 @@ function ElabFoodConsumption(s:Scene, r: TTASceneValues)
 {
     if (s.yellowToken<5)
         r.food.AddValue(-6, "FoodConsumption");
-    else if (s.yellowToken<9)
+    else if (s.yellowToken<5)
         r.food.AddValue(-4, "FoodConsumption");
-    else if (s.yellowToken<13)
+    else if (s.yellowToken<9)
         r.food.AddValue(-3, "FoodConsumption");
-    else if (s.yellowToken<17)
+    else if (s.yellowToken<13)
         r.food.AddValue(-2, "FoodConsumption");
-    else
+    else if (s.yellowToken<17)
         r.food.AddValue(-1, "FoodConsumption");
+    else
+        r.food.AddValue(0, "FoodConsumption");
 }
 
 export function TTASceneCalculation(s: Scene)
