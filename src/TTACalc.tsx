@@ -353,7 +353,7 @@ function ElabCards(s:Scene, r: TTASceneValues) {
 
 function ElabFoodConsumption(s:Scene, r: TTASceneValues)
 {
-    if (s.yellowToken<5)
+    if (s.yellowToken<4)
         r.food.AddValue(-6, "FoodConsumption");
     else if (s.yellowToken<5)
         r.food.AddValue(-4, "FoodConsumption");
