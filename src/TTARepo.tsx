@@ -35,6 +35,23 @@ export function GetBestFromArray(a: Array<BoardCard>, codeprefix: string)
     return result;
 }
 
+export function GetBestFromRangeArray(a: Array<BoardCard>, codeprefix: string, minAge: number, maxAge: number)
+{
+    let result: BoardCard = null;
+    let nAge: number = -1;
+    a.forEach(c => {
+        if((c.code.startsWith(codeprefix))&&(c.workers>0)&&(c.card.age>=minAge)&&(c.card.age<=maxAge))
+        {
+            if(c.card.age>nAge)
+            {
+                result = c;
+                nAge = c.card.age;
+            }
+        }
+    });
+    return result;
+}
+
 let CARD_PFA01: TTACard = {
     code: "PFA01",
     type: "Production",
@@ -1102,10 +1119,10 @@ let CARD_WON21: TTACard = {
     text: "1 blue token. Your best Age A or Age I farm and your best Age A and Age I mine produce one extra blue token.",
     getSceneValuesModifier: (s:Scene) => {
         let result = new SceneValuesModifier();
-        let bestFarm = GetBestFromArray(s.Productions, "PFA");
+        let bestFarm = GetBestFromRangeArray(s.Productions, "PFA", 0, 1);
         if (bestFarm)
             result.food += (bestFarm.card.food);
-        let bestMine = GetBestFromArray(s.Productions, "PMI");
+        let bestMine = GetBestFromRangeArray(s.Productions, "PMI", 0 ,1);
         if (bestMine)
             result.resource += (bestMine.card.resource);
         return result;
