@@ -1,6 +1,7 @@
 import React from "react";
 import {TTARepoCards} from "./TTARepo"
-import { TTACard, TTASceneValues } from "./TTATypes";
+import { TTACard, TTASceneValues, TTAStrengthValue } from "./TTATypes";
+import { TacticSVG } from "./TTAUITactic";
 import {
     IErrors,
     IFormContext,
@@ -602,4 +603,54 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
             </div> 
         );
     }
+};
+
+type TTAStrengthValuesProps =  {
 }
+
+type TTAStrengthValuesState = {
+    values: TTAStrengthValue;
+}
+
+export class TacticResult extends React.Component<TTASceneValuesProps, TTASceneValuesState> {
+    state: TTASceneValuesState = {
+        values: new TTASceneValues()
+    };
+
+
+    Title() {
+        if (this.state.values.strength.tacticReport.TacticCard != null)
+            return (<h6>{this.state.values.strength.tacticReport.TacticCard.name}</h6>);
+        else
+            return (<h6></h6>);
+    };
+
+    TacticImage() {
+        if (this.state.values.strength.tacticReport.TacticCard != null)
+        {
+            let tacticSVG = new TacticSVG();
+            let svg = tacticSVG.GetImageSVG(this.state.values.strength.tacticReport.TacticCard, 40);
+            return (<div>
+                        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`} height="40" />
+                    </div>);
+        }
+        else
+            return (<div></div>);
+    }
+
+    Report() {
+        
+        let tacticSVG = new TacticSVG();
+        return tacticSVG.GetTableReport(this.state.values.strength.tacticReport);
+        
+    }
+
+    render() {
+        return(
+            <div>
+                {this.Title()}
+                {this.Report()}
+            </div>
+        );
+    }
+};
