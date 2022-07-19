@@ -1,4 +1,4 @@
-import { BoardCard, Scene, SceneValuesModifier, TTASceneValue, TTASceneValues } from "./TTATypes";
+import { BoardCard, Scene, SceneValuesModifier, TacticInfoReport, TacticReport, TTAStrengthValue, TTASceneValues } from "./TTATypes";
 import { TTARepoCards, GetBestFromArray } from "./TTARepo";
 
 export enum CardType {
@@ -68,7 +68,7 @@ interface Token {
 
 export function StrenghtCalculation(s: Scene)
 {
-    let resultStrength = new TTASceneValue();
+    let resultStrength = new TTAStrengthValue();
 
     let countTactics: number = 0;
     let countTacticsObs: number = 0;
@@ -84,6 +84,8 @@ export function StrenghtCalculation(s: Scene)
 
     if (s.Tactic!=null)
     {
+        resultStrength.tacticReport.TacticCard = s.Tactic;
+
         let ageTactic: number = s.Tactic.age;
         s.Infantry.forEach(c => {
             for (let index = 0; index < c.workers; index++) {
@@ -171,11 +173,15 @@ export function StrenghtCalculation(s: Scene)
             let nArt: number = 0;
             let isObsolete: boolean = false;
 
+            let tInfo = new TacticInfoReport();
+
             while ((nCav!=s.Tactic.ncav) && (cavArray.length>0))
             {
                 if (cavArray.pop().obsolete)
                     isObsolete = true;
                 nCav++;
+
+                tInfo.Cav.push('C');
             }
 
             if ((nCav!=s.Tactic.ncav) && (genghisMod))
@@ -186,6 +192,8 @@ export function StrenghtCalculation(s: Scene)
                         if (infArray.pop().obsolete)
                             isObsolete = true;
                         nCav++;
+
+                        tInfo.Cav.push('I');
                     }    
             }
 
@@ -194,6 +202,8 @@ export function StrenghtCalculation(s: Scene)
                 if (infArray.pop().obsolete)
                     isObsolete = true;
                 nInf++;
+
+                tInfo.Inf.push('I');
             }
             
             while ((nArt!=s.Tactic.nart) && (artArray.length>0))
@@ -201,17 +211,28 @@ export function StrenghtCalculation(s: Scene)
                 if (artArray.pop().obsolete)
                     isObsolete = true;
                 nArt++;
+
+                tInfo.Art.push('A');
             }
             
 
             if (dietrichMod)
             {
                 if ((nArt>0)&&(nArt<s.Tactic.nart))
+                {
                     nArt++;
+                    tInfo.Art.push('Dietrich');
+                }
                 else if ((nCav>0)&&(nCav<s.Tactic.ncav))
+                {
                     nCav++;
+                    tInfo.Cav.push('Dietrich');
+                }
                 else if ((nInf>0)&&(nInf<s.Tactic.ninf))
+                {
                     nInf++;
+                    tInfo.Inf.push('Dietrich');
+                }
             }
 
             findTactic = ((nInf == s.Tactic.ninf) && (nCav == s.Tactic.ncav) && (nArt == s.Tactic.nart))
@@ -219,10 +240,19 @@ export function StrenghtCalculation(s: Scene)
             if (findTactic)
             {
                 if (isObsolete)
+                {
                     countTacticsObs++;
+                    tInfo.strength = s.Tactic.strengthObs;
+                }
                 else
+                {
                     countTactics++;
+                    tInfo.strength = s.Tactic.strength;
+                }
             }
+
+            if (!tInfo.IsEmpty())
+                resultStrength.tacticReport.Items.push(tInfo);
 
         } while (findTactic);
 
@@ -248,8 +278,13 @@ export function StrenghtCalculation(s: Scene)
 
                 if (strengthFromAirMod>0)
                     resultStrength.AddValue(strengthFromAirMod, "Air force ability");
+
+                for(let i =0;i<Math.min(s.AirForce.workers, resultStrength.tacticReport.Items.length);i++)
+                    resultStrength.tacticReport.Items[i].AirMod = true;
             }
         }
+
+        console.log(resultStrength.tacticReport);
     }
 
     return resultStrength;
