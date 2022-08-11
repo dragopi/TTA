@@ -57,7 +57,7 @@ function App() {
 
 
 
-<ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+<ul className="nav nav-tabs mb-3" id="pills-tab" role="tablist">
   <li className="nav-item" role="presentation">
     <button className="nav-link active" id="pills-resources-tab" data-bs-toggle="pill" data-bs-target="#pills-resources" type="button" role="tab" aria-controls="pills-resources" aria-selected="true">Resources</button>
   </li>
