@@ -1,32 +1,32 @@
-import { BoardCard, Scene, SceneValuesModifier, TTASceneValue, TTASceneValues } from "./TTATypes";
+import { BoardCard, Scene, SceneValuesModifier, TacticInfoReport, TacticReport, TTAStrengthValue, TTASceneValues } from "./TTATypes";
 import { TTARepoCards, GetBestFromArray } from "./TTARepo";
 
 export enum CardType {
-    Leader,
-    Wonder,
-    Military,
-    ProductionBuilding,
-    UrbanBuilding,
-    Governament,
-    Special,
-    Tactic
+    Leader,
+    Wonder,
+    Military,
+    ProductionBuilding,
+    UrbanBuilding,
+    Governament,
+    Special,
+    Tactic
 }
 
 
 function FillCard(c: BoardCard)
 {
-    if (c!=null)
+    if (c!=null)
         if (c.card==null)
-            c.card = TTARepoCards.Instance.Get(c.code);
+            c.card = TTARepoCards.Instance.Get(c.code);
 }
 
 function FillArray(a: Array<BoardCard>)
 {
-    if (a!=null)
-        a.forEach(c => {
+    if (a!=null)
+        a.forEach(c => {
             if (c.card==null)
-                c.card = TTARepoCards.Instance.Get(c.code)
-        });
+                c.card = TTARepoCards.Instance.Get(c.code)
+        });
 }
 
 function OrderByAge(a: Array<BoardCard>)
@@ -62,65 +62,67 @@ function FillCardsInScene(s: Scene)
 }
 
 interface Token {
-        assignedCard: BoardCard;
-        obsolete: boolean;
+        assignedCard: BoardCard;
+        obsolete: boolean;
     }
 
 export function StrenghtCalculation(s: Scene)
 {
-    let resultStrength = new TTASceneValue();
+    let resultStrength = new TTAStrengthValue();
 
-    let countTactics: number = 0;
-    let countTacticsObs: number = 0;
+    let countTactics: number = 0;
+    let countTacticsObs: number = 0;
 
-    let strengthFromTactic: number = 0;
+    let strengthFromTactic: number = 0;
 
-    let infArray: Array<Token> = [];
-    let cavArray: Array<Token> = [];
-    let artArray: Array<Token> = [];
-    let airArray: Array<Token> = [];
+    let infArray: Array<Token> = [];
+    let cavArray: Array<Token> = [];
+    let artArray: Array<Token> = [];
+    let airArray: Array<Token> = [];
 
     FillCardsInScene(s);
 
     if (s.Tactic!=null)
     {
+        resultStrength.tacticReport.TacticCard = s.Tactic;
+
         let ageTactic: number = s.Tactic.age;
-        s.Infantry.forEach(c => {
-            for (let index = 0; index < c.workers; index++) {
-                infArray.push({
-                    assignedCard: c,
-                    obsolete : (Math.abs(c.card.age-ageTactic)>1)
-                });
-            }
-        });
+        s.Infantry.forEach(c => {
+            for (let index = 0; index < c.workers; index++) {
+                infArray.push({
+                    assignedCard: c,
+                obsolete : (Math.abs(c.card.age-ageTactic)>1)
+                });
+            }
+        });
 
-        s.Cavallery.forEach(c => {
-            for (let index = 0; index < c.workers; index++) {
-                cavArray.push({
-                    assignedCard: c,
-                    obsolete : (Math.abs(c.card.age-ageTactic)>1)
-                });
-            }
-        });
+        s.Cavallery.forEach(c => {
+            for (let index = 0; index < c.workers; index++) {
+                cavArray.push({
+                    assignedCard: c,
+                    obsolete : (Math.abs(c.card.age-ageTactic)>1)
+                });
+            }
+        });
 
-        s.Artillery.forEach(c => {
-            for (let index = 0; index < c.workers; index++) {
-                artArray.push({
-                    assignedCard: c,
-                    obsolete : (Math.abs(c.card.age-ageTactic)>1)
-                });
-            }
-        });
+        s.Artillery.forEach(c => {
+            for (let index = 0; index < c.workers; index++) {
+                artArray.push({
+                    assignedCard: c,
+                    obsolete : (Math.abs(c.card.age-ageTactic)>1)
+                });
+            }
+        });
 
-        if (s.AirForce != null)
-        {
-            for (let index = 0; index < s.AirForce.workers; index++) {
-                airArray.push({
-                    assignedCard: s.AirForce,
-                    obsolete: false
-                });
-            }
-        }
+        if (s.AirForce != null)
+        {
+            for (let index = 0; index < s.AirForce.workers; index++) {
+                airArray.push({
+                    assignedCard: s.AirForce,
+                    obsolete: false
+                });
+            }
+        }
 
         let genghisMod: boolean = false;
         let dietrichMod: boolean = false;
@@ -130,13 +132,13 @@ export function StrenghtCalculation(s: Scene)
             {
                 s.Productions.forEach(c => {
                     if (c.card.subtype=="Farm")
-                        for (let index = 0; index < c.workers; index++) {
-                            infArray.push({
-                                assignedCard: c,
+                        for (let index = 0; index < c.workers; index++) {
+                            infArray.push({
+                                assignedCard: c,
                                 // Each farm count as age "A" infantry -> A = 0
-                                obsolete : (Math.abs(0-ageTactic)>1)
-                            });
-                        }
+                                obsolete : (Math.abs(0-ageTactic)>1)
+                            });
+                        }
                 });
             }
             else if (s.Leader.code=="LEA10") // Genghis
@@ -150,7 +152,7 @@ export function StrenghtCalculation(s: Scene)
         }
 
     
-        let findTactic: boolean = false;
+        let findTactic: boolean = false;
         let tacticStrength: number = s.Tactic.strength;
         let tacticStrengthObs: number = s.Tactic.strengthObs;
 
@@ -164,70 +166,98 @@ export function StrenghtCalculation(s: Scene)
             tacticStrength += maxAge;
         }
 
-        do {
+        do {
 
-            let nInf: number = 0;
-            let nCav: number = 0;
-            let nArt: number = 0;
-            let isObsolete: boolean = false;
+            let nInf: number = 0;
+            let nCav: number = 0;
+            let nArt: number = 0;
+            let isObsolete: boolean = false;
+
+            let tInfo = new TacticInfoReport();
 
             while ((nCav!=s.Tactic.ncav) && (cavArray.length>0))
-            {
-                if (cavArray.pop().obsolete)
-                    isObsolete = true;
-                nCav++;
-            }
+            {
+                if (cavArray.pop().obsolete)
+                    isObsolete = true;
+                nCav++;
+
+                tInfo.Cav.push('C');
+            }
 
             if ((nCav!=s.Tactic.ncav) && (genghisMod))
             {
                 if ((s.Tactic.ncav-nCav-infArray.length) <= 0 )
                     while ((nCav!=s.Tactic.ncav) && (infArray.length>0))
-                    {
-                        if (infArray.pop().obsolete)
-                            isObsolete = true;
-                        nCav++;
-                    }    
+                    {
+                        if (infArray.pop().obsolete)
+                            isObsolete = true;
+                        nCav++;
+
+                        tInfo.Cav.push('I');
+                    }    
             }
 
-            while ((nInf!=s.Tactic.ninf) && (infArray.length>0))
-            {
-                if (infArray.pop().obsolete)
-                    isObsolete = true;
-                nInf++;
-            }
+            while ((nInf!=s.Tactic.ninf) && (infArray.length>0))
+            {
+                if (infArray.pop().obsolete)
+                    isObsolete = true;
+                nInf++;
+
+                tInfo.Inf.push('I');
+            }
             
-            while ((nArt!=s.Tactic.nart) && (artArray.length>0))
-            {
-                if (artArray.pop().obsolete)
-                    isObsolete = true;
-                nArt++;
-            }
+            while ((nArt!=s.Tactic.nart) && (artArray.length>0))
+            {
+                if (artArray.pop().obsolete)
+                    isObsolete = true;
+                nArt++;
+
+                tInfo.Art.push('A');
+            }
             
 
             if (dietrichMod)
             {
                 if ((nArt>0)&&(nArt<s.Tactic.nart))
+                {
                     nArt++;
+                    tInfo.Art.push('Dietrich');
+                }
                 else if ((nCav>0)&&(nCav<s.Tactic.ncav))
+                {
                     nCav++;
+                    tInfo.Cav.push('Dietrich');
+                }
                 else if ((nInf>0)&&(nInf<s.Tactic.ninf))
+                {
                     nInf++;
+                    tInfo.Inf.push('Dietrich');
+                }
             }
 
-            findTactic = ((nInf == s.Tactic.ninf) && (nCav == s.Tactic.ncav) && (nArt == s.Tactic.nart))
+            findTactic = ((nInf == s.Tactic.ninf) && (nCav == s.Tactic.ncav) && (nArt == s.Tactic.nart))
 
-            if (findTactic)
-            {
-                if (isObsolete)
-                    countTacticsObs++;
-                else
-                    countTactics++;
-            }
+            if (findTactic)
+            {
+                if (isObsolete)
+                {
+                    countTacticsObs++;
+                    tInfo.strength = s.Tactic.strengthObs;
+                }
+                else
+                {
+                    countTactics++;
+                    tInfo.strength = s.Tactic.strength;
+                }
+            }
 
-        } while (findTactic);
+            if (!tInfo.IsEmpty())
+                resultStrength.tacticReport.Items.push(tInfo);
+
+        } while (findTactic);
 
         if (s.Tactic.strengthObs>0)
-            strengthFromTactic = (countTactics * tacticStrength) + (countTacticsObs * tacticStrengthObs);
+            strengthFromTactic = (countTactics * tacticStrength) + (countTacticsObs * tacticStrengthObs);
         else
             strengthFromTactic = ((countTactics+countTacticsObs) * tacticStrength);    
 
@@ -236,23 +266,28 @@ export function StrenghtCalculation(s: Scene)
             resultStrength.AddValue(strengthFromTactic, "Tactics (Obs: " + countTacticsObs + " - Mod: " + countTactics + ")");
 
             let strengthFromAirMod: number = 0;
-            if (s.AirForce != null)
-            {
+            if (s.AirForce != null)
+            {
                 let airToken: number = s.AirForce.workers;
-                let tokenUsed = Math.min(airToken, countTactics);
-                strengthFromAirMod += tokenUsed * tacticStrength;
+                let tokenUsed = Math.min(airToken, countTactics);
+                strengthFromAirMod += tokenUsed * tacticStrength;
 
-                airToken -= tokenUsed;
+                airToken -= tokenUsed;
                 if (airToken>0)
-                    strengthFromAirMod += Math.min(s.AirForce.workers, countTacticsObs) * tacticStrengthObs;
+                    strengthFromAirMod += Math.min(s.AirForce.workers, countTacticsObs) * tacticStrengthObs;
 
                 if (strengthFromAirMod>0)
                     resultStrength.AddValue(strengthFromAirMod, "Air force ability");
-            }
+
+                for(let i =0;i<Math.min(s.AirForce.workers, resultStrength.tacticReport.Items.length);i++)
+                    resultStrength.tacticReport.Items[i].AirMod = true;
+            }
         }
+
+        console.log(resultStrength.tacticReport);
     }
 
-    return resultStrength;
+    return resultStrength;
 }
 
 function ElabCard(s: Scene, c: BoardCard, r: TTASceneValues, evalToken: Boolean = true)

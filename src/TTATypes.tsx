@@ -105,11 +105,57 @@ export class TTASceneValue {
     }
 }
 
+export class TacticInfoReport {
+    public Art: string[];
+    public Cav: string[];
+    public Inf: string[];
+    public strength: number;
+    public AirMod: boolean;
+    public Log: string;
+
+    constructor() {
+        this.Cav = [];
+        this.Art = [];
+        this.Inf = [];
+        this.strength = 0;
+        this.AirMod = false;
+        this.Log = '';
+    }
+
+    public IsEmpty() 
+    {
+        return ((this.Cav.length == 0) && (this.Art.length == 0) && (this.Art.length == 0));
+    }
+};
+
+export class TacticReport {
+    public Items: TacticInfoReport[];
+    public TacticCard: TTATacticCard;
+    constructor() {
+        this.Items = [];
+        this.TacticCard = null;
+    }
+};
+
+export class TTAStrengthValue extends TTASceneValue {
+    public tacticReport: TacticReport;
+    
+    constructor() {
+        super();
+        this.tacticReport = new TacticReport();
+    }    
+
+    public Reset() {
+        super.Reset();
+        this.tacticReport = new TacticReport();
+    }
+};
+
 export class TTASceneValues {
     public food: TTASceneValue;
     public resource: TTASceneValue;
     public culture: TTASceneValue;
-    public strength: TTASceneValue;
+    public strength: TTAStrengthValue;
     public happy: TTASceneValue;
     public science: TTASceneValue;
     public ca: TTASceneValue;
@@ -120,7 +166,7 @@ export class TTASceneValues {
         this.food = new TTASceneValue();
         this.resource = new TTASceneValue();
         this.culture = new TTASceneValue();
-        this.strength = new TTASceneValue();
+        this.strength = new TTAStrengthValue();
         this.happy = new TTASceneValue();
         this.science = new TTASceneValue();
         this.ca = new TTASceneValue();
