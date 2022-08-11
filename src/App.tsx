@@ -39,7 +39,8 @@ function App() {
         render={() => (
           <React.Fragment>
 
-        <div className="row">
+
+<div className="row">
             <div className="col">
               <h6>Age</h6>
               <FilterAge />
@@ -51,37 +52,26 @@ function App() {
               <FilterTactics />
               <FilterYellowTokens />
             </div>
-            <div className="col ttawon">
-              <FilterWonder />
-            </div>
+            
         </div>
 
-        <div className="row">
-            <div className="col ttamin">
-              <h6>Infantry</h6>
-              <CardItem code="MIN01" />
-              <CardItem code="MIN02" />
-              <CardItem code="MIN03" />
-              <CardItem code="MIN04" />
-            </div>
-            <div className="col ttamca">
-              <h6>Cavallery</h6>
-              <CardItem code="MCA01" />
-              <CardItem code="MCA02" />
-              <CardItem code="MCA03" />
-            </div>
-            <div className="col ttamar">
-              <h6>Artillery</h6>
-              <CardItem code="MAR01" />
-              <CardItem code="MAR02" />
-            </div>
-            <div className="col ttamai">
-              <h6>Air Force</h6>
-              <CardItem code="MAI01" />
-            </div>
-        </div>
-        
-        <div className="row">
+
+
+<ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li className="nav-item" role="presentation">
+    <button className="nav-link active" id="pills-resources-tab" data-bs-toggle="pill" data-bs-target="#pills-resources" type="button" role="tab" aria-controls="pills-resources" aria-selected="true">Resources</button>
+  </li>
+  <li className="nav-item" role="presentation">
+    <button className="nav-link" id="pills-strength-tab" data-bs-toggle="pill" data-bs-target="#pills-strength" type="button" role="tab" aria-controls="pills-strength" aria-selected="false">Strength</button>
+  </li>
+  <li className="nav-item" role="presentation">
+    <button className="nav-link" id="pills-wonders-tab" data-bs-toggle="pill" data-bs-target="#pills-wonders" type="button" role="tab" aria-controls="pills-wonders" aria-selected="false">Wonders</button>
+  </li>
+</ul>
+<div className="tab-content" id="pills-tabContent">
+  <div className="tab-pane fade show active" id="pills-resources" role="tabpanel" aria-labelledby="pills-resources-tab" >
+
+  <div className="row">
             <div className="col ttapfa">
               <h6>Farm</h6>
               <CardItem code="PFA01" />
@@ -182,7 +172,89 @@ function App() {
               <CardItem code="TER13" needToken={false} />
             </div>
         </div>
-          
+       
+
+  </div>
+  <div className="tab-pane fade" id="pills-strength" role="tabpanel" aria-labelledby="pills-strength-tab" >
+
+        <div className="row">
+            <div className="col ttamin">
+              <h6>Infantry</h6>
+              <CardItem code="MIN01" />
+              <CardItem code="MIN02" />
+              <CardItem code="MIN03" />
+              <CardItem code="MIN04" />
+            </div>
+            <div className="col ttamca">
+              <h6>Cavallery</h6>
+              <CardItem code="MCA01" />
+              <CardItem code="MCA02" />
+              <CardItem code="MCA03" />
+            </div>
+            <div className="col ttamar">
+              <h6>Artillery</h6>
+              <CardItem code="MAR01" />
+              <CardItem code="MAR02" />
+            </div>
+            <div className="col ttamai">
+              <h6>Air Force</h6>
+              <CardItem code="MAI01" />
+            </div>
+        </div>
+
+  </div>
+  <div className="tab-pane fade" id="pills-wonders" role="tabpanel" aria-labelledby="pills-wonders-tab" >
+
+          <div className="row">
+            <div className="col ttawon">
+              <h6>Age 0</h6>
+              <CardItem code="WON01" needToken={false} />
+              <CardItem code="WON02" needToken={false} />
+              <CardItem code="WON03" needToken={false} />
+              <CardItem code="WON04" needToken={false} />
+              <CardItem code="WON17" needToken={false} />
+              <CardItem code="WON18" needToken={false} />
+              <CardItem code="WON19" needToken={false} />
+              <CardItem code="WON20" needToken={false} />
+            </div>
+            <div className="col ttawon">
+              <h6>Age I</h6>
+              <CardItem code="WON05" needToken={false} />
+              <CardItem code="WON06" needToken={false} />
+              <CardItem code="WON07" needToken={false} />
+              <CardItem code="WON08" needToken={false} />
+              <CardItem code="WON21" needToken={false} />
+              <CardItem code="WON22" needToken={false} />
+              <CardItem code="WON23" needToken={false} />
+              <CardItem code="WON24" needToken={false} />
+            </div>
+            <div className="col ttawon">
+              <h6>Age II</h6>
+              <CardItem code="WON09" needToken={false} />
+              <CardItem code="WON10" needToken={false} />
+              <CardItem code="WON11" needToken={false} />
+              <CardItem code="WON12" needToken={false} />
+              <CardItem code="WON25" needToken={false} />
+              <CardItem code="WON26" needToken={false} />
+              <CardItem code="WON27" needToken={false} />
+              <CardItem code="WON28" needToken={false} />
+            </div>
+            <div className="col ttawon">
+              <h6>Age III</h6>
+              <CardItem code="WON13" needToken={false} />
+              <CardItem code="WON14" needToken={false} />
+              <CardItem code="WON15" needToken={false} />
+              <CardItem code="WON16" needToken={false} />
+              <CardItem code="WON29" needToken={false} />
+              <CardItem code="WON30" needToken={false} />
+              <CardItem code="WON31" needToken={false} />
+              <CardItem code="WON32" needToken={false} />
+            </div>
+          </div>
+
+  </div>
+</div>
+           
 
           </React.Fragment>
         )}
