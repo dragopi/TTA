@@ -1,4 +1,6 @@
 import React, { useRef } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import logo from './logo.svg';
 import './App.css';
 import { CardItem, FilterAge, FilterLeaders, FilterTactics, FilterWonder, SceneResult, FilterGovernament, FilterYellowTokens } from './TTAUI';
