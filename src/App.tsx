@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import logo from './logo.svg';
 import './App.css';
-import { CardItem, FilterAge, FilterLeaders, FilterTactics, FilterWonder, SceneResult, FilterGovernament, FilterYellowTokens } from './TTAUI';
+import { CardItem, CardItemToken, FilterAge, FilterLeaders, FilterTactics, FilterWonder, SceneResult, FilterGovernament, FilterYellowTokens, TacticResult } from './TTAUI';
 import { Form } from "./Forms";
 import { TTASceneCalculation } from './TTACalc';
 import { MakeScene } from './TTARepo';
@@ -12,6 +13,7 @@ import { MakeScene } from './TTARepo';
 function App() {  
 
   const sceneRef = useRef(null);
+  const tacticRef = useRef(null);
   const formRef = useRef(null);
 
   function CalcScene(v: [key: string]) {
@@ -19,6 +21,7 @@ function App() {
     let s = MakeScene(v);
     let o = TTASceneCalculation(s);
     sceneRef.current.setState({values: o});
+    //tacticRef.current.setState({values: o});
   }
 
   function BtnCalcClick()
@@ -74,51 +77,51 @@ function App() {
   <div className="row">
             <div className="col ttapfa">
               <h6>Farm</h6>
-              <CardItem code="PFA01" />
-              <CardItem code="PFA02" />
-              <CardItem code="PFA03" />
-              <CardItem code="PFA04" />
+              <CardItemToken code="PFA01" />
+              <CardItemToken code="PFA02" />
+              <CardItemToken code="PFA03" />
+              <CardItemToken code="PFA04" />
             </div>
             <div className="col ttapmi">
               <h6>Mine</h6>
-              <CardItem code="PMI01" />
-              <CardItem code="PMI02" />
-              <CardItem code="PMI03" />
-              <CardItem code="PMI04" />
+              <CardItemToken code="PMI01" />
+              <CardItemToken code="PMI02" />
+              <CardItemToken code="PMI03" />
+              <CardItemToken code="PMI04" />
             </div>
             <div className="col ttaula">
               <h6>Lab</h6>
-              <CardItem code="ULA01" />
-              <CardItem code="ULA02" />
-              <CardItem code="ULA03" />
-              <CardItem code="ULA04" />
+              <CardItemToken code="ULA01" />
+              <CardItemToken code="ULA02" />
+              <CardItemToken code="ULA03" />
+              <CardItemToken code="ULA04" />
             </div>
         </div>
         
         <div className="row">
             <div className="col ttaute">
               <h6>Theology</h6>
-              <CardItem code="UTE01" />
-              <CardItem code="UTE02" />
-              <CardItem code="UTE03" />
+              <CardItemToken code="UTE01" />
+              <CardItemToken code="UTE02" />
+              <CardItemToken code="UTE03" />
             </div>
             <div className="col ttauar">
               <h6>Arena</h6>
-              <CardItem code="UAR01" />
-              <CardItem code="UAR02" />
-              <CardItem code="UAR03" />
+              <CardItemToken code="UAR01" />
+              <CardItemToken code="UAR02" />
+              <CardItemToken code="UAR03" />
             </div>
             <div className="col ttauth">
               <h6>Theatre</h6>
-              <CardItem code="UTH01" />
-              <CardItem code="UTH02" />
-              <CardItem code="UTH03" />
+              <CardItemToken code="UTH01" />
+              <CardItemToken code="UTH02" />
+              <CardItemToken code="UTH03" />
             </div>
             <div className="col ttauli">
               <h6>Press</h6>
-              <CardItem code="ULI01" />
-              <CardItem code="ULI02" />
-              <CardItem code="ULI03" />
+              <CardItemToken code="ULI01" />
+              <CardItemToken code="ULI02" />
+              <CardItemToken code="ULI03" />
             </div>
         </div>
 
@@ -180,25 +183,25 @@ function App() {
         <div className="row">
             <div className="col ttamin">
               <h6>Infantry</h6>
-              <CardItem code="MIN01" />
-              <CardItem code="MIN02" />
-              <CardItem code="MIN03" />
-              <CardItem code="MIN04" />
+              <CardItemToken code="MIN01" />
+              <CardItemToken code="MIN02" />
+              <CardItemToken code="MIN03" />
+              <CardItemToken code="MIN04" />
             </div>
             <div className="col ttamca">
               <h6>Cavallery</h6>
-              <CardItem code="MCA01" />
-              <CardItem code="MCA02" />
-              <CardItem code="MCA03" />
+              <CardItemToken code="MCA01" />
+              <CardItemToken code="MCA02" />
+              <CardItemToken code="MCA03" />
             </div>
             <div className="col ttamar">
               <h6>Artillery</h6>
-              <CardItem code="MAR01" />
-              <CardItem code="MAR02" />
+              <CardItemToken code="MAR01" />
+              <CardItemToken code="MAR02" />
             </div>
             <div className="col ttamai">
               <h6>Air Force</h6>
-              <CardItem code="MAI01" />
+              <CardItemToken code="MAI01" />
             </div>
         </div>
 
@@ -267,7 +270,7 @@ function App() {
             <div className="d-grid gap-2 mb-2">
               <a href="#" className="btn btn-primary btn-block btn-lg" onClick={BtnCalcClick}>Calculate Board</a>
             </div>
-            <SceneResult ref={sceneRef} />  
+            <SceneResult ref={sceneRef} /> 
           </div>
         </div>
       </div>

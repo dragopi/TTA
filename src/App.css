@@ -71,3 +71,11 @@
 .ttater .crdtkn-header {
   background-color: rgb(223, 255, 227);
 }
+
+.tknval {
+  margin: 0 12px 0 8px;
+}
+
+.onboard {
+  font-weight: bold;
+}
