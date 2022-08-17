@@ -162,6 +162,7 @@ export class TTASceneValues {
     public ma: TTASceneValue;
     public yellowToken: number;
     public valid: boolean;
+    private logs: LogItem[];
 
     constructor() {
         this.food = new TTASceneValue();
@@ -174,5 +175,16 @@ export class TTASceneValues {
         this.ma = new TTASceneValue();
         this.yellowToken = 0;
         this.valid = true;
+        this.logs = [];
+    }
+
+    public AddLog(m: string)
+    {
+        if (m!="")
+            this.logs.push({msg: m});
+    }
+
+    public Logs() {
+        return this.logs;
     }
 };

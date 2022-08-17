@@ -437,13 +437,15 @@ function IsValidCardForAge(card:TTACard, age: number)
         return true;
 }
 
-function CheckConsistencyAge(s:Scene) {
-    let consinstency = true;
+function CheckConsistencyAge(s:Scene, r: TTASceneValues) {
+    
     GetBoardCardArray(s).forEach(c => {
-        if (!(IsValidCardForAge(c.card, s.Age)))
-            consinstency = false;    
+        if (!(IsValidCardForAge(c.card, s.Age))) {
+            r.valid = false;
+            r.AddLog(`Inconsistency error: the "${c.card.name}" card cannot be drawn and played in era ${s.Age}.`);
+        }
     });        
-    return consinstency;
+    
 }   
 
 export function TTASceneCalculation(s: Scene)
@@ -462,7 +464,7 @@ export function TTASceneCalculation(s: Scene)
     ElabCards(s, result);
 
     // Check consinstency
-    result.valid = CheckConsistencyAge(s);
+    CheckConsistencyAge(s, result);
     /*
     let cultureTemp: number;
     s.Urbans.forEach(c => {
