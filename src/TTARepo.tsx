@@ -1746,7 +1746,15 @@ let CARD_LEA17: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "It costs you 1 science less to discover theater techs; theaters cost 1 less resource to build and produce 1 extra culture"
+    text: "It costs you 1 science less to discover theater techs; theaters cost 1 less resource to build and produce 1 extra culture",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        s.Urbans.forEach(c => {
+            if (c.code.startsWith("UTH")&&(c.workers>0))
+                result.culture += c.workers;
+        });
+        return result;
+    }
 }
 
 let CARD_LEA18: TTACard = {
