@@ -50,26 +50,26 @@ export type TTATacticCard = {
     nair: number
 }
 export interface BoardCard {
-    code: string;
-    card?: TTACard;
-    workers: number;
+    code: string;
+    card?: TTACard;
+    workers: number;
 }
 
 export interface Scene {
-    Age: number;
+    Age: number;
     yellowToken: number;
-    Leader?: BoardCard;
-    Governament?: BoardCard;
-    Wonders?: Array<BoardCard>;
-    Infantry: Array<BoardCard>;
-    Cavallery: Array<BoardCard>;
-    Artillery: Array<BoardCard>;
-    AirForce: BoardCard;
-    Special?: Array<BoardCard>;
-    Productions?: Array<BoardCard>;
-    Urbans?: Array<BoardCard>;
+    Leader?: BoardCard;
+    Governament?: BoardCard;
+    Wonders?: Array<BoardCard>;
+    Infantry: Array<BoardCard>;
+    Cavallery: Array<BoardCard>;
+    Artillery: Array<BoardCard>;
+    AirForce: BoardCard;
+    Special?: Array<BoardCard>;
+    Productions?: Array<BoardCard>;
+    Urbans?: Array<BoardCard>;
     Territories?: Array<BoardCard>;
-    Tactic: TTATacticCard;
+    Tactic: TTATacticCard;
 }
 
 interface LogItem {
