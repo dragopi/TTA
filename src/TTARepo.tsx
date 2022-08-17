@@ -2471,13 +2471,15 @@ let CARD_LEA49: TTACard = {
     text: "Each of your labs also produces rocks equal to its level. When Bill Gates leaves play or at the end of the game, score culture equal to this additional production.",
     getSceneValuesModifier: (s:Scene) => {
         let levelLab: number = 0;
-        s.Urbans.forEach(c => {
-            if ((c.card.subtype == "Lab")&&(c.workers>0))
-                levelLab = Math.max(levelLab, c.card.age);
-        });
 
         let result = new SceneValuesModifier();
-        result.resource = levelLab+1;
+        s.Urbans.forEach(c => {
+            if ((c.card.subtype == "Lab")&&(c.workers>0))
+                result.resource = result.resource + ( c.card.age * c.workers );
+        });
+
+        
+        
         return result;
     }
 }
