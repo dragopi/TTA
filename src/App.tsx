@@ -8,6 +8,8 @@ import { CardItem, CardItemToken, FilterAge, FilterLeaders, FilterTactics, Filte
 import { Form } from "./Forms";
 import { TTASceneCalculation } from './TTACalc';
 import { MakeScene } from './TTARepo';
+import { TTASceneValues } from './TTATypes';
+import ReactDOM from 'react-dom';
 
 
 function App() {  
@@ -19,9 +21,25 @@ function App() {
   function CalcScene(v: [key: string]) {
     console.log(v);
     let s = MakeScene(v);
-    let o = TTASceneCalculation(s);
-    sceneRef.current.setState({values: o});
-    //tacticRef.current.setState({values: o});
+    let sceneResult = TTASceneCalculation(s);
+    sceneRef.current.setState({values: sceneResult});
+    //tacticRef.current.setState({values: o})
+    let resultConsoleElements = PrintConsoleLog(sceneResult);
+    ReactDOM.render(resultConsoleElements, document.getElementById('sceneConsole'));
+    ;
+  }
+
+  function PrintConsoleLog(r: TTASceneValues) {
+    if (r != null)
+      return (
+        <div>
+          {r.Logs().map((item, i) => {      
+            return (<span>{item.msg}<br /></span>) 
+          })}
+        </div>
+      );
+    else
+      return <div>No logs</div>;
   }
 
   function BtnCalcClick()
@@ -69,6 +87,9 @@ function App() {
   </li>
   <li className="nav-item" role="presentation">
     <button className="nav-link" id="pills-wonders-tab" data-bs-toggle="pill" data-bs-target="#pills-wonders" type="button" role="tab" aria-controls="pills-wonders" aria-selected="false">Wonders</button>
+  </li>
+  <li className="nav-item" role="console">
+    <button className="nav-link" id="pills-console-tab" data-bs-toggle="pill" data-bs-target="#pills-console" type="button" role="tab" aria-controls="pills-console" aria-selected="false">Errors</button>
   </li>
 </ul>
 <div className="tab-content" id="pills-tabContent">
@@ -255,6 +276,9 @@ function App() {
             </div>
           </div>
 
+  </div>
+  <div className="tab-pane fade" id="pills-console" role="tabpanel" aria-labelledby="pills-console-tab">
+    <div id="sceneConsole"></div>    
   </div>
 </div>
            
