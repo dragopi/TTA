@@ -587,6 +587,10 @@ export class SceneResult extends React.Component<TTASceneValuesProps, TTASceneVa
     render() {
 
         let defClass: string = "list-group-item list-group-item-action flex-column align-items-start";
+
+        if (!this.state.values.valid)
+            defClass = defClass + " list-group-item-danger";
+
         let imgSvg = GetYellowTokenBar(this.state.values.yellowToken,this.state.values.happy.Value());
         return (
             <div className="list-group">
