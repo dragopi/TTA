@@ -1636,9 +1636,9 @@ let CARD_LEA13: TTACard = {
         let thtCount = 0;
         s.Urbans.forEach(c => {
             if (c.code.startsWith("UL") && (c.workers>0))
-                lbrCount += 1;
-            else if (c.code.startsWith("UT") && (c.workers>0))
-                thtCount += 1;
+                lbrCount += c.workers;
+            else if (c.code.startsWith("UTH") && (c.workers>0))
+                thtCount += c.workers;
         });
         for(let i=0;i<Math.min(lbrCount, thtCount);i++)
             result.culture += 2;
