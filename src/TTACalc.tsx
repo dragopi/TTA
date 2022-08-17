@@ -402,6 +402,33 @@ function ElabFoodConsumption(s:Scene, r: TTASceneValues)
         r.food.AddValue(0, "FoodConsumption");
 }
 
+function GetBoardCardArray(s: Scene) {
+    let deck: Array<BoardCard> = new Array<BoardCard>();
+
+    if (s.Leader!=null) deck.push(s.Leader);
+    if (s.Governament!=null) deck.push(s.Governament);
+    if (s.AirForce!=null) deck.push(s.AirForce);
+
+    if (s.Wonders)
+        s.Wonders.forEach(c=> deck.push(c));
+    if (s.Infantry)
+        s.Infantry.forEach(c=> deck.push(c));
+    if (s.Cavallery)
+        s.Cavallery.forEach(c=> deck.push(c));
+    if (s.Artillery)
+        s.Artillery.forEach(c=> deck.push(c));
+    if (s.Special)
+        s.Special.forEach(c=> deck.push(c));
+    if (s.Productions)
+        s.Productions.forEach(c=> deck.push(c));
+    if (s.Urbans)
+        s.Urbans.forEach(c=> deck.push(c));
+    if (s.Territories)
+        s.Territories.forEach(c=> deck.push(c));
+
+    return deck;
+}
+
 function IsValidCardForAge(card:TTACard, age: number)
 {
     if (card) 
@@ -412,9 +439,10 @@ function IsValidCardForAge(card:TTACard, age: number)
 
 function CheckConsistencyAge(s:Scene) {
     let consinstency = true;
-    if (s.AirForce != null)
-        if (!(IsValidCardForAge(s.AirForce.card, s.Age)))
+    GetBoardCardArray(s).forEach(c => {
+        if (!(IsValidCardForAge(c.card, s.Age)))
             consinstency = false;    
+    });        
     return consinstency;
 }   
 
