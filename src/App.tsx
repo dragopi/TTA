@@ -24,22 +24,36 @@ function App() {
     let sceneResult = TTASceneCalculation(s);
     sceneRef.current.setState({values: sceneResult});
     //tacticRef.current.setState({values: o})
-    let resultConsoleElements = PrintConsoleLog(sceneResult);
-    ReactDOM.render(resultConsoleElements, document.getElementById('sceneConsole'));
+    PrintConsoleLog(sceneResult);
+    
     ;
   }
 
   function PrintConsoleLog(r: TTASceneValues) {
-    if (r != null)
-      return (
+    let errorCount = 0;
+    let resultConsoleElements = <div>No logs</div>;
+    if (r != null) {
+      resultConsoleElements = (
         <div>
           {r.Logs().map((item, i) => {      
+            errorCount++;
             return (<span>{item.msg}<br /></span>) 
           })}
         </div>
       );
-    else
-      return <div>No logs</div>;
+    }
+
+    let badge = document.getElementById('countErrorLog')
+    if (errorCount>0) {
+      badge.classList.add("bg-danger");
+      badge.innerText = errorCount.toString();
+    }
+    else {
+      badge.classList.remove("bg-danger")
+      badge.innerText = "";
+    }
+    ReactDOM.render(resultConsoleElements, document.getElementById('sceneConsole'));
+
   }
 
   function BtnCalcClick()
@@ -89,7 +103,7 @@ function App() {
     <button className="nav-link" id="pills-wonders-tab" data-bs-toggle="pill" data-bs-target="#pills-wonders" type="button" role="tab" aria-controls="pills-wonders" aria-selected="false">Wonders</button>
   </li>
   <li className="nav-item" role="console">
-    <button className="nav-link" id="pills-console-tab" data-bs-toggle="pill" data-bs-target="#pills-console" type="button" role="tab" aria-controls="pills-console" aria-selected="false">Errors</button>
+    <button className="nav-link" id="pills-console-tab" data-bs-toggle="pill" data-bs-target="#pills-console" type="button" role="tab" aria-controls="pills-console" aria-selected="false">Errors <span id="countErrorLog" className="badge"></span></button>
   </li>
 </ul>
 <div className="tab-content" id="pills-tabContent">
