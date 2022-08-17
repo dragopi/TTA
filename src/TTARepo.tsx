@@ -1690,8 +1690,9 @@ let CARD_LEA15: TTACard = {
         if(countArmy>0)
             result.strength += 2;
         countArmy = 0;
-        if (s.AirForce.workers>0)
-            result.strength += 2;
+        if (s.AirForce!=null)
+            if (s.AirForce.workers>0)
+                result.strength += 2;
         return result;
     }
 }

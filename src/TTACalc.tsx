@@ -440,18 +440,18 @@ function IsValidCardForAge(card:TTACard, age: number)
 function CheckConsistencyAge(s:Scene, r: TTASceneValues) {
     
     GetBoardCardArray(s).forEach(c => {
-        if (c.card.code.startsWith("LE")) {
-            let diff = s.Age - c.card.age;
-            if (Math.abs(diff)>1) {
-                r.valid = false;
-                r.AddLog(`Inconsistency error: the "${c.card.name}" card cannot be drawn and played in era ${s.Age}. (leader)`);    
-            }
-        }
-         else
         if (!(IsValidCardForAge(c.card, s.Age))) {
             r.valid = false;
             r.AddLog(`Inconsistency error: the "${c.card.name}" card cannot be drawn and played in era ${s.Age}.`);
         }
+        if (c.card.code.startsWith("LE")) {
+            let diff = s.Age - c.card.age;
+            if (Math.abs(diff)>1) {
+                r.valid = false;
+                r.AddLog(`Inconsistency error: the "${c.card.name}" card cannot be on the board in era ${s.Age}.`);    
+            }
+        }
+
     });        
     
 }   
@@ -492,12 +492,13 @@ export function TTASceneCalculation(s: Scene)
         if (s.Leader.card.getSceneValuesModifier)
             console.log(s.Leader.card.getSceneValuesModifier(s));
     */
+    /*
     console.log("--- CULTURE ---");
     result.culture.Logs().forEach(l => {
         console.log(l.msg)
     });
     console.log("---");
     console.log("TOTAL", result.culture.Value());
-
+    */
     return result;
 }
