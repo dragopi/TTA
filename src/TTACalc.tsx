@@ -1,4 +1,4 @@
-import { BoardCard, Scene, SceneValuesModifier, TacticInfoReport, TacticReport, TTAStrengthValue, TTASceneValues } from "./TTATypes";
+import { BoardCard, Scene, SceneValuesModifier, TacticInfoReport, TacticReport, TTAStrengthValue, TTASceneValues, TTACard } from "./TTATypes";
 import { TTARepoCards, GetBestFromArray } from "./TTARepo";
 
 export enum CardType {
@@ -402,6 +402,22 @@ function ElabFoodConsumption(s:Scene, r: TTASceneValues)
         r.food.AddValue(0, "FoodConsumption");
 }
 
+function IsValidCardForAge(card:TTACard, age: number)
+{
+    if (card) 
+        return (card.age == age);
+    else
+        return true;
+}
+
+function CheckConsistencyAge(s:Scene) {
+    let consinstency = true;
+    if (s.AirForce != null)
+        if (!(IsValidCardForAge(s.AirForce.card, s.Age)))
+            consinstency = false;    
+    return consinstency;
+}   
+
 export function TTASceneCalculation(s: Scene)
 {
     let result: TTASceneValues = new TTASceneValues();
@@ -416,6 +432,9 @@ export function TTASceneCalculation(s: Scene)
 
     // All cards
     ElabCards(s, result);
+
+    // Check consinstency
+    result.valid = CheckConsistencyAge(s);
     /*
     let cultureTemp: number;
     s.Urbans.forEach(c => {

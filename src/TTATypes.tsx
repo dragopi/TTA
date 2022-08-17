@@ -161,6 +161,7 @@ export class TTASceneValues {
     public ca: TTASceneValue;
     public ma: TTASceneValue;
     public yellowToken: number;
+    public valid: boolean;
 
     constructor() {
         this.food = new TTASceneValue();
@@ -172,5 +173,6 @@ export class TTASceneValues {
         this.ca = new TTASceneValue();
         this.ma = new TTASceneValue();
         this.yellowToken = 0;
+        this.valid = true;
     }
 };
