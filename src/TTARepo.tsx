@@ -1773,7 +1773,21 @@ let CARD_LEA18: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "You best lab or library produces extra science equal to its level; every time you play a technology card, get 1 spent civil action back"
+    text: "You best lab or library produces extra science equal to its level; every time you play a technology card, get 1 spent civil action back",
+    getSceneValuesModifier: (s:Scene) => {
+        let levelLab: number = 0;
+        let levelLibrary: number = 0;
+        s.Urbans.forEach(c => {
+            if ((c.card.code.startsWith("ULI"))&&(c.workers>0))
+                levelLibrary = Math.max(levelLibrary, c.card.age);
+            else if ((c.card.code.startsWith("ULA"))&&(c.workers>0))
+                levelLab= Math.max(levelLab, c.card.age);
+        });
+
+        let result = new SceneValuesModifier();
+        result.science += Math.max(levelLab, levelLibrary);
+        return result;
+    }
 }
 
 let CARD_LEA19: TTACard = {
