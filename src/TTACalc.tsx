@@ -432,7 +432,7 @@ function GetBoardCardArray(s: Scene) {
 function IsValidCardForAge(card:TTACard, age: number)
 {
     if (card) 
-        return (card.age == age);
+        return (card.age <= age);
     else
         return true;
 }
