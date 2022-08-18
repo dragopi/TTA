@@ -1338,6 +1338,25 @@ let CARD_WON32: TTACard = {
     text: "You immediately score culture equal to your science rating."
 }
 
+let CARD_WON99: TTACard = {
+    code: "WON99",
+    type: "Wonder",
+    subtype: "Wonder",
+    name: "Ancient Ruins",
+    age: 0,
+    light_cost: null,
+    rock_cost: null,
+    food: null,
+    resource: null,
+    culture: 2,
+    strength: null,
+    happy: null,
+    science: null,
+    ca: null,
+    ma: null,
+    text: null
+}
+
 let CARD_LEA01: TTACard = {
     code: "LEA01",
     type: "Leader",
@@ -3452,6 +3471,7 @@ export class TTARepoCards {
             ["WON30", CARD_WON30],
             ["WON31", CARD_WON31],
             ["WON32", CARD_WON32],
+            ["WON99", CARD_WON99],
             ["LEA01", CARD_LEA01],
             ["LEA02", CARD_LEA02],
             ["LEA03", CARD_LEA03],
@@ -3656,6 +3676,7 @@ export class TTARepoCards {
         let wonders = Array<TTACard>();
         if (age==0)
         {
+            wonders.push(this.internalRepo.get("WON99"));
             wonders.push(this.internalRepo.get("WON01"));
             wonders.push(this.internalRepo.get("WON02"));
             wonders.push(this.internalRepo.get("WON03"));
