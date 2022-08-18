@@ -1,11 +1,12 @@
-import { BoardCard, Scene, SceneValuesModifier, TacticInfoReport, TacticReport, TTAStrengthValue, TTASceneValues, TTACard, TTATacticCard } from "./TTATypes";
-import { TTARepoCards, GetBestFromArray } from "./TTARepo";
+import { BoardCard, Scene, TTASceneValues, TTATacticCard } from "./TTATypes";
+import { TTARepoCards } from "./TTARepo";
 import { TTASceneCalculation } from "./TTACalc";
 
 function GetCardByCode(value: string, token: number = 1) {
     let result: BoardCard = {
         code: value,
-        workers: token
+        workers: token,
+        card: TTARepoCards.Instance.Get(value)
     };
     return result;
 }
