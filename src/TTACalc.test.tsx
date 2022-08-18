@@ -1,7 +1,7 @@
 import { BoardCard, Scene, SceneValuesModifier, TacticInfoReport, TacticReport, TTAStrengthValue, TTASceneValues, TTACard } from "./TTATypes";
 import { TTARepoCards, GetBestFromArray } from "./TTARepo";
 import { TTASceneCalculation } from "./TTACalc";
-import { assert } from "console";
+import { TTADeck, TTASceneManager } from "./TTAScene"
 
 function GetEmptyScene() {
     let s: Scene = {
@@ -83,19 +83,55 @@ test('SceneCalculation InvalidMilitaryArtillery', () => {
 */
 test('StrengthCalculation Scenario1', () => {
 
+
+    let deck = new TTADeck();
     let s: Scene = GetEmptyScene();
     s.Age = 2;
-    s.Leader = GetCardByCode("LEA15");
-    s.Infantry.push(GetCardByCode("MIN02",3));
-    s.Cavallery.push(GetCardByCode("MCA01",1));
+    s.Leader = deck.Leaders.NapoleonBonaparte();
+    s.Infantry.push(deck.Military.Infantry.Swordsmen(3));
+    s.Cavallery.push(deck.Military.Cavallery.Knights(1));
     s.Tactic = TTARepoCards.Instance.GetTactic("TAC02");
-    s.Urbans.push(GetCardByCode("UAR01", 1));
-    s.Special.push(GetCardByCode("SMI01"));
+    s.Urbans.push( deck.Urban.Arena.BreadandCircuses() );
+    s.Special.push( deck.Special.Military.Warfare());
     let result: TTASceneValues = TTASceneCalculation(s);
     expect(result.valid).toEqual(true);
     expect(result.strength.Value()).toEqual(16);
 
     
+});
+
+test('StrengthCalculation Scenario2', () => {
+
+
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(2)
+    sm.Add( deck.Leaders.NapoleonBonaparte() );
+    sm.Add( deck.Military.Infantry.Swordsmen(3) );
+    sm.Add( deck.Military.Cavallery.Knights(1) );
+    sm.Add( deck.Urban.Arena.BreadandCircuses() );
+    sm.Add( deck.Special.Military.Warfare() );
+    sm.AddTactic( deck.Tactics.Legion() );
+
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(true);
+    expect(result.strength.Value()).toEqual(16);
+
+    
+});
+
+// Test Modifier
+
+test('Newton modifier', () => {
+    let s: Scene = GetEmptyScene();
+    s.Age = 3;
+    s.Leader = GetCardByCode("LEA18");
+    s.Urbans.push(GetCardByCode("ULA01", 2));
+    s.Urbans.push(GetCardByCode("ULI02", 3));
+    let result: TTASceneValues = TTASceneCalculation(s);
+    expect(result.valid).toEqual(true);
+    expect(result.science.Value()).toEqual(10);
 });
 
 
