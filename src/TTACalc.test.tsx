@@ -41,6 +41,17 @@ test('SceneCalculation InvalidScenario1', () => {
 
 });
 
+test('SceneCalculation InvalidScenario1 sm', () => {
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(2)
+    sm.Add( deck.Military.AirForces());
+    
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(false);
+});
+
 test('SceneCalculation InvalidScenario2', () => {
 
     let s: Scene = GetEmptyScene();
@@ -51,6 +62,18 @@ test('SceneCalculation InvalidScenario2', () => {
 
 });
 
+test('SceneCalculation InvalidScenario2 sm', () => {
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(1)
+    sm.Add( deck.Leaders.IsaacNewton() );
+    
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(false);
+});
+
+
 test('SceneCalculation InvalidScenario3', () => {
 
     let s: Scene = GetEmptyScene();
@@ -58,6 +81,16 @@ test('SceneCalculation InvalidScenario3', () => {
     s.Age = 3;
     s.Leader = GetCardByCode("LEA01");
     let result: TTASceneValues = TTASceneCalculation(s);
+    expect(result.valid).toEqual(false);
+});
+test('SceneCalculation InvalidScenario3 sm', () => {
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(3)
+    sm.Add( deck.Leaders.JuliusCaesar() );
+    
+    let result = sm.Calculate();
     expect(result.valid).toEqual(false);
 });
 
@@ -69,20 +102,18 @@ test('SceneCalculation InvalidScenario4', () => {
     let result: TTASceneValues = TTASceneCalculation(s);
     expect(result.valid).toEqual(false);
 });
+test('SceneCalculation InvalidScenario4 sm', () => {
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
 
-/*
-test('SceneCalculation InvalidMilitaryArtillery', () => {
-
-    let s: Scene = GetEmptyScene();
-    s.Age = 1;
-    s.Artillery.push(GetCardByCode("MCA01"));
-    let result: TTASceneValues = TTASceneCalculation(s);
+    sm.Age(4)
+    sm.Add( deck.Leaders.NapoleonBonaparte() );
+    
+    let result = sm.Calculate();
     expect(result.valid).toEqual(false);
 });
 
-*/
 test('StrengthCalculation Scenario1', () => {
-
 
     let deck = new TTADeck();
     let s: Scene = GetEmptyScene();
@@ -96,11 +127,10 @@ test('StrengthCalculation Scenario1', () => {
     let result: TTASceneValues = TTASceneCalculation(s);
     expect(result.valid).toEqual(true);
     expect(result.strength.Value()).toEqual(16);
-
     
 });
 
-test('StrengthCalculation Scenario2', () => {
+test('StrengthCalculation Scenario1 sm', () => {
 
 
     let sm = new TTASceneManager();
@@ -121,6 +151,44 @@ test('StrengthCalculation Scenario2', () => {
     
 });
 
+test('StrengthCalculation Scenario2 sm', () => {
+
+
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(3)
+    sm.Add( deck.Leaders.CharlesDarwin() );
+    sm.Add( deck.Military.Infantry.Warriors(1) );
+    sm.Add( deck.Military.Infantry.Riflemen(2) );
+    sm.Add( deck.Military.Artillery.Cannon(1) );
+
+    sm.Add( deck.Resources.Farm.Agriculture(1) );
+    sm.Add( deck.Resources.Farm.SelectiveBreeding(1) );
+    sm.Add( deck.Resources.Mine.Iron(3) );
+
+    sm.Add( deck.Urban.Lab.Philosophy(2) );
+    sm.Add( deck.Urban.Arena.TeamSports(1) );
+
+    sm.Add( deck.Special.Civil.CodeOfLaw() );
+    sm.Add( deck.Special.Colonization.Navigation() );
+
+    sm.Add( deck.Wonders.AncientRuins() );
+    sm.Add( deck.Wonders.UniversitasCarolina() );
+    sm.Add( deck.Wonders.HarvardCollege() );
+    sm.Add( deck.Wonders.EiffelTower() );
+
+    sm.AddTactic( deck.Tactics.DefensiveArmy() );
+
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(true);
+    expect(result.strength.Value()).toEqual(20);
+    expect(result.happy.Value()).toEqual(4);
+    expect(result.science.Value()).toEqual(7);
+    expect(result.culture.Value()).toEqual(10);
+
+});
+
 // Test Modifier
 
 test('Newton modifier', () => {
@@ -130,6 +198,20 @@ test('Newton modifier', () => {
     s.Urbans.push(GetCardByCode("ULA01", 2));
     s.Urbans.push(GetCardByCode("ULI02", 3));
     let result: TTASceneValues = TTASceneCalculation(s);
+    expect(result.valid).toEqual(true);
+    expect(result.science.Value()).toEqual(10);
+});
+test('Newton modifier sm', () => {
+    
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(3)
+    sm.Add( deck.Leaders.IsaacNewton() );
+    sm.Add( deck.Urban.Lab.Philosophy(2) );
+    sm.Add( deck.Urban.Press.Journalism(3) );
+
+    let result = sm.Calculate();
     expect(result.valid).toEqual(true);
     expect(result.science.Value()).toEqual(10);
 });
