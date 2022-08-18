@@ -174,6 +174,7 @@ class WondersClass {
     UnitedNations = () => { return GetCardByCode("WON30", 1) };
     InternationalRedCross = () => { return GetCardByCode("WON31", 1) };
     ManhattanProjects = () => { return GetCardByCode("WON32", 1) };
+    AncientRuins = () => { return GetCardByCode("WON99", 1) };
 }
 
 class LeadersClass {
@@ -328,7 +329,7 @@ export class TTASceneManager {
             this.s.Leader = card;
     }
 
-    public GetScene() {
+    private GetScene() {
         let result: Scene = {
             Age: this.s.Age,
             yellowToken: this.s.yellowToken,
@@ -351,7 +352,6 @@ export class TTASceneManager {
     public Calculate():TTASceneValues {
         return TTASceneCalculation(this.s);
     }
-
 
     constructor() {
         this.Reset();
