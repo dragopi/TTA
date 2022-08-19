@@ -1259,7 +1259,12 @@ let CARD_WON28: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "When you complete this wonder, you may colonize a territory in your hand. You produce an extra 1 resource for each colony you have."
+    text: "When you complete this wonder, you may colonize a territory in your hand. You produce an extra 1 resource for each colony you have.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        result.resource += s.Territories.length;
+        return result;
+    }
 }
 
 let CARD_WON29: TTACard = {
