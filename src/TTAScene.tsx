@@ -12,16 +12,16 @@ function GetCardByCode(value: string, token: number = 1) {
 }
 
 class FarmClass {
-    Agriculture           = (token: number = 1) => { return GetCardByCode("PFA01", token) };
-    Irrigation            = (token: number = 1) => { return GetCardByCode("PFA02", token) };
-    SelectiveBreeding     = (token: number = 1) => { return GetCardByCode("PFA03", token) };
-    MechanizedAgriculture = (token: number = 1) => { return GetCardByCode("PFA04", token) };
+    Agriculture           = (token: number = 1) => GetCardByCode("PFA01", token);
+    Irrigation            = (token: number = 1) => GetCardByCode("PFA02", token);
+    SelectiveBreeding     = (token: number = 1) => GetCardByCode("PFA03", token);
+    MechanizedAgriculture = (token: number = 1) => GetCardByCode("PFA04", token);
 }
 class MineClass {
-    Bronze = (token: number = 1) => { return GetCardByCode("PMI01", token) };
-    Iron   = (token: number = 1) => { return GetCardByCode("PMI02", token) };
-    Coal   = (token: number = 1) => { return GetCardByCode("PMI03", token) };
-    Oil    = (token: number = 1) => { return GetCardByCode("PMI04", token) };
+    Bronze = (token: number = 1) => GetCardByCode("PMI01", token);
+    Iron   = (token: number = 1) => GetCardByCode("PMI02", token);
+    Coal   = (token: number = 1) => GetCardByCode("PMI03", token);
+    Oil    = (token: number = 1) => GetCardByCode("PMI04", token);
 }
 
 class ResourcesClass {
@@ -35,33 +35,33 @@ class ResourcesClass {
 }
 
 class LabClass {
-    Philosophy         = (token: number = 1) => { return GetCardByCode("ULA01", token) };
-    Alchemy            = (token: number = 1) => { return GetCardByCode("ULA02", token) };
-    ScientificMethod   = (token: number = 1) => { return GetCardByCode("ULA03", token) };
-    Computers          = (token: number = 1) => { return GetCardByCode("ULA04", token) };
+    Philosophy         = (token: number = 1) => GetCardByCode("ULA01", token);
+    Alchemy            = (token: number = 1) => GetCardByCode("ULA02", token);
+    ScientificMethod   = (token: number = 1) => GetCardByCode("ULA03", token);
+    Computers          = (token: number = 1) => GetCardByCode("ULA04", token);
 }
 
 class ArenaClass {
-    BreadandCircuses   = (token: number = 1) => { return GetCardByCode("UAR01", token); }
-    TeamSports         = (token: number = 1) => { return GetCardByCode("UAR02", token); }
-    ProfessionalSports = (token: number = 1) => { return GetCardByCode("UAR03", token); }
+    BreadandCircuses   = (token: number = 1) => GetCardByCode("UAR01", token);
+    TeamSports         = (token: number = 1) => GetCardByCode("UAR02", token);
+    ProfessionalSports = (token: number = 1) => GetCardByCode("UAR03", token);
 }
 
 class TheologyClass {
-    Religion           = (token: number = 1) => { return GetCardByCode("UTE01", token); }
-    Theology           = (token: number = 1) => { return GetCardByCode("UTE02", token); }
-    OrganizedReligion  = (token: number = 1) => { return GetCardByCode("UTE03", token); }
+    Religion           = (token: number = 1) => GetCardByCode("UTE01", token);
+    Theology           = (token: number = 1) => GetCardByCode("UTE02", token);
+    OrganizedReligion  = (token: number = 1) => GetCardByCode("UTE03", token);
 }
 
 class TheatreClass {
-    Drama              = (token: number = 1) => { return GetCardByCode("UTH01", token); }
-    Opera              = (token: number = 1) => { return GetCardByCode("UTH02", token); }
-    Movies             = (token: number = 1) => { return GetCardByCode("UTH03", token); }
+    Drama              = (token: number = 1) => GetCardByCode("UTH01", token);
+    Opera              = (token: number = 1) => GetCardByCode("UTH02", token);
+    Movies             = (token: number = 1) => GetCardByCode("UTH03", token);
 }
 class PressClass {
-    PrintingPress      = (token: number = 1) => { return GetCardByCode("ULI01", token); }
-    Journalism         = (token: number = 1) => { return GetCardByCode("ULI02", token); }
-    Multimedia         = (token: number = 1) => { return GetCardByCode("ULI03", token); }
+    PrintingPress      = (token: number = 1) => GetCardByCode("ULI01", token);
+    Journalism         = (token: number = 1) => GetCardByCode("ULI02", token);
+    Multimedia         = (token: number = 1) => GetCardByCode("ULI03", token);
 }
 
 class UrbanClass {
@@ -81,24 +81,24 @@ class UrbanClass {
 }
 
 class MilitarySpecialClass {
-    Warfare        = () => { return GetCardByCode("SMI01", 1) };
-    Strategy       = () => { return GetCardByCode("SMI02", 1) };
-    MilitaryTheory = () => { return GetCardByCode("SMI03", 1) };
+    Warfare        = () => GetCardByCode("SMI01");
+    Strategy       = () => GetCardByCode("SMI02");
+    MilitaryTheory = () => GetCardByCode("SMI03");
 }
 class CivilClass {
-    CodeOfLaw      = () => { return GetCardByCode("SCI01", 1) };
-    JusticeSystem  = () => { return GetCardByCode("SCI02", 1) };
-    CivilService   = () => { return GetCardByCode("SCI03", 1) };
+    CodeOfLaw      = () => GetCardByCode("SCI01");
+    JusticeSystem  = () => GetCardByCode("SCI02");
+    CivilService   = () => GetCardByCode("SCI03");
 }
 class ColonizationClass {
-    Cartography    = () => { return GetCardByCode("SCL01", 1) };
-    Navigation     = () => { return GetCardByCode("SCL02", 1) };
-    Satellites     = () => { return GetCardByCode("SCL03", 1) };
+    Cartography    = () => GetCardByCode("SCL01");
+    Navigation     = () => GetCardByCode("SCL02");
+    Satellites     = () => GetCardByCode("SCL03");
 }
 class ConstructionClass {
-    Masonry        = () => { return GetCardByCode("SCO01", 1) };
-    Architecture   = () => { return GetCardByCode("SCO02", 1) };
-    Engineering    = () => { return GetCardByCode("SCO03", 1) };
+    Masonry        = () => GetCardByCode("SCO01");
+    Architecture   = () => GetCardByCode("SCO02");
+    Engineering    = () => GetCardByCode("SCO03");
 }
 
 class SpecialClass {
@@ -116,26 +116,26 @@ class SpecialClass {
 }
 
 class InfantryClass {
-    Warriors        = (token: number = 1) => { return GetCardByCode("MIN01", token) };
-    Swordsmen       = (token: number = 1) => { return GetCardByCode("MIN02", token) };
-    Riflemen        = (token: number = 1) => { return GetCardByCode("MIN03", token) };
-    ModernInfantry  = (token: number = 1) => { return GetCardByCode("MIN04", token) };
+    Warriors        = (token: number = 1) => GetCardByCode("MIN01", token);
+    Swordsmen       = (token: number = 1) => GetCardByCode("MIN02", token);
+    Riflemen        = (token: number = 1) => GetCardByCode("MIN03", token);
+    ModernInfantry  = (token: number = 1) => GetCardByCode("MIN04", token);
 }
 class CavalleryClass {
-    Knights     = (token: number = 1) => { return GetCardByCode("MCA01", token) };
-    Calvarymen  = (token: number = 1) => { return GetCardByCode("MCA02", token) };
-    Tanks       = (token: number = 1) => { return GetCardByCode("MCA03", token) };
+    Knights         = (token: number = 1) => GetCardByCode("MCA01", token);
+    Calvarymen      = (token: number = 1) => GetCardByCode("MCA02", token);
+    Tanks           = (token: number = 1) => GetCardByCode("MCA03", token);
 }
 class ArtilleryClass {
-    Cannon  = (token: number = 1) => { return GetCardByCode("MAR01", token) };
-    Rockets = (token: number = 1) => { return GetCardByCode("MAR02", token) };
+    Cannon          = (token: number = 1) => GetCardByCode("MAR01", token);
+    Rockets         = (token: number = 1) => GetCardByCode("MAR02", token);
 }
 
 class MilitaryClass {
     public Infantry: InfantryClass;
     public Cavallery: CavalleryClass;
     public Artillery: ArtilleryClass;
-    AirForces = (token: number = 1) => { return GetCardByCode("MAI01", token) };
+    AirForces = (token: number = 1) => GetCardByCode("MAI01", token);
 
     constructor() {
         this.Infantry = new InfantryClass();
@@ -145,91 +145,91 @@ class MilitaryClass {
 }
 
 class WondersClass {
-    HangingGardens           = () => { return GetCardByCode("WON01", 1) };
-    LibraryOfAlexandria      = () => { return GetCardByCode("WON02", 1) };
-    Colossus                 = () => { return GetCardByCode("WON03", 1) };
-    Pyramids                 = () => { return GetCardByCode("WON04", 1) };
-    Colosseum                = () => { return GetCardByCode("WON17", 1) };
-    RomanRoads               = () => { return GetCardByCode("WON18", 1) };
-    Stonenhenge              = () => { return GetCardByCode("WON19", 1) };
-    Acropolis                = () => { return GetCardByCode("WON20", 1) };
-    GreatWall                = () => { return GetCardByCode("WON05", 1) };
-    StPetersBasilica         = () => { return GetCardByCode("WON06", 1) };
-    UniversitasCarolina      = () => { return GetCardByCode("WON07", 1) };
-    TajMahal                 = () => { return GetCardByCode("WON08", 1) };
-    MachuPicchu              = () => { return GetCardByCode("WON21", 1) };
-    HimejiCastle             = () => { return GetCardByCode("WON22", 1) };
-    ForbiddenCity            = () => { return GetCardByCode("WON23", 1) };
-    SilkRoad                 = () => { return GetCardByCode("WON24", 1) };
-    TranscontinentalRailroad = () => { return GetCardByCode("WON09", 1) };
-    EiffelTower              = () => { return GetCardByCode("WON10", 1) };
-    Kremlin                  = () => { return GetCardByCode("WON11", 1) };
-    OceanLinerService        = () => { return GetCardByCode("WON12", 1) };
-    HarvardCollege           = () => { return GetCardByCode("WON25", 1) };
-    StatueOfLiberty          = () => { return GetCardByCode("WON26", 1) };
-    LouvreMuseum             = () => { return GetCardByCode("WON27", 1) };
-    SuezCanal                = () => { return GetCardByCode("WON28", 1) };
-    Hollywood                = () => { return GetCardByCode("WON13", 1) };
-    Internet                 = () => { return GetCardByCode("WON14", 1) };
-    FirstSpaceFlight         = () => { return GetCardByCode("WON15", 1) };
-    FastFoodChains           = () => { return GetCardByCode("WON16", 1) };
-    EmpireStateBuilding      = () => { return GetCardByCode("WON29", 1) };
-    UnitedNations            = () => { return GetCardByCode("WON30", 1) };
-    InternationalRedCross    = () => { return GetCardByCode("WON31", 1) };
-    ManhattanProjects        = () => { return GetCardByCode("WON32", 1) };
-    AncientRuins             = () => { return GetCardByCode("WON99", 1) };
+    HangingGardens           = () => GetCardByCode("WON01");
+    LibraryOfAlexandria      = () => GetCardByCode("WON02");
+    Colossus                 = () => GetCardByCode("WON03");
+    Pyramids                 = () => GetCardByCode("WON04");
+    Colosseum                = () => GetCardByCode("WON17");
+    RomanRoads               = () => GetCardByCode("WON18");
+    Stonenhenge              = () => GetCardByCode("WON19");
+    Acropolis                = () => GetCardByCode("WON20");
+    GreatWall                = () => GetCardByCode("WON05");
+    StPetersBasilica         = () => GetCardByCode("WON06");
+    UniversitasCarolina      = () => GetCardByCode("WON07");
+    TajMahal                 = () => GetCardByCode("WON08");
+    MachuPicchu              = () => GetCardByCode("WON21");
+    HimejiCastle             = () => GetCardByCode("WON22");
+    ForbiddenCity            = () => GetCardByCode("WON23");
+    SilkRoad                 = () => GetCardByCode("WON24");
+    TranscontinentalRailroad = () => GetCardByCode("WON09");
+    EiffelTower              = () => GetCardByCode("WON10");
+    Kremlin                  = () => GetCardByCode("WON11");
+    OceanLinerService        = () => GetCardByCode("WON12");
+    HarvardCollege           = () => GetCardByCode("WON25");
+    StatueOfLiberty          = () => GetCardByCode("WON26");
+    LouvreMuseum             = () => GetCardByCode("WON27");
+    SuezCanal                = () => GetCardByCode("WON28");
+    Hollywood                = () => GetCardByCode("WON13");
+    Internet                 = () => GetCardByCode("WON14");
+    FirstSpaceFlight         = () => GetCardByCode("WON15");
+    FastFoodChains           = () => GetCardByCode("WON16");
+    EmpireStateBuilding      = () => GetCardByCode("WON29");
+    UnitedNations            = () => GetCardByCode("WON30");
+    InternationalRedCross    = () => GetCardByCode("WON31");
+    ManhattanProjects        = () => GetCardByCode("WON32");
+    AncientRuins             = () => GetCardByCode("WON99");
 }
 
 class LeadersClass {
-    JuliusCaesar            = () => { return GetCardByCode("LEA01", 1) };
-    Homer                   = () => { return GetCardByCode("LEA02", 1) };
-    Moses                   = () => { return GetCardByCode("LEA03", 1) };
-    Hammurabi               = () => { return GetCardByCode("LEA04", 1) };
-    Aristotle               = () => { return GetCardByCode("LEA05", 1) };
-    AlexanderTheGreat       = () => { return GetCardByCode("LEA06", 1) };
-    Michelangelo            = () => { return GetCardByCode("LEA07", 1) };
-    JoanOfArc               = () => { return GetCardByCode("LEA08", 1) };
-    LeonardoDaVinci         = () => { return GetCardByCode("LEA09", 1) };
-    GenghisKhan             = () => { return GetCardByCode("LEA10", 1) };
-    ChristopherColumbus     = () => { return GetCardByCode("LEA11", 1) };
-    FrederickBarbarossa     = () => { return GetCardByCode("LEA12", 1) };
-    WilliamShakespeare      = () => { return GetCardByCode("LEA13", 1) };
-    JamesCook               = () => { return GetCardByCode("LEA14", 1) };
-    NapoleonBonaparte       = () => { return GetCardByCode("LEA15", 1) };
-    MaximillienRobespierre  = () => { return GetCardByCode("LEA16", 1) };
-    JSBach                  = () => { return GetCardByCode("LEA17", 1) };
-    IsaacNewton             = () => { return GetCardByCode("LEA18", 1) };
-    AlbertEinstein          = () => { return GetCardByCode("LEA19", 1) };
-    MahatmaGandhi           = () => { return GetCardByCode("LEA20", 1) };
-    RockAndRollIcon         = () => { return GetCardByCode("LEA21", 1) };
-    NikolaiTesla            = () => { return GetCardByCode("LEA22", 1) };
-    WinstonChurchill        = () => { return GetCardByCode("LEA23", 1) };
-    SidMeier                = () => { return GetCardByCode("LEA24", 1) };
-    Boudica                 = () => { return GetCardByCode("LEA25", 1) };
-    Cleopatra               = () => { return GetCardByCode("LEA26", 1) };
-    Hippocrates             = () => { return GetCardByCode("LEA27", 1) };
-    Confucius               = () => { return GetCardByCode("LEA28", 1) };
-    SunTzu                  = () => { return GetCardByCode("LEA29", 1) };
-    Ashoka                  = () => { return GetCardByCode("LEA30", 1) };
-    IsabellaOfCastile       = () => { return GetCardByCode("LEA31", 1) };
-    EleanorOfAquitaine      = () => { return GetCardByCode("LEA32", 1) };
-    JanŽižka                = () => { return GetCardByCode("LEA33", 1) };
-    Nostradamus             = () => { return GetCardByCode("LEA34", 1) };
-    JohannesGutenberg       = () => { return GetCardByCode("LEA35", 1) };
-    Saladin                 = () => { return GetCardByCode("LEA36", 1) };
-    CatherineTheGreat       = () => { return GetCardByCode("LEA37", 1) };
-    MariaTheresa            = () => { return GetCardByCode("LEA38", 1) };
-    JamesWatt               = () => { return GetCardByCode("LEA39", 1) };
-    AlfredNobel             = () => { return GetCardByCode("LEA40", 1) };
-    AntoniGaudí             = () => { return GetCardByCode("LEA41", 1) };
-    CharlesDarwin           = () => { return GetCardByCode("LEA42", 1) };
-    MarieCurieSklodowska    = () => { return GetCardByCode("LEA43", 1) };
-    MarleneDietrich         = () => { return GetCardByCode("LEA44", 1) };
-    SteveJobs               = () => { return GetCardByCode("LEA45", 1) };
-    NelsonMandela           = () => { return GetCardByCode("LEA46", 1) };
-    PierreDeCubertin        = () => { return GetCardByCode("LEA47", 1) };
-    IanFlemming             = () => { return GetCardByCode("LEA48", 1) };
-    BillGates               = () => { return GetCardByCode("LEA49", 1) };
+    JuliusCaesar            = () => GetCardByCode("LEA01");
+    Homer                   = () => GetCardByCode("LEA02");
+    Moses                   = () => GetCardByCode("LEA03");
+    Hammurabi               = () => GetCardByCode("LEA04");
+    Aristotle               = () => GetCardByCode("LEA05");
+    AlexanderTheGreat       = () => GetCardByCode("LEA06");
+    Michelangelo            = () => GetCardByCode("LEA07");
+    JoanOfArc               = () => GetCardByCode("LEA08");
+    LeonardoDaVinci         = () => GetCardByCode("LEA09");
+    GenghisKhan             = () => GetCardByCode("LEA10");
+    ChristopherColumbus     = () => GetCardByCode("LEA11");
+    FrederickBarbarossa     = () => GetCardByCode("LEA12");
+    WilliamShakespeare      = () => GetCardByCode("LEA13");
+    JamesCook               = () => GetCardByCode("LEA14");
+    NapoleonBonaparte       = () => GetCardByCode("LEA15");
+    MaximillienRobespierre  = () => GetCardByCode("LEA16");
+    JSBach                  = () => GetCardByCode("LEA17");
+    IsaacNewton             = () => GetCardByCode("LEA18");
+    AlbertEinstein          = () => GetCardByCode("LEA19");
+    MahatmaGandhi           = () => GetCardByCode("LEA20");
+    RockAndRollIcon         = () => GetCardByCode("LEA21");
+    NikolaiTesla            = () => GetCardByCode("LEA22");
+    WinstonChurchill        = () => GetCardByCode("LEA23");
+    SidMeier                = () => GetCardByCode("LEA24");
+    Boudica                 = () => GetCardByCode("LEA25");
+    Cleopatra               = () => GetCardByCode("LEA26");
+    Hippocrates             = () => GetCardByCode("LEA27");
+    Confucius               = () => GetCardByCode("LEA28");
+    SunTzu                  = () => GetCardByCode("LEA29");
+    Ashoka                  = () => GetCardByCode("LEA30");
+    IsabellaOfCastile       = () => GetCardByCode("LEA31");
+    EleanorOfAquitaine      = () => GetCardByCode("LEA32");
+    JanŽižka                = () => GetCardByCode("LEA33");
+    Nostradamus             = () => GetCardByCode("LEA34");
+    JohannesGutenberg       = () => GetCardByCode("LEA35");
+    Saladin                 = () => GetCardByCode("LEA36");
+    CatherineTheGreat       = () => GetCardByCode("LEA37");
+    MariaTheresa            = () => GetCardByCode("LEA38");
+    JamesWatt               = () => GetCardByCode("LEA39");
+    AlfredNobel             = () => GetCardByCode("LEA40");
+    AntoniGaudí             = () => GetCardByCode("LEA41");
+    CharlesDarwin           = () => GetCardByCode("LEA42");
+    MarieCurieSklodowska    = () => GetCardByCode("LEA43");
+    MarleneDietrich         = () => GetCardByCode("LEA44");
+    SteveJobs               = () => GetCardByCode("LEA45");
+    NelsonMandela           = () => GetCardByCode("LEA46");
+    PierreDeCubertin        = () => GetCardByCode("LEA47");
+    IanFlemming             = () => GetCardByCode("LEA48");
+    BillGates               = () => GetCardByCode("LEA49");
 }
 
 class TacticsClass {
