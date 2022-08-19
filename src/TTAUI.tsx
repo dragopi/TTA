@@ -17,25 +17,14 @@ type CardItemProps =  {
 type CardItemState = {
     card: TTACard;
     onBoard: boolean;
-    showToken: boolean;
-    tokens: number;
 }
 
 export class CardItem extends React.Component<CardItemProps, CardItemState> {
     state: CardItemState = {
         // optional second annotation for better type inference
         card: TTARepoCards.Instance.Get(this.props.code),
-        onBoard: false,
-        tokens: 0,
-        showToken: (this.props.needToken !== false)
+        onBoard: false
     };
-
-    buttonClick = (e: React.FormEvent<HTMLButtonElement>): void => {
-        if (this.state.onBoard)
-            this.setState({ onBoard: false });
-        else
-            this.setState({ onBoard: true });
-      };
 
     cardClick = (): void => {
         console.log('card click');
@@ -62,26 +51,6 @@ export class CardItem extends React.Component<CardItemProps, CardItemState> {
                     </div>
 
                     <strong className="me-auto">{this.state.card.name}</strong>
-                    {this.state.showToken && (
-                    <small>
-
-                        <select name={this.state.card.code + "_tk"}
-                            onChange={
-                            (e: React.FormEvent<HTMLSelectElement>) =>
-                            context.setValues({ [this.state.card.code + "_tk"]: e.currentTarget.value })
-                            }
-                        >
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-
-                    </small>
-                    )}
                 </div>
                 
             </div>
@@ -94,10 +63,10 @@ export class CardItem extends React.Component<CardItemProps, CardItemState> {
 export class CardItemToken extends React.Component<CardItemProps, CardItemState> {
     state: CardItemState = {
         card: TTARepoCards.Instance.Get(this.props.code),
-        onBoard: false,
-        tokens: 0,
-        showToken: true
+        onBoard: false
     };
+
+    private tokens: number = 0;
 
     private UpdateState(value: number, context: IFormContext) {
         if (value>=0) {
@@ -107,16 +76,16 @@ export class CardItemToken extends React.Component<CardItemProps, CardItemState>
                     [this.state.card.code]: (value)?"on":"off"
                 });
             
-            this.setState({ tokens: value });
+            this.tokens = value;
             this.setState({ onBoard: (value>0) });
         }
     }
     IncrementItem = (context: IFormContext) => {
-        let value = this.state.tokens + 1;
+        let value = this.tokens + 1;
         this.UpdateState(value, context);
     };
     DecreaseItem = (context: IFormContext) => {
-        let value = this.state.tokens - 1;
+        let value = this.tokens - 1;
         this.UpdateState(value, context);
     };
 
@@ -129,10 +98,10 @@ export class CardItemToken extends React.Component<CardItemProps, CardItemState>
             <div className="crdtkn">
                 <div className={`crdtkn-header ${this.state.onBoard ? "onboard" : ""}`}>
                     
-                    <span className="tknval">{ this.state.tokens }</span>
+                    <span className="tknval">{ this.tokens }</span>
 
                     <input type="hidden" name={this.state.card.code}  />
-                    <input type="hidden" name={this.state.card.code + "_tk"}  value={this.state.tokens} />
+                    <input type="hidden" name={this.state.card.code + "_tk"}  value={this.tokens} />
 
                     <span className="me-auto">{this.state.card.name}</span>
                     

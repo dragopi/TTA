@@ -163,51 +163,51 @@ function App() {
         <div className="row">
             <div className="col ttasmi">
               <h6>Military</h6>
-              <CardItem code="SMI01" needToken={false} />
-              <CardItem code="SMI02" needToken={false} />
-              <CardItem code="SMI03" needToken={false} />
+              <CardItem code="SMI01"/>
+              <CardItem code="SMI02"/>
+              <CardItem code="SMI03"/>
             </div>
             <div className="col ttasci">
               <h6>Civil</h6>
-              <CardItem code="SCI01" needToken={false} />
-              <CardItem code="SCI02" needToken={false} />
-              <CardItem code="SCI03" needToken={false} />
+              <CardItem code="SCI01"/>
+              <CardItem code="SCI02"/>
+              <CardItem code="SCI03"/>
             </div>
             <div className="col ttascl">
               <h6>Colonization</h6>
-              <CardItem code="SCL01" needToken={false} />
-              <CardItem code="SCL02" needToken={false} />
-              <CardItem code="SCL03" needToken={false} />
+              <CardItem code="SCL01"/>
+              <CardItem code="SCL02"/>
+              <CardItem code="SCL03"/>
             </div>
             <div className="col ttasco">
               <h6>Construction</h6>
-              <CardItem code="SCO01" needToken={false} />
-              <CardItem code="SCO02" needToken={false} />
-              <CardItem code="SCO03" needToken={false} />
+              <CardItem code="SCO01"/>
+              <CardItem code="SCO02"/>
+              <CardItem code="SCO03"/>
             </div>
         </div>
         <h6>Territories</h6>
         <div className="row ttater">
             <div className="col">
-              <CardItem code="TER01" needToken={false} />
-              <CardItem code="TER02" needToken={false} />
-              <CardItem code="TER03" needToken={false} />
+              <CardItem code="TER01"/>
+              <CardItem code="TER02"/>
+              <CardItem code="TER03"/>
             </div>
             <div className="col">
-              <CardItem code="TER04" needToken={false} />
-              <CardItem code="TER05" needToken={false} />
-              <CardItem code="TER06" needToken={false} />
+              <CardItem code="TER04"/>
+              <CardItem code="TER05"/>
+              <CardItem code="TER06"/>
             </div>
             <div className="col">
-              <CardItem code="TER07" needToken={false} />
-              <CardItem code="TER08" needToken={false} />
-              <CardItem code="TER09" needToken={false} />
+              <CardItem code="TER07"/>
+              <CardItem code="TER08"/>
+              <CardItem code="TER09"/>
             </div>
             <div className="col">
-              <CardItem code="TER10" needToken={false} />
-              <CardItem code="TER11" needToken={false} />
-              <CardItem code="TER12" needToken={false} />
-              <CardItem code="TER13" needToken={false} />
+              <CardItem code="TER10"/>
+              <CardItem code="TER11"/>
+              <CardItem code="TER12"/>
+              <CardItem code="TER13"/>
             </div>
         </div>
        
@@ -246,47 +246,47 @@ function App() {
           <div className="row">
             <div className="col ttawon">
               <h6>Age 0</h6>
-              <CardItem code="WON01" needToken={false} />
-              <CardItem code="WON02" needToken={false} />
-              <CardItem code="WON03" needToken={false} />
-              <CardItem code="WON04" needToken={false} />
-              <CardItem code="WON17" needToken={false} />
-              <CardItem code="WON18" needToken={false} />
-              <CardItem code="WON19" needToken={false} />
-              <CardItem code="WON20" needToken={false} />
+              <CardItem code="WON01"/>
+              <CardItem code="WON02"/>
+              <CardItem code="WON03"/>
+              <CardItem code="WON04"/>
+              <CardItem code="WON17"/>
+              <CardItem code="WON18"/>
+              <CardItem code="WON19"/>
+              <CardItem code="WON20"/>
             </div>
             <div className="col ttawon">
               <h6>Age I</h6>
-              <CardItem code="WON05" needToken={false} />
-              <CardItem code="WON06" needToken={false} />
-              <CardItem code="WON07" needToken={false} />
-              <CardItem code="WON08" needToken={false} />
-              <CardItem code="WON21" needToken={false} />
-              <CardItem code="WON22" needToken={false} />
-              <CardItem code="WON23" needToken={false} />
-              <CardItem code="WON24" needToken={false} />
+              <CardItem code="WON05"/>
+              <CardItem code="WON06"/>
+              <CardItem code="WON07"/>
+              <CardItem code="WON08"/>
+              <CardItem code="WON21"/>
+              <CardItem code="WON22"/>
+              <CardItem code="WON23"/>
+              <CardItem code="WON24"/>
             </div>
             <div className="col ttawon">
               <h6>Age II</h6>
-              <CardItem code="WON09" needToken={false} />
-              <CardItem code="WON10" needToken={false} />
-              <CardItem code="WON11" needToken={false} />
-              <CardItem code="WON12" needToken={false} />
-              <CardItem code="WON25" needToken={false} />
-              <CardItem code="WON26" needToken={false} />
-              <CardItem code="WON27" needToken={false} />
-              <CardItem code="WON28" needToken={false} />
+              <CardItem code="WON09"/>
+              <CardItem code="WON10"/>
+              <CardItem code="WON11"/>
+              <CardItem code="WON12"/>
+              <CardItem code="WON25"/>
+              <CardItem code="WON26"/>
+              <CardItem code="WON27"/>
+              <CardItem code="WON28"/>
             </div>
             <div className="col ttawon">
               <h6>Age III</h6>
-              <CardItem code="WON13" needToken={false} />
-              <CardItem code="WON14" needToken={false} />
-              <CardItem code="WON15" needToken={false} />
-              <CardItem code="WON16" needToken={false} />
-              <CardItem code="WON29" needToken={false} />
-              <CardItem code="WON30" needToken={false} />
-              <CardItem code="WON31" needToken={false} />
-              <CardItem code="WON32" needToken={false} />
+              <CardItem code="WON13"/>
+              <CardItem code="WON14"/>
+              <CardItem code="WON15"/>
+              <CardItem code="WON16"/>
+              <CardItem code="WON29"/>
+              <CardItem code="WON30"/>
+              <CardItem code="WON31"/>
+              <CardItem code="WON32"/>
             </div>
           </div>
 
