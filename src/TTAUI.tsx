@@ -1,6 +1,6 @@
 import React from "react";
 import {TTARepoCards} from "./TTARepo"
-import { TTACard, TTASceneValues, TTAStrengthValue } from "./TTATypes";
+import { TTACard, TTASceneValues, TTAStrengthValue, TTATacticCard } from "./TTATypes";
 import { TacticSVG } from "./TTAUITactic";
 import {
     IErrors,
@@ -203,6 +203,21 @@ export class FilterLeaders extends React.Component<FLeadersProps, FLeadersState>
 export class FilterTactics extends React.Component<FLeadersProps, FLeadersState> {
     state: FLeadersState = {};
 
+    GetSimpleTextTactic(c: TTATacticCard) {
+        let result: string = '';
+        for(let i=0;i<c.ninf;i++)
+            result += 'I';
+        for(let i=0;i<c.ncav;i++)
+            result += 'C';
+        for(let i=0;i<c.nart;i++)
+            result += 'A';
+        result += " - " + c.strength.toString();
+        if (c.strengthObs>0)
+            result += "/" + c.strengthObs.toString();
+        return result;
+    }
+
+
     render() {
 
         var tactics = TTARepoCards.Instance.GetTactics();
@@ -210,7 +225,7 @@ export class FilterTactics extends React.Component<FLeadersProps, FLeadersState>
         for (var i = 0; i < tactics.length; i++) {
             var tactic = tactics[i];
             //indents.push(<CardItem code={leader.code} />);
-            indents.push(<option value={tactic.code}>{tactic.name}</option>);
+            indents.push(<option value={tactic.code}>{tactic.name} ({this.GetSimpleTextTactic(tactic)})</option>);
         }
 
         return (
