@@ -383,6 +383,15 @@ export class FilterAge extends React.Component<FLeadersProps, FLeadersState> {
                                     Age III
                                 </label>
                             </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="age" onClick={
+                                        (e: React.FormEvent<HTMLInputElement>) =>
+                                            context.setValues({ ["age"]: 4 })
+                                        } />
+                                <label className="form-check-label" htmlFor="flexRadioDefault2">
+                                    Age IV
+                                </label>
+                            </div>
                         </div>
                 )}
                 </FormContext.Consumer>
