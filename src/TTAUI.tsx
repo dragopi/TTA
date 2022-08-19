@@ -93,19 +93,11 @@ export class CardItem extends React.Component<CardItemProps, CardItemState> {
 
 export class CardItemToken extends React.Component<CardItemProps, CardItemState> {
     state: CardItemState = {
-        // optional second annotation for better type inference
         card: TTARepoCards.Instance.Get(this.props.code),
         onBoard: false,
         tokens: 0,
-        showToken: (this.props.needToken !== false)
+        showToken: true
     };
-
-    buttonClick = (e: React.FormEvent<HTMLButtonElement>): void => {
-        if (this.state.onBoard)
-            this.setState({ onBoard: false });
-        else
-            this.setState({ onBoard: true });
-      };
 
     private UpdateState(value: number, context: IFormContext) {
         if (value>=0) {
@@ -144,13 +136,12 @@ export class CardItemToken extends React.Component<CardItemProps, CardItemState>
 
                     <span className="me-auto">{this.state.card.name}</span>
                     
-                    {this.state.showToken && (
-                        <div>
-                            <a href="#" className="" id={this.state.card.code + "_add"} onClick={() => {this.IncrementItem(context)}}><i className="bi bi-file-plus"></i></a>
-                            
-                            <a href="#" className="" id={this.state.card.code + "_rmv"} onClick={() => {this.DecreaseItem(context)}}><i className="bi bi-file-minus"></i></a>
-                        </div>
-                    )}
+                    <div>
+                        <a href="#" className="" id={this.state.card.code + "_add"} onClick={() => {this.IncrementItem(context)}}><i className="bi bi-file-plus"></i></a>
+                        
+                        <a href="#" className="" id={this.state.card.code + "_rmv"} onClick={() => {this.DecreaseItem(context)}}><i className="bi bi-file-minus"></i></a>
+                    </div>
+                    
                 </div>
                 
             </div>
