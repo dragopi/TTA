@@ -107,13 +107,25 @@ export class CardItemToken extends React.Component<CardItemProps, CardItemState>
             this.setState({ onBoard: true });
       };
 
-    IncrementItem = () => {
-        this.setState({ tokens: this.state.tokens + 1 });
-        this.setState({ onBoard: (this.state.tokens>0) });
+    private UpdateState(value: number, context: IFormContext) {
+        if (value>=0) {
+            if (context!=null)
+                context.setValues({ 
+                    [this.state.card.code + "_tk"]: value,
+                    [this.state.card.code]: (value)?"on":"off"
+                });
+            
+            this.setState({ tokens: value });
+            this.setState({ onBoard: (value>0) });
+        }
+    }
+    IncrementItem = (context: IFormContext) => {
+        let value = this.state.tokens + 1;
+        this.UpdateState(value, context);
     };
-    DecreaseItem = (e: React.FormEvent<HTMLButtonElement>) => {
-        this.setState({ tokens: this.state.tokens - 1 });
-        this.setState({ onBoard: (this.state.tokens>0) });
+    DecreaseItem = (context: IFormContext) => {
+        let value = this.state.tokens - 1;
+        this.UpdateState(value, context);
     };
 
     render() {
@@ -134,35 +146,9 @@ export class CardItemToken extends React.Component<CardItemProps, CardItemState>
                     
                     {this.state.showToken && (
                         <div>
-                            <a href="#" className="" id={this.state.card.code + "_add"} onClick={
-                                (e: React.FormEvent<HTMLAnchorElement>) => {
-                                    let value = this.state.tokens + 1;
-                                    if (value>=0) {
-
-                                            if (context!=null)
-                                                context.setValues({ 
-                                                    [this.state.card.code + "_tk"]: value,
-                                                    [this.state.card.code]: (value)?"on":"off"
-                                                });
-                                            
-                                            this.setState({ tokens: value });
-                                            this.setState({ onBoard: (value>0) });
-                                        }
-                                    }}><i className="bi bi-file-plus"></i></a>
+                            <a href="#" className="" id={this.state.card.code + "_add"} onClick={() => {this.IncrementItem(context)}}><i className="bi bi-file-plus"></i></a>
                             
-                            <a href="#" className="" id={this.state.card.code + "_rmv"} onClick={
-                                    (e: React.FormEvent<HTMLAnchorElement>) => {
-                                        let value = this.state.tokens - 1;
-                                        if (value>=0) {
-                                            if (context!=null)
-                                                context.setValues({ 
-                                                    [this.state.card.code + "_tk"]: value,
-                                                    [this.state.card.code]: (value)?"on":"off"
-                                                });
-                                            this.setState({ tokens: value });
-                                            this.setState({ onBoard: (value>0) });
-                                        }
-                                    }}><i className="bi bi-file-minus"></i></a>
+                            <a href="#" className="" id={this.state.card.code + "_rmv"} onClick={() => {this.DecreaseItem(context)}}><i className="bi bi-file-minus"></i></a>
                         </div>
                     )}
                 </div>
