@@ -243,5 +243,22 @@ test('CookSuez modifier', () => {
     expect(result.culture.Value()).toEqual(12);
 });
 
+// food
+test('FoodConsumption', () => {
+    
+                            // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 10 11 12 13 14 15 16 17 18 19 20 21 22
+    var testcase: number[] = [-6,-4,-4,-4,-4,-3,-3,-3,-3,-2,-2,-2,-2,-1,-1,-1,-1, 0, 0, 0, 0, 0, 0];
 
+
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+    let result: TTASceneValues;
+
+    for(let i=0;i<testcase.length;i++) {
+        sm.Tokens(i);
+        result= sm.Calculate();
+        expect(result.food.Value()).toEqual(testcase[i]);
+    }
+
+});
 
