@@ -1221,7 +1221,13 @@ let CARD_WON26: TTACard = {
     science: null,
     ca: null,
     ma: null,
-    text: "Your government produce culture equal to its level."
+    text: "Your government produce culture equal to its level.",
+    getSceneValuesModifier: (s:Scene) => {
+        let result = new SceneValuesModifier();
+        if (s.Governament.card != null)
+            result.culture += s.Governament.card.age;
+        return result;
+    }
 }
 
 let CARD_WON27: TTACard = {
