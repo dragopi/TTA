@@ -253,19 +253,19 @@ class TacticsClass {
 }
 
 class TerritoriesClass {
-    VastTerritoryI          = () => TTARepoCards.Instance.GetTactic("TER01");
-    WealthyTerritoryI       = () => TTARepoCards.Instance.GetTactic("TER02");
-    InhabitedTerritoryI     = () => TTARepoCards.Instance.GetTactic("TER03");
-    StrategicTerritoryI     = () => TTARepoCards.Instance.GetTactic("TER04");
-    HistoricTerritoryI      = () => TTARepoCards.Instance.GetTactic("TER05");
-    DevelopedTerritoryI     = () => TTARepoCards.Instance.GetTactic("TER06");
-    VastTerritoryII         = () => TTARepoCards.Instance.GetTactic("TER07");
-    WealthyTerritoryII      = () => TTARepoCards.Instance.GetTactic("TER08");
-    InhabitedTerritoryII    = () => TTARepoCards.Instance.GetTactic("TER09");
-    StrategicTerritoryII    = () => TTARepoCards.Instance.GetTactic("TER10");
-    HistoricTerritoryII     = () => TTARepoCards.Instance.GetTactic("TER11");
-    DevelopedTerritoryII    = () => TTARepoCards.Instance.GetTactic("TER12");
-    AutonomousTerritory     = () => TTARepoCards.Instance.GetTactic("TER13");
+    VastTerritoryI          = () => GetCardByCode("TER01");
+    WealthyTerritoryI       = () => GetCardByCode("TER02");
+    InhabitedTerritoryI     = () => GetCardByCode("TER03");
+    StrategicTerritoryI     = () => GetCardByCode("TER04");
+    HistoricTerritoryI      = () => GetCardByCode("TER05");
+    DevelopedTerritoryI     = () => GetCardByCode("TER06");
+    VastTerritoryII         = () => GetCardByCode("TER07");
+    WealthyTerritoryII      = () => GetCardByCode("TER08");
+    InhabitedTerritoryII    = () => GetCardByCode("TER09");
+    StrategicTerritoryII    = () => GetCardByCode("TER10");
+    HistoricTerritoryII     = () => GetCardByCode("TER11");
+    DevelopedTerritoryII    = () => GetCardByCode("TER12");
+    AutonomousTerritory     = () => GetCardByCode("TER13");
 }
 
 export class TTADeck {
@@ -323,6 +323,10 @@ export class TTASceneManager {
 
     public AddTactic(card: TTATacticCard) {
         this.s.Tactic = card;
+    }
+
+    public Tokens(n: number) {
+        this.s.yellowToken = n;
     }
 
     public Add(card: BoardCard) {
