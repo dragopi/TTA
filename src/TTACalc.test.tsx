@@ -216,5 +216,32 @@ test('Newton modifier sm', () => {
     expect(result.science.Value()).toEqual(10);
 });
 
+test('CookSuez modifier', () => {
+    
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(2)
+    sm.Add( deck.Leaders.JamesCook() );
+    sm.Add( deck.Wonders.SuezCanal() );
+    sm.Add( deck.Territories.DevelopedTerritoryI() );
+    sm.Add( deck.Territories.HistoricTerritoryI() );
+    sm.Add( deck.Territories.InhabitedTerritoryI() );
+
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(true);
+    expect(result.resource.Value()).toEqual(3);
+    expect(result.culture.Value()).toEqual(6);
+
+    sm.Add( deck.Territories.DevelopedTerritoryI() );
+    sm.Add( deck.Territories.HistoricTerritoryI() );
+    sm.Add( deck.Territories.InhabitedTerritoryI() );
+
+    result = sm.Calculate();
+    expect(result.valid).toEqual(true);
+    expect(result.resource.Value()).toEqual(6);
+    expect(result.culture.Value()).toEqual(12);
+});
+
 
 
