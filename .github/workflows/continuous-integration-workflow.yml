@@ -29,6 +29,8 @@ jobs:
         run: npm test
 
       - run: npm run build  --if-present
+        env:
+          process.env.CI : false
 
       - name: Deploy
         run: |
