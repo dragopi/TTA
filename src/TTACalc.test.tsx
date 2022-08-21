@@ -240,7 +240,7 @@ test('CookSuez modifier', () => {
     result = sm.Calculate();
     expect(result.valid).toEqual(true);
     expect(result.resource.Value()).toEqual(6);
-    expect(result.culture.Value()).toEqual(12);
+    expect(result.culture.Value()).toEqual(11);
 });
 
 // food
