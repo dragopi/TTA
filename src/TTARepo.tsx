@@ -1234,7 +1234,7 @@ let CARD_WON27: TTACard = {
     code: "WON27",
     type: "Wonder",
     subtype: "Wonder",
-    name: "Louvre Museum",
+    name: "Louvre Museum (no tokens)",
     age: 2,
     light_cost: null,
     rock_cost: 13,
@@ -1347,6 +1347,63 @@ let CARD_WON32: TTACard = {
     ca: null,
     ma: null,
     text: "You immediately score culture equal to your science rating."
+}
+
+let CARD_WON33: TTACard = {
+    code: "WON33",
+    type: "Wonder",
+    subtype: "Wonder",
+    name: "Louvre Museum (1 token)",
+    age: 2,
+    light_cost: null,
+    rock_cost: 13,
+    food: null,
+    resource: null,
+    culture: 3,
+    strength: null,
+    happy: null,
+    science: null,
+    ca: null,
+    ma: null,
+    text: "The Louver keeps its blue tokens when completed. Each can be spent during your Action Phase to gain 2 resource. The Louvre produce an extra 1 culture per blue token on it."
+}
+
+let CARD_WON34: TTACard = {
+    code: "WON34",
+    type: "Wonder",
+    subtype: "Wonder",
+    name: "Louvre Museum (2 tokens)",
+    age: 2,
+    light_cost: null,
+    rock_cost: 13,
+    food: null,
+    resource: null,
+    culture: 4,
+    strength: null,
+    happy: null,
+    science: null,
+    ca: null,
+    ma: null,
+    text: "The Louver keeps its blue tokens when completed. Each can be spent during your Action Phase to gain 2 resource. The Louvre produce an extra 1 culture per blue token on it."
+}
+
+let CARD_WON35: TTACard = {
+    code: "WON35",
+    type: "Wonder",
+    subtype: "Wonder",
+    name: "Louvre Museum (3 tokens)",
+    age: 2,
+    light_cost: null,
+    rock_cost: 13,
+    food: null,
+    resource: null,
+    culture: 5,
+    strength: null,
+    happy: null,
+    science: null,
+    ca: null,
+    ma: null,
+    text: "The Louver keeps its blue tokens when completed. Each can be spent during your Action Phase to gain 2 resource. The Louvre produce an extra 1 culture per blue token on it."
 }
 
 let CARD_WON99: TTACard = {
@@ -3482,6 +3539,9 @@ export class TTARepoCards {
             ["WON30", CARD_WON30],
             ["WON31", CARD_WON31],
             ["WON32", CARD_WON32],
+            ["WON33", CARD_WON33],
+            ["WON34", CARD_WON34],
+            ["WON35", CARD_WON35],
             ["WON99", CARD_WON99],
             ["LEA01", CARD_LEA01],
             ["LEA02", CARD_LEA02],
@@ -3718,6 +3778,9 @@ export class TTARepoCards {
             wonders.push(this.internalRepo.get("WON26"));
             wonders.push(this.internalRepo.get("WON27"));
             wonders.push(this.internalRepo.get("WON28"));
+            wonders.push(this.internalRepo.get("WON33"));
+            wonders.push(this.internalRepo.get("WON34"));
+            wonders.push(this.internalRepo.get("WON35"));
         }
         else if (age==3)
         {

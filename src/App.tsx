@@ -274,8 +274,11 @@ function App() {
               <CardItem code="WON12"/>
               <CardItem code="WON25"/>
               <CardItem code="WON26"/>
-              <CardItem code="WON27"/>
               <CardItem code="WON28"/>
+              <CardItem code="WON27"/>
+              <CardItem code="WON33"/>
+              <CardItem code="WON34"/>
+              <CardItem code="WON35"/>
             </div>
             <div className="col ttawon">
               <h6>Age III</h6>

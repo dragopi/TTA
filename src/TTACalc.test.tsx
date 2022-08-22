@@ -113,6 +113,7 @@ test('SceneCalculation InvalidScenario4 sm', () => {
     expect(result.valid).toEqual(false);
 });
 
+
 test('StrengthCalculation Scenario1', () => {
 
     let deck = new TTADeck();
@@ -263,6 +264,51 @@ test('CookSuez modifier', () => {
     expect(result.valid).toEqual(true);
     expect(result.resource.Value()).toEqual(6);
     expect(result.culture.Value()).toEqual(12);
+});
+
+test('Culture Louvre 0 tokens', () => {
+
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(3)
+    sm.Add( deck.Wonders.AncientRuins() );
+    sm.Add( deck.Wonders.LouvreMuseum() );
+
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(true);
+    expect(result.culture.Value()).toEqual(4);
+
+});
+
+test('Culture Louvre 2 tokens', () => {
+
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(3)
+    sm.Add( deck.Urban.Theology.Religion(1));
+    sm.Add( deck.Wonders.LouvreMuseum2() );
+
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(true);
+    expect(result.culture.Value()).toEqual(5);
+
+});
+
+test('Culture Louvre 3 tokens', () => {
+
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(3)
+    sm.Add( deck.Urban.Theatre.Movies(2));
+    sm.Add( deck.Wonders.LouvreMuseum3() );
+
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(true);
+    expect(result.culture.Value()).toEqual(13);
+
 });
 
 // food

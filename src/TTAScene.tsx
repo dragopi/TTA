@@ -168,6 +168,9 @@ class WondersClass {
     HarvardCollege           = () => GetCardByCode("WON25");
     StatueOfLiberty          = () => GetCardByCode("WON26");
     LouvreMuseum             = () => GetCardByCode("WON27");
+    LouvreMuseum1            = () => GetCardByCode("WON33");
+    LouvreMuseum2            = () => GetCardByCode("WON34");
+    LouvreMuseum3            = () => GetCardByCode("WON35");
     SuezCanal                = () => GetCardByCode("WON28");
     Hollywood                = () => GetCardByCode("WON13");
     Internet                 = () => GetCardByCode("WON14");
