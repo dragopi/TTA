@@ -189,6 +189,28 @@ test('StrengthCalculation Scenario2 sm', () => {
 
 });
 
+test('StrengthCalculation Scenario3 sm', () => {
+
+
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(2)
+    sm.Add( deck.Leaders.NapoleonBonaparte() );
+    sm.Add( deck.Military.Infantry.Swordsmen(3) );
+    sm.Add( deck.Military.Cavallery.Knights(3) );
+    sm.Add( deck.Urban.Arena.BreadandCircuses() );
+    sm.Add( deck.Special.Military.Warfare() );
+    sm.AddTactic( deck.Tactics.Legion() );
+
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(true);
+    expect(result.strength.Value()).toEqual(20);
+
+    
+});
+
+
 // Test Modifier
 
 test('Newton modifier', () => {
