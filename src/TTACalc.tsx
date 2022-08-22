@@ -456,6 +456,50 @@ function CheckConsistencyAge(s:Scene, r: TTASceneValues) {
     
 }   
 
+function CheckConsistencyLouvre(s:Scene, r: TTASceneValues) {
+    
+    GetBoardCardArray(s).forEach(c => {
+        if (c.card.code.startsWith("WON27")) {
+            GetBoardCardArray(s).forEach(c2 => {
+                if (c2.card.code.startsWith("WON33")) {
+                    r.valid = false;
+                    r.AddLog(`Inconsistency error: the "${c.card.name}" card cannot be on the board with the "${c2.card.name}" card.`);
+                }
+                if (c2.card.code.startsWith("WON34")) {
+                    r.valid = false;
+                    r.AddLog(`Inconsistency error: the "${c.card.name}" card cannot be on the board with the "${c2.card.name}" card.`);
+                }
+                if (c2.card.code.startsWith("WON35")) {
+                    r.valid = false;
+                    r.AddLog(`Inconsistency error: the "${c.card.name}" card cannot be on the board with the "${c2.card.name}" card.`);
+                }
+            })    
+        }
+        if (c.card.code.startsWith("WON33")) {
+            GetBoardCardArray(s).forEach(c2 => {
+                if (c2.card.code.startsWith("WON34")) {
+                    r.valid = false;
+                    r.AddLog(`Inconsistency error: the "${c.card.name}" card cannot be on the board with the "${c2.card.name}" card.`);
+                }
+                if (c2.card.code.startsWith("WON35")) {
+                    r.valid = false;
+                    r.AddLog(`Inconsistency error: the "${c.card.name}" card cannot be on the board with the "${c2.card.name}" card.`);
+                }
+            })    
+        }
+        if (c.card.code.startsWith("WON34")) {
+            GetBoardCardArray(s).forEach(c2 => {
+                if (c2.card.code.startsWith("WON35")) {
+                    r.valid = false;
+                    r.AddLog(`Inconsistency error: the "${c.card.name}" card cannot be on the board with the "${c2.card.name}" card.`);
+                }
+            })    
+        }
+
+    });        
+    
+}   
+
 export function TTASceneCalculation(s: Scene)
 {
     let result: TTASceneValues = new TTASceneValues();
@@ -471,8 +515,9 @@ export function TTASceneCalculation(s: Scene)
     // All cards
     ElabCards(s, result);
 
-    // Check consinstency
+    // Check consistency
     CheckConsistencyAge(s, result);
+    CheckConsistencyLouvre(s, result);
     /*
     let cultureTemp: number;
     s.Urbans.forEach(c => {
