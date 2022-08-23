@@ -217,19 +217,24 @@ test('StrengthCalculation Scenario3 sm', () => {
 test('Newton modifier', () => {
     let s: Scene = GetEmptyScene();
     s.Age = 3;
+
+    s.Governament = GetCardByCode("GOV07");
     s.Leader = GetCardByCode("LEA18");
+
     s.Urbans.push(GetCardByCode("ULA01", 2));
     s.Urbans.push(GetCardByCode("ULI02", 3));
     let result: TTASceneValues = TTASceneCalculation(s);
     expect(result.valid).toEqual(true);
     expect(result.science.Value()).toEqual(10);
 });
+
 test('Newton modifier sm', () => {
     
     let sm = new TTASceneManager();
     let deck = new TTADeck();
 
     sm.Age(3)
+    sm.Add( deck.Governaments.Republic() );
     sm.Add( deck.Leaders.IsaacNewton() );
     sm.Add( deck.Urban.Lab.Philosophy(2) );
     sm.Add( deck.Urban.Press.Journalism(3) );

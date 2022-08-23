@@ -271,6 +271,17 @@ class TerritoriesClass {
     AutonomousTerritory     = () => GetCardByCode("TER13");
 }
 
+class GovernamentsClass {
+    Despotism               = () => GetCardByCode("GOV01");
+    Monarchy                = () => GetCardByCode("GOV02");
+    Theocracy               = () => GetCardByCode("GOV03");
+    ConstitutionalMonarchy  = () => GetCardByCode("GOV04");
+    Republic                = () => GetCardByCode("GOV05");
+    Communism               = () => GetCardByCode("GOV06");
+    Democracy               = () => GetCardByCode("GOV07");
+    Fundamentalism          = () => GetCardByCode("GOV08");
+}
+
 export class TTADeck {
     public Leaders: LeadersClass;
     public Resources: ResourcesClass;
@@ -280,6 +291,7 @@ export class TTADeck {
     public Wonders: WondersClass;
     public Tactics: TacticsClass;
     public Territories: TerritoriesClass;
+    public Governaments: GovernamentsClass;
 
     constructor() {
         this.Leaders = new LeadersClass();
@@ -290,6 +302,7 @@ export class TTADeck {
         this.Wonders = new WondersClass();
         this.Tactics = new TacticsClass();
         this.Territories = new TerritoriesClass();
+        this.Governaments = new GovernamentsClass();
     }
 }
 

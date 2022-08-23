@@ -500,6 +500,30 @@ function CheckConsistencyLouvre(s:Scene, r: TTASceneValues) {
     
 }   
 
+function CheckUrbanLimitTokens(s:Scene, r: TTASceneValues) {
+
+    let tokenLitmit: number[] = [2,3,3,4]
+    let maxToken: number = 2; // there is always a governament
+
+    if (s.Governament != null)
+        maxToken = tokenLitmit[s.Governament.card.age];
+    
+    if (s.Wonders != null)
+        s.Wonders.forEach(c => {
+            if (c.code == "WON20") // Acropolis
+                maxToken++;
+        });
+
+    if (s.Urbans != null)
+        s.Urbans.forEach(c => {
+            if (c.workers > maxToken) {
+                r.valid = false;
+                r.AddLog(`Urban token limit error: the "${c.card.name}" cannot have ${c.workers} tokens, with this configuration the maximum number of tokens for an urban building is ${maxToken}.`);    
+            }
+        });
+}
+
+
 export function TTASceneCalculation(s: Scene)
 {
     let result: TTASceneValues = new TTASceneValues();
@@ -518,6 +542,8 @@ export function TTASceneCalculation(s: Scene)
     // Check consistency
     CheckConsistencyAge(s, result);
     CheckConsistencyLouvre(s, result);
+    CheckUrbanLimitTokens(s, result);
+
     /*
     let cultureTemp: number;
     s.Urbans.forEach(c => {
