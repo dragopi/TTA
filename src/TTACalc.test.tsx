@@ -344,12 +344,12 @@ test('Napoleon modifier sm', () => {
     sm.Add( deck.Military.Infantry.Warriors(2) );
     sm.Add( deck.Military.AirForces(1) );
     sm.Add( deck.Military.Infantry.Riflemen(1) );
-    sm.Add( deck.Military.Artillery.Cannon(1) );
+    sm.Add( deck.Military.Artillery.Cannon(2) );
     sm.AddTactic( deck.Tactics.DefensiveArmy() );
 
     let result = sm.Calculate();
     expect(result.valid).toEqual(true);
-    expect(result.strength.Value()).toEqual(25);
+    expect(result.strength.Value()).toEqual(28);
 });
 
 // food
