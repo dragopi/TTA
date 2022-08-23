@@ -316,6 +316,42 @@ test('Culture Louvre 3 tokens', () => {
 
 });
 
+test('Shakespeare modifier sm', () => {
+    
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(3)
+    sm.Add( deck.Governaments.Republic() );
+    sm.Add( deck.Leaders.WilliamShakespeare() );
+    sm.Add( deck.Urban.Theatre.Drama(2) );
+    sm.Add( deck.Urban.Press.Journalism(2) );
+    sm.Add( deck.Urban.Press.PrintingPress(1) );
+
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(true);
+    expect(result.science.Value()).toEqual(5);
+    expect(result.culture.Value()).toEqual(13);
+});
+
+test('Napoleon modifier sm', () => {
+    
+    let sm = new TTASceneManager();
+    let deck = new TTADeck();
+
+    sm.Age(3)
+    sm.Add( deck.Leaders.NapoleonBonaparte() );
+    sm.Add( deck.Military.Infantry.Warriors(2) );
+    sm.Add( deck.Military.AirForces(1) );
+    sm.Add( deck.Military.Infantry.Riflemen(1) );
+    sm.Add( deck.Military.Artillery.Cannon(1) );
+    sm.AddTactic( deck.Tactics.DefensiveArmy() );
+
+    let result = sm.Calculate();
+    expect(result.valid).toEqual(true);
+    expect(result.strength.Value()).toEqual(25);
+});
+
 // food
 test('FoodConsumption', () => {
     
